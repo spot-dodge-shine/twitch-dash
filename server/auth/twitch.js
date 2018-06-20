@@ -20,14 +20,16 @@ if (!process.env.TWITCH_CLIENT_ID || !process.env.TWITCH_CLIENT_SECRET) {
     twitchConfig,
     async (accessToken, refreshToken, profile, done) => {
 
-    const users = await User.findOrCreate({where: {twitchId: profile.id}, defaults: {
-      twitchId: profile.id,
-      twitchLogin: profile.login,
-      twitchImg: profile.profile_image_url
-    }})
-    user = users[0]
-    done(null, user)
-  })
+      const users = await User.findOrCreate({where: {twitchId: profile.id}, defaults: {
+        twitchId: profile.id,
+        twitchLogin: profile.login,
+        twitchImg: profile.profile_image_url,
+        twitchAccessToken: accessToken
+      }})
+      user = users[0]
+      done(null, user)
+    }
+  )
 
   passport.use(strategy)
 
