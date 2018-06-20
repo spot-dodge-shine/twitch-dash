@@ -6,11 +6,11 @@ import {connect} from 'react-redux'
  * COMPONENT
  */
 export const UserHome = props => {
-  const {email} = props
+  const {email, twitchLogin} = props
 
   return (
     <div>
-      <h3>Welcome, {email}</h3>
+      <h3>Welcome, {twitchLogin}</h3>
     </div>
   )
 }
@@ -19,8 +19,10 @@ export const UserHome = props => {
  * CONTAINER
  */
 const mapState = state => {
+  console.log('state', state)
   return {
-    email: state.user.email
+    email: state.user.email,
+    twitchLogin: state.user.twitchLogin
   }
 }
 
