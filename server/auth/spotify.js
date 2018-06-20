@@ -2,16 +2,10 @@
 
 const passport = require('passport')
 const router = require('express').Router()
-const axios = require('axios')
 const SpotifyStrategy = require('passport-spotify').Strategy
 const { User } = require('../db/models')
 
 let userId
-
-const corsOptions = {
-  origin: `http://localhost:${process.env.PORT}`,
-  credentials: true
-}
 
 module.exports = router
 
