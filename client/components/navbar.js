@@ -3,10 +3,18 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
+import {Image} from 'semantic-ui-react'
+import styled from 'styled-components'
+
+const Logo = styled.div`
+  max-width: 300px;
+`
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
-    <h1>twitch dash</h1>
+    <Logo>
+      <Link to="/home"><Image src='/images/navbarlogo.png' /></Link>
+    </Logo>
     <nav>
       {isLoggedIn ? (
         <div>

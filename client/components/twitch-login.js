@@ -1,14 +1,28 @@
 'use strict'
 
 import React from 'react'
-import { Card, Button, Icon, Image } from 'semantic-ui-react'
+import { Card, Button, Icon, Image, Grid } from 'semantic-ui-react'
+import styled from 'styled-components'
+
+const Wrapper = styled.div`
+display: flex;
+justify-content: center;
+text-align: center;
+align-items: center;
+margin-top: 10%;
+`
+
+// const style = {
+//   display: flex;
+//   justify-content: center;
+//   text-align: center;
+// }
 
 const TwitchLogin = props => {
   const {email, twitchLogin} = props
   return (
-    <div>
+    <Wrapper>
       <Card>
-
         <Card.Content>
           <Card.Header>
           <Image src='/images/twitchbuddylogo.png' />
@@ -26,7 +40,7 @@ const TwitchLogin = props => {
           </Card.Description>
         </Card.Content>
       </Card>
-    </div>
+    </Wrapper>
   )
 }
 
