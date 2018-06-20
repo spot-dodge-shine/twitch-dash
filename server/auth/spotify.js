@@ -64,9 +64,10 @@ if (!process.env.SPOTIFY_CLIENT_ID || !process.env.SPOTIFY_CLIENT_SECRET) {
   router.get('/callback', passport.authenticate('spotify', { failureRedirect: '/' }),
     async (req, res) => {
       const { code, state } = req.query
-      const user = await User.findById(req.user.id)
-      req.user = await user.update({ spotifyAuthCode: code, spotifyState: state })
-      res.redirect('/')
+      const spotifyUser = await Spotify.findOne({ where: { userId: userId }})
+      await spotifyUser.update({ spotifyAuthCode: code, spotifyState: state })
+      req.user = await User.findById(userId)
+      res.redirect('/home')
     }
   )
 }

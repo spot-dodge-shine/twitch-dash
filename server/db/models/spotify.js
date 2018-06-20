@@ -2,7 +2,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const Spotify = db.define('spotify', {
+const Spotify = db.define('spotifyAccount', {
   spotifyEmail: {
     type: Sequelize.STRING,
     unique: true,
