@@ -24,9 +24,24 @@ const User = db.define('user', {
       return () => this.getDataValue('salt')
     }
   },
-  googleId: {
+  twitchLogin: {
+    type: Sequelize.STRING,
+    unique: true,
+  },
+  twitchId: {
+    type: Sequelize.STRING,
+    unique: true,
+  },
+  twitchImg: {
     type: Sequelize.STRING
-  }
+  },
+  twitchAuthCode: {
+    type: Sequelize.TEXT,
+  },
+  twitchAccessToken: {
+    type: Sequelize.TEXT,
+  },
+
 })
 
 module.exports = User
