@@ -1,19 +1,38 @@
 const tmi = require('tmi.js')
+const axios = require('axios')
 
-module.exports = (io) => {
+module.exports = async () => {
+  console.log('CREATING NEW TWITCHBOT')
   // Valid commands start with:
   let commandPrefix = '!'
-  // Define configuration options:
-  let opts = {
+
+  // Get all active channels
+  // TODO: change this link to make it work in deployed version
+  const {data} = await axios.get(`http://localhost:${process.env.PORT}/api/users/active`)
+  const channels = data.map((user) => {
+    return user.twitchLogin
+  })
+  const opts = {
     identity: {
       username: 'musicvoteb0t',
       password: process.env.TWITCH_OAUTH_TOKEN
     },
-    channels: [
-      'fivetenssbm',
-      'homum1337'
-    ]
+    channels
   }
+
+    // .then((res) => {
+    //   return res.data.map((user) => {
+    //     return user.twitchLogin
+    //   })
+    // })
+    // .then((myChannels) => {
+    // })
+    // .catch((err) => {
+    //   console.log(err)
+    // })
+  
+  // Define configuration options:
+  console.log('channels', channels)
 
   // These are the commands the bot knows (defined below):
   let knownCommands = { echo, musicvote, random }
@@ -109,4 +128,8 @@ module.exports = (io) => {
     console.log(`Womp womp, disconnected: ${reason}`)
     process.exit(1)
   }
+}
+
+const getActiveUsers = async () => {
+  return await axios.get(`http://localhost:${process.env.PORT}/api/users/active`)
 }
