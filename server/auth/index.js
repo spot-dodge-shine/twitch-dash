@@ -41,4 +41,8 @@ router.get('/me', (req, res) => {
 })
 
 router.use('/google', require('./google'))
+<<<<<<< HEAD
 router.use('/spotify', require('./spotify'))
+=======
+router.use('/twitch', require('./twitch'))
+>>>>>>> 3827ecbb3fe67697761acd36a18e61af3f909abd
