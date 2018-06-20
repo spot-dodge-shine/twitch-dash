@@ -24,6 +24,21 @@ const User = db.define('user', {
       return () => this.getDataValue('salt')
     }
   },
+  twitchLogin: {
+    type: Sequelize.STRING,
+  },
+  twitchId: {
+    type: Sequelize.STRING
+  },
+  twitchImg: {
+    type: Sequelize.STRING
+  },
+  twitchAuthCode: {
+    type: Sequelize.TEXT,
+  },
+  twitchAccessToken: {
+    type: Sequelize.TEXT,
+  },
   googleId: {
     type: Sequelize.STRING
   }
