@@ -26,6 +26,7 @@ const User = db.define('user', {
   },
   twitchLogin: {
     type: Sequelize.STRING,
+<<<<<<< HEAD
   },
   twitchId: {
     type: Sequelize.STRING
@@ -40,8 +41,24 @@ const User = db.define('user', {
     type: Sequelize.TEXT,
   },
   googleId: {
+=======
+    unique: true,
+  },
+  twitchId: {
+    type: Sequelize.STRING,
+    unique: true,
+  },
+  twitchImg: {
+>>>>>>> e44162ea37159896a434a0a3d95727e8f5a848ca
     type: Sequelize.STRING
-  }
+  },
+  twitchAuthCode: {
+    type: Sequelize.TEXT,
+  },
+  twitchAccessToken: {
+    type: Sequelize.TEXT,
+  },
+
 })
 
 module.exports = User
