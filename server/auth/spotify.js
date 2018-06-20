@@ -3,7 +3,7 @@
 const passport = require('passport')
 const router = require('express').Router()
 const SpotifyStrategy = require('passport-spotify').Strategy
-const { User } = require('../db/models')
+const { User, Spotify } = require('../db/models')
 
 let userId
 
@@ -12,6 +12,12 @@ module.exports = router
 if (!process.env.SPOTIFY_CLIENT_ID || !process.env.SPOTIFY_CLIENT_SECRET) {
   console.log('Spotify client ID / secret not found. Skipping Spotify OAuth.')
 } else {
+  router.get('/', (req, res, next) => {
+    userId = req.user.id
+    next()
+  })
+
+  console.log('userId >>>>>>>', userId)
 
   const spotifyConfig = {
     clientID: process.env.SPOTIFY_CLIENT_ID,
@@ -20,8 +26,9 @@ if (!process.env.SPOTIFY_CLIENT_ID || !process.env.SPOTIFY_CLIENT_SECRET) {
   }
 
   const strategy = new SpotifyStrategy(spotifyConfig, async (accessToken, refreshToken, profile, done) => {
-    const foundUser = await User.findOne({ where: { id: userId } })
-    const user = await foundUser.update({
+    const foundUser = await User.findOrCreate({ where: { id: userId } })
+    console.log('foundUser >>>>>>>', foundUser)
+    const spotifyUser = await Spotify.create({
       spotifyEmail: profile._json.email,
       spotifyHref: profile.href,
       spotifyId: profile.id,
@@ -29,8 +36,9 @@ if (!process.env.SPOTIFY_CLIENT_ID || !process.env.SPOTIFY_CLIENT_SECRET) {
       spotifyPremium: (profile.product === 'premium'),
       spotifyAccessToken: accessToken,
       spotifyRefreshToken: refreshToken,
+      userId: userId
     })
-    done(null, user)
+    done(null, spotifyUser)
   })
 
   passport.use(strategy)

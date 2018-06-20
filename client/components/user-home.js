@@ -6,11 +6,19 @@ import {connect} from 'react-redux'
  * COMPONENT
  */
 export const UserHome = props => {
-  const {email} = props
+  const { twitchLogin } = props.user
 
   return (
     <div>
-      <h3>Welcome, {email}</h3>
+      <h3>Welcome, {twitchLogin}</h3>
+      {
+        props.isLoggedIn
+          ? <div>
+              <h1>Connect your spotify account</h1>
+              <a href="/auth/spotify">Log in</a>
+            </div>
+          : <div />
+      }
     </div>
   )
 }
@@ -20,7 +28,8 @@ export const UserHome = props => {
  */
 const mapState = state => {
   return {
-    email: state.user.email
+    user: state.user,
+    isLoggedIn: !!state.user.id
   }
 }
 

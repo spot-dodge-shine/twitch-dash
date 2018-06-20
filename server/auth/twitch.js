@@ -12,10 +12,6 @@ if (!process.env.TWITCH_CLIENT_ID || !process.env.TWITCH_CLIENT_SECRET) {
     clientSecret: process.env.TWITCH_CLIENT_SECRET,
     callbackURL: `http://localhost:${process.env.PORT}/auth/twitch/callback/`
   }
-
-  //Remember to change this back to global var^
-
-
   const strategy = new TwitchStrategy(
     twitchConfig,
     async (accessToken, refreshToken, profile, done) => {
@@ -26,7 +22,7 @@ if (!process.env.TWITCH_CLIENT_ID || !process.env.TWITCH_CLIENT_SECRET) {
         twitchImg: profile.profile_image_url,
         twitchAccessToken: accessToken
       }})
-      user = users[0]
+      const user = users[0]
       done(null, user)
     }
   )
