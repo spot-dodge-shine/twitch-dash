@@ -1,7 +1,6 @@
 'use strict'
 
 const { User } = require('../db/models')
-const axios = require('axios')
 const refresh = require('spotify-refresh')
 
 
