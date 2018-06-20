@@ -12,15 +12,11 @@ module.exports = router
 if (!process.env.SPOTIFY_CLIENT_ID || !process.env.SPOTIFY_CLIENT_SECRET) {
   console.log('Spotify client ID / secret not found. Skipping Spotify OAuth.')
 } else {
-  router.get('/', (req, res, next) => {
-    userId = req.user.id
-    next()
-  })
 
   const spotifyConfig = {
     clientID: process.env.SPOTIFY_CLIENT_ID,
     clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-    callbackURL: `http://localhost:${process.env.PORT}/auth/spotify/callback/`
+    callbackURL: `http://localhost:${process.env.PORT}/auth/spotify/callback`
   }
 
   const strategy = new SpotifyStrategy(spotifyConfig, async (accessToken, refreshToken, profile, done) => {
