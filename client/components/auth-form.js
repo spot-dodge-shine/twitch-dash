@@ -10,26 +10,58 @@ const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
   return (
+    // <div>
+    //   <form onSubmit={handleSubmit} name={name}>
+    //     <div>
+    //       <label htmlFor="email">
+    //         <small>Email</small>
+    //       </label>
+    //       <input name="email" type="text" />
+    //     </div>
+    //     <div>
+    //       <label htmlFor="password">
+    //         <small>Password</small>
+    //       </label>
+    //       <input name="password" type="password" />
+    //     </div>
+    //     <div>
+    //       <button type="submit">{displayName}</button>
+    //     </div>
+    //     {error && error.response && <div> {error.response.data} </div>}
+    //   </form>
+    //   <a href="/auth/google">{displayName} with Google</a>
+    //   <a href="/auth/twitch">{displayName} with Twitch</a>
+    // </div>
     <div>
-      <form onSubmit={handleSubmit} name={name}>
-        <div>
-          <label htmlFor="email">
-            <small>Email</small>
-          </label>
-          <input name="email" type="text" />
+      <div>
+        <div id="login">
+          <h1>Log in to twitch</h1>
+          <a href="/auth/twitch">Log in</a>
+          {
+            props.user && props.user.twitchId
+              ? <div>
+                  <h1>Connect your spotify account</h1>
+                  <a href="/auth/spotify">Log in</a>
+                </div>
+              : <div />
+          }
         </div>
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" />
-        </div>
-        <div>
-          <button type="submit">{displayName}</button>
-        </div>
-        {error && error.response && <div> {error.response.data} </div>}
-      </form>
-      <a href="/auth/google">{displayName} with Google</a>
+        <div id="loggedin" />
+      </div>
+
+      <script id="loggedin-template" type="text/x-handlebars-template">
+          <h1>Logged in as </h1>
+          <img id="avatar" width="200" src="" />
+          <dl>
+            <dt>Display name</dt><dd />
+            <dt>Username</dt><dd />
+            <dt>Email</dt><dd />
+            <dt>Spotify URI</dt><dd><a href="" /></dd>
+            <dt>Link</dt><dd><a href="" /></dd>
+            <dt>Profile Image</dt><dd />
+          </dl>
+          <p><a href="/">Log in again</a></p>
+      </script>
     </div>
   )
 }
