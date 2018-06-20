@@ -1,3 +1,5 @@
+'use strict'
+
 const router = require('express').Router()
 const User = require('../db/models/user')
 module.exports = router
@@ -39,3 +41,4 @@ router.get('/me', (req, res) => {
 })
 
 router.use('/google', require('./google'))
+router.use('/spotify', require('./spotify'))
