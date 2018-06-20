@@ -46,21 +46,6 @@ const AuthForm = props => {
               : <div />
           }
         </div>
-<<<<<<< HEAD
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" />
-        </div>
-        <div>
-          <button type="submit">{displayName}</button>
-        </div>
-        {error && error.response && <div> {error.response.data} </div>}
-      </form>
-      <a href="/auth/google">{displayName} with Google</a>
-      <a href="/auth/spotify">{displayName} with Spotify</a>
-=======
         <div id="loggedin" />
       </div>
 
@@ -77,7 +62,6 @@ const AuthForm = props => {
           </dl>
           <p><a href="/">Log in again</a></p>
       </script>
->>>>>>> 3827ecbb3fe67697761acd36a18e61af3f909abd
     </div>
   )
 }

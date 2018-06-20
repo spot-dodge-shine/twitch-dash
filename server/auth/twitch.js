@@ -10,7 +10,7 @@ if (!process.env.TWITCH_CLIENT_ID || !process.env.TWITCH_CLIENT_SECRET) {
   const twitchConfig = {
     clientID: process.env.TWITCH_CLIENT_ID,
     clientSecret: process.env.TWITCH_CLIENT_SECRET,
-    callbackURL: `http://localhost:6969/auth/twitch/callback/`
+    callbackURL: `http://localhost:${process.env.PORT}/auth/twitch/callback/`
   }
 
   //Remember to change this back to global var^
