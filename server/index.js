@@ -11,6 +11,9 @@ const sessionStore = new SequelizeStore({db})
 const PORT = process.env.PORT || 6969
 const app = express()
 const socketio = require('socket.io')
+
+const twitchBot = require('./bot')
+
 module.exports = app
 
 // This is a global Mocha hook, used for resource cleanup.
@@ -94,7 +97,8 @@ const startListening = () => {
 
   // set up our socket control center
   const io = socketio(server)
-  require('./socket')(io)
+  // twitchBot(io)
+  // require('./socket')(io)
 }
 
 const syncDb = () => db.sync({force: true})

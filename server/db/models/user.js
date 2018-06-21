@@ -40,6 +40,9 @@ const User = db.define('user', {
   },
   twitchAccessToken: {
     type: Sequelize.TEXT,
+  },
+  isActiveDash: {
+    type: Sequelize.BOOLEAN
   }
 })
 

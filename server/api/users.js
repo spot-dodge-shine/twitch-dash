@@ -54,3 +54,16 @@ router.put('/me/playtrack/:trackURI', async (req, res, next) => {
     next(err)
   }
 })
+
+router.get('/active', async (req, res, next) => {
+  try {
+    const users = await User.findAll({
+      where: {
+        isActiveDash: true
+      }
+    })
+    res.json(users)
+  } catch (err) {
+    next(err)
+  }
+})
