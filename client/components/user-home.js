@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import NavBar from './navbar'
 
 /**
  * COMPONENT
@@ -10,9 +11,10 @@ export const UserHome = props => {
 
   return (
     <div>
+      <NavBar />
       <h3>Welcome, {twitchLogin}</h3>
       {
-        props.isLoggedIn
+        props.twitchLogin
           ? <div>
               <h1>Connect your spotify account</h1>
               <a href="/auth/spotify">Connect</a>
