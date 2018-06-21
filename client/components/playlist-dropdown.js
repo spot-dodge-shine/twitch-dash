@@ -13,10 +13,19 @@ align-items: center;
 margin-top: 5%;
 `
 
-// const SpotifyLogo = styled.div`
-//   justify-content: center;
-//   max-width: 100px;
-// `
+const SpotifyLogo = styled.div`
+  justify-content: center;
+  max-width: 100px;
+  margin-top: 10%;
+  margin-left: 10%;
+  margin-bottom: 10%;
+`
+
+const SpotifyButton = styled.div`
+  margin-top: 18%;
+  margin-right: 10%;
+  margin-left: 10%;
+`
 
 export class PlaylistDropdown extends Component {
 
@@ -49,23 +58,27 @@ export class PlaylistDropdown extends Component {
     return (
       <div>
         <Wrapper>
-          <Item>
-            <Item.Image width='100px' src='/images/spotifylogoblue.png' />
-            <Item.Header>
-              <Item.Meta>
-              <a href="/auth/spotify">
-              <Button primary animated floated='right'>
-                <Button.Content visible>
-                  Connect to Spotify
-                </Button.Content>
-                <Button.Content hidden>
-                  <Icon name='spotify' />
-                </Button.Content>
-              </Button>
-              </a>
-              </Item.Meta>
-            </Item.Header>
-          </Item>
+          <Menu>
+            <Menu.Menu>
+              <SpotifyLogo>
+                <Image src='/images/spotifylogoblue.png' />
+              </SpotifyLogo>
+            </Menu.Menu>
+            <a href="/auth/spotify">
+            <Menu.Menu position='right'>
+              <SpotifyButton>
+                <Button primary animated floated='right'>
+                  <Button.Content visible>
+                    Connect to Spotify
+                  </Button.Content>
+                  <Button.Content hidden>
+                    <Icon name='spotify' />
+                  </Button.Content>
+                </Button>
+              </SpotifyButton>
+            </Menu.Menu>
+            </a>
+          </Menu>
         </Wrapper>
         <h3>Your Spotify Playlists</h3>
         <Dropdown button='true' placeholder='Select a Playlist' fluid search selection options={dummySongs} />
