@@ -118,9 +118,9 @@ describe('Actions', () => {
     it('should create an action to select a playlist', () => {
       const expectedAction = {
         type: SELECT_PLAYLIST,
-        selectedPlaylist: fakePlaylists[0]
+        selectedPlaylistId: fakePlaylists[0].id
       }
-      expect(selectPlaylist(fakePlaylists[0])).to.be.deep.equal(expectedAction)
+      expect(selectPlaylist(fakePlaylists[0].id)).to.be.deep.equal(expectedAction)
     })
   })
 })
