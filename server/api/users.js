@@ -24,7 +24,17 @@ router.get('/me/playlists', checkSpotifyAccessToken, async (req, res, next) => {
     const { data } = await axios.get(process.env.SPOTIFY_API_URL + '/v1/me/playlists', {
       headers: { Authorization: 'Bearer ' + req.user.spotifyAccessToken}
     })
-    res.json(data)
+    const playlists = data.items.map(playlist => {
+      return {
+        name: playlist.name,
+        id: playlist.id,
+        image: playlist.images.length ? playlist.images[0].url : null,
+        externalUrl: playlist.external_urls.spotify,
+        uri: playlist.uri,
+        trackCount: playlist.tracks.total
+      }
+    })
+    res.json(playlists)
   } catch (err) {
     console.log('Error when getting playlists')
     next(err)
