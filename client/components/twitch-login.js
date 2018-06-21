@@ -24,7 +24,7 @@ const TwitchLogin = () => {
           </Card.Header>
           <Card.Description>
             <a href="/auth/twitch">
-              <Button color='primary' animated>
+              <Button primary animated>
               <Button.Content visible>Login with twitch</Button.Content>
               <Button.Content hidden>
                 <Icon name='sign in' />
