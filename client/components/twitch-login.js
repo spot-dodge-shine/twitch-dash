@@ -27,7 +27,7 @@ const TwitchLogin = () => {
               <Button primary animated>
               <Button.Content visible>Login with twitch</Button.Content>
               <Button.Content hidden>
-                <Icon name='sign in' />
+                <Icon name='twitch' />
               </Button.Content>
               </Button>
             </a>

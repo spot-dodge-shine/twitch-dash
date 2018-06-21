@@ -18,7 +18,7 @@ export const UserHome = props => {
       {
         props.twitchLogin
           ? <div>
-              <h1>Connect your spotify account</h1>
+              <h3>Connect Your Spotify Account</h3>
               <a href="/auth/spotify">Connect</a>
             </div>
           : <div />
@@ -39,9 +39,3 @@ const mapState = state => {
 
 export default connect(mapState)(UserHome)
 
-/**
- * PROP TYPES
- */
-UserHome.propTypes = {
-  email: PropTypes.string
-}
