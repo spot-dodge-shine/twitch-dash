@@ -31,6 +31,7 @@ if (!process.env.SPOTIFY_CLIENT_ID || !process.env.SPOTIFY_CLIENT_SECRET) {
           spotifyRefreshToken: refreshToken,
           userId: req.user.id
         })
+        req.user.spotifyAccessToken = accessToken
         done(null, req.user)
       } catch (err) {
         console.error(err)
@@ -61,7 +62,7 @@ if (!process.env.SPOTIFY_CLIENT_ID || !process.env.SPOTIFY_CLIENT_SECRET) {
     async (req, res, next) => {
       try {
         const { code, state } = req.query
-        const spotifyAcct = await Spotify.findOne({ where: { userId: userId }})
+        const spotifyAcct = await Spotify.findOne({ where: { userId: req.user.id }})
         await spotifyAcct.update({ spotifyAuthCode: code, spotifyState: state })
         res.redirect('/home')
       } catch (err) {

@@ -1,7 +1,7 @@
-const User = require('./user')
-const Spotify = require('./spotify')
-const Votecycle = require('./votecycle')
-const Vote = require('./vote')
+const { User } = require('./user')
+const { Spotify } = require('./spotify')
+const { Votecycle } = require('./votecycle')
+const { Vote } = require('./vote')
 
 /**
  * If we had any associations to make, this would be a great place to put them!

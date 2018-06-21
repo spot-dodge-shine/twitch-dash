@@ -40,4 +40,4 @@ const Spotify = db.define('spotifyAccount', {
   },
 })
 
-module.exports = Spotify
+module.exports.Spotify = Spotify
