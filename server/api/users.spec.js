@@ -6,27 +6,35 @@ const db = require('../db')
 const app = require('../index')
 const User = db.model('user')
 
+// console.log(db)
+
 describe('User routes', () => {
   beforeEach(() => {
     return db.sync({force: true})
   })
 
-  describe('/api/users/', () => {
-    const codysEmail = 'cody@puppybook.com'
+  describe('/api/users/active', async () => {
+    beforeEach(async () => {
+      await User.create({
+        twitchId: 'testUser1',
+        isActiveDash: true
+      })
 
-    beforeEach(() => {
-      return User.create({
-        email: codysEmail
+      await User.create({
+        twitchId: 'testUser2',
+        isActiveDash: false
       })
     })
-
-    it('GET /api/users', async () => {
+    
+    it('GET /api/users/active', async () => {
       const res = await request(app)
-        .get('/api/users')
+        .get('/api/users/active')
         .expect(200)
 
       expect(res.body).to.be.an('array')
-      expect(res.body[0].email).to.be.equal(codysEmail)
+      expect(res.body.length).to.be.equal(1)
+      expect(res.body[0].twitchId).to.be.equal('testUser1')
     })
-  }) // end describe('/api/users')
+  })
+
 }) // end describe('User routes')

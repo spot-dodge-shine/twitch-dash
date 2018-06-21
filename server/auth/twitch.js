@@ -2,6 +2,7 @@ const passport = require('passport')
 const router = require('express').Router()
 const TwitchStrategy = require('passport-twitch-new').Strategy
 const {User} = require('../db/models')
+const twitchBot = require('../bot')
 module.exports = router
 
 if (!process.env.TWITCH_CLIENT_ID || !process.env.TWITCH_CLIENT_SECRET) {
@@ -10,7 +11,7 @@ if (!process.env.TWITCH_CLIENT_ID || !process.env.TWITCH_CLIENT_SECRET) {
   const twitchConfig = {
     clientID: process.env.TWITCH_CLIENT_ID,
     clientSecret: process.env.TWITCH_CLIENT_SECRET,
-    callbackURL: `http://localhost:6969/auth/twitch/callback/`
+    callbackURL: `http://localhost:${process.env.PORT}/auth/twitch/callback/`
   }
 
   //Remember to change this back to global var^
@@ -20,14 +21,20 @@ if (!process.env.TWITCH_CLIENT_ID || !process.env.TWITCH_CLIENT_SECRET) {
     twitchConfig,
     async (accessToken, refreshToken, profile, done) => {
 
-      const users = await User.findOrCreate({where: {twitchId: profile.id}, defaults: {
-        twitchId: profile.id,
-        twitchLogin: profile.login,
-        twitchImg: profile.profile_image_url,
-        twitchAccessToken: accessToken
-      }})
-      user = users[0]
-      done(null, user)
+      const user = await User.findOne({where: {twitchId: profile.id}})
+      if (user) {
+        done(null, user)
+      } else {
+        const newUser = await User.create({
+          twitchId: profile.id,
+          twitchLogin: profile.login,
+          twitchImg: profile.profile_image_url,
+          twitchAccessToken: accessToken,
+          isActiveDash: true
+        })
+        twitchBot()
+        done(null, newUser)
+      }
     }
   )
 
