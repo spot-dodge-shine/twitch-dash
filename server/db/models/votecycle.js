@@ -8,4 +8,4 @@ const Votecycle = db.define('votecycle', {
   }
 })
 
-module.exports = Votecycle
+module.exports.Votecycle = Votecycle
