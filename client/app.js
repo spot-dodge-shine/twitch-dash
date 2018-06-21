@@ -7,14 +7,14 @@ import Routes from './routes'
 const App = (props) => {
   const {isLoggedIn} = props
   return (
-    <Switch>
+    <div>
       {isLoggedIn && (
         <Switch>
           <Route path="/" component={Navbar} />
         </Switch>
       )}
       <Routes />
-    </Switch>
+    </div>
   )
 }
 

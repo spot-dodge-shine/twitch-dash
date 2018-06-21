@@ -8,7 +8,7 @@ import {PlaylistDropdown} from './playlist-dropdown'
  */
 export const UserHome = props => {
   const {twitchLogin} = props
-
+  console.log('TEST', props)
   return (
     <div>
       <h3>Welcome, {twitchLogin}</h3>
