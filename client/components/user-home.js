@@ -31,7 +31,6 @@ export const UserHome = props => {
 const mapState = state => {
   console.log('state', state)
   return {
-    email: state.user.email,
     twitchLogin: state.user.twitchLogin
   }
 }
