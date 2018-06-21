@@ -1,5 +1,3 @@
-/* global describe beforeEach it */
-
 const {expect} = require('chai')
 const request = require('supertest')
 const db = require('../db')
@@ -8,7 +6,7 @@ const Votecycle = db.model('votecycle')
 const Votechoice = db.model('votechoice')
 const Vote = db.model('vote')
 
-describe('User routes', () => {
+describe('Votecycle routes', () => {
   beforeEach(() => {
     return db.sync({force: true})
   })
