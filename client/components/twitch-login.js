@@ -9,7 +9,7 @@ display: flex;
 justify-content: center;
 text-align: center;
 align-items: center;
-margin-top: 10%;
+margin-top: 15%;
 `
 
 // const style = {
