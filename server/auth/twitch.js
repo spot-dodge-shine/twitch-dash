@@ -13,6 +13,7 @@ if (!process.env.TWITCH_CLIENT_ID || !process.env.TWITCH_CLIENT_SECRET) {
     clientSecret: process.env.TWITCH_CLIENT_SECRET,
     callbackURL: `http://localhost:${process.env.PORT}/auth/twitch/callback/`
   }
+
   const strategy = new TwitchStrategy(
     twitchConfig,
     async (accessToken, refreshToken, profile, done) => {
