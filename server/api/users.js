@@ -33,7 +33,10 @@ router.get('/me/playlists', checkSpotifyAccessToken, async (req, res, next) => {
         uri: playlist.uri,
         trackCount: playlist.tracks.total
       }
-    })
+    }).reduce((resultObj, playlist) => {
+      resultObj[playlist.id] = playlist
+      return resultObj
+    }, {})
     res.json(playlists)
   } catch (err) {
     console.log('Error when getting playlists')

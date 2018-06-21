@@ -12,10 +12,10 @@ export const gotPlaylists = playlists => {
   }
 }
 
-export const selectPlaylist = selectedPlaylist => {
+export const selectPlaylist = selectedPlaylistId => {
   return {
     type: SELECT_PLAYLIST,
-    selectedPlaylist
+    selectedPlaylistId
   }
 }
 
@@ -26,7 +26,7 @@ export const getPlaylistsFromSpotify = () => {
   }
 }
 
-export const playlistsReducer = (state = [], action) => {
+export const playlistsReducer = (state = {}, action) => {
   switch (action.type) {
     case GET_PLAYLISTS:
       return action.playlists
@@ -35,10 +35,10 @@ export const playlistsReducer = (state = [], action) => {
   }
 }
 
-export const selectedPlaylistReducer = (state = {}, action) => {
+export const selectedPlaylistReducer = (state = '', action) => {
   switch (action.type) {
     case SELECT_PLAYLIST:
-      return action.selectedPlaylist
+      return action.selectedPlaylistId
     default:
       return state
   }
