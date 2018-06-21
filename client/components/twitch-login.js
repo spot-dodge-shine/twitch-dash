@@ -1,7 +1,7 @@
 'use strict'
 
 import React from 'react'
-import { Card, Button, Icon, Image, Grid } from 'semantic-ui-react'
+import { Card, Button, Icon, Image } from 'semantic-ui-react'
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
@@ -12,16 +12,12 @@ align-items: center;
 margin-top: 15%;
 `
 
-// const style = {
-//   display: flex;
-//   justify-content: center;
-//   text-align: center;
-// }
+const TwitchLogin = () => {
 
-const TwitchLogin = props => {
-  const {email, twitchLogin} = props
   return (
     <Wrapper>
+      <h3>test</h3>
+      <div>
       <Card>
         <Card.Content>
           <Card.Header>
@@ -40,6 +36,7 @@ const TwitchLogin = props => {
           </Card.Description>
         </Card.Content>
       </Card>
+      </div>
     </Wrapper>
   )
 }
