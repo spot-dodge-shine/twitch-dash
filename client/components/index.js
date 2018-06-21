@@ -5,4 +5,5 @@
  */
 export {default as Navbar} from './navbar'
 export {default as UserHome} from './user-home'
+export {default as TwitchLogin} from './twitch-login'
 export {Login, Signup} from './auth-form'

@@ -7,4 +7,4 @@ const Vote = db.define('vote', {
   }
 })
 
-module.exports = Vote
+module.exports.Vote = Vote
