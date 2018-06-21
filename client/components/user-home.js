@@ -7,12 +7,20 @@ import {PlaylistDropdown} from './playlist-dropdown'
  * COMPONENT
  */
 export const UserHome = props => {
-  const {email, twitchLogin} = props
+  const {twitchLogin} = props
 
   return (
     <div>
       <h3>Welcome, {twitchLogin}</h3>
       <PlaylistDropdown />
+      {
+        props.isLoggedIn
+          ? <div>
+              <h1>Connect your spotify account</h1>
+              <a href="/auth/spotify">Connect</a>
+            </div>
+          : <div />
+      }
     </div>
   )
 }
@@ -23,7 +31,6 @@ export const UserHome = props => {
 const mapState = state => {
   console.log('state', state)
   return {
-    email: state.user.email,
     twitchLogin: state.user.twitchLogin
   }
 }

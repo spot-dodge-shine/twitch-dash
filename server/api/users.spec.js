@@ -13,7 +13,7 @@ describe('User routes', () => {
     return db.sync({force: true})
   })
 
-  describe('/api/users/active', async () => {
+  describe('/api/users/active', () => {
     beforeEach(async () => {
       await User.create({
         twitchId: 'testUser1',
@@ -25,7 +25,7 @@ describe('User routes', () => {
         isActiveDash: false
       })
     })
-    
+
     it('GET /api/users/active', async () => {
       const res = await request(app)
         .get('/api/users/active')

@@ -15,18 +15,8 @@ const AuthForm = props => {
         <div id="login">
           <h1>Log in to twitch</h1>
           <a href="/auth/twitch">Log in</a>
-          {
-            props.user && props.user.twitchId
-              ? <div>
-                  <h1>Connect your spotify account</h1>
-                  <a href="/auth/spotify">Log in</a>
-                </div>
-              : <div />
-          }
         </div>
-        <div id="loggedin" />
       </div>
-
       <script id="loggedin-template" type="text/x-handlebars-template">
           <h1>Logged in as </h1>
           <img id="avatar" width="200" src="" />
@@ -55,7 +45,7 @@ const mapLogin = state => {
   return {
     name: 'login',
     displayName: 'Login',
-    error: state.user.error
+    error: state.user.error,
   }
 }
 
@@ -63,7 +53,8 @@ const mapSignup = state => {
   return {
     name: 'signup',
     displayName: 'Sign Up',
-    error: state.user.error
+    error: state.user.error,
+    user: state.user,
   }
 }
 
