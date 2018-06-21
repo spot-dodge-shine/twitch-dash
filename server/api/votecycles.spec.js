@@ -2,6 +2,7 @@ const {expect} = require('chai')
 const request = require('supertest')
 const db = require('../db')
 const app = require('../index')
+const User = db.model('user')
 const Votecycle = db.model('votecycle')
 const Votechoice = db.model('votechoice')
 const Vote = db.model('vote')
@@ -13,7 +14,11 @@ describe('Votecycle routes', () => {
 
   describe('/api/votecycles', async () => {
     beforeEach(async () => {
-      const votecycle1 = await Votecycle.create({ active: true })
+      const user1 = await User.create({
+        twitchId: 'testUser1',
+        isActiveDash: true
+      })
+      const votecycle1 = await Votecycle.create({ active: true, userId: user1.id })
 
       await Promise.all([
         Votechoice.create({ votecycleId: votecycle1.id }),
@@ -30,7 +35,7 @@ describe('Votecycle routes', () => {
         Vote.create({ votechoiceId: 3 }),
       ])
 
-      const votecycle2 = await Votecycle.create({ active: false })
+      const votecycle2 = await Votecycle.create({ active: false, userId: 1 })
 
     })
     
@@ -42,6 +47,15 @@ describe('Votecycle routes', () => {
       expect(res.body).to.be.an('array')
       expect(res.body.length).to.be.equal(2)
       expect(res.body[0].active).to.be.equal(true)
+    })
+
+    it('GET /api/votecycles/active/:userId', async () => {
+      const res = await request(app)
+        .get(`/api/votecycles/active/1`)
+        .expect(200)
+
+      expect(res.body).to.be.an('object')
+      expect(res.body.userId).to.be.equal(1)
     })
 
     it('POST /api/votecycles', async () => {

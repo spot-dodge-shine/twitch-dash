@@ -12,6 +12,27 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+// Get active votecycle for user
+router.get('/active/:userId', async (req, res, next) => {
+  try {
+    const activeVotecycle = await Votecycle.findOne({
+      where: {
+        userId: req.params.userId,
+        active: true
+      },
+      include: [{
+        model: Votechoice,
+        include: [{
+          model: Vote
+        }]
+      }]
+    })
+    res.json(activeVotecycle)
+  } catch(err) {
+    next(err)
+  }
+})
+
 // Create new votecycle
 router.post('/', async (req, res, next) => {
   try {
