@@ -14,15 +14,21 @@ describe('Votecycle routes', () => {
   describe('/api/votecycles', async () => {
     beforeEach(async () => {
       const votecycle1 = await Votecycle.create({ active: true })
-      const votechoice1 = await Votechoice.create({ votecycleId: votecycle1.id })
-      const votechoice2 = await Votechoice.create({ votecycleId: votecycle1.id })
-      const votechoice3 = await Votechoice.create({ votecycleId: votecycle1.id })
-      const vote1 = await Vote.create({ votechoiceId: votechoice1.id })
-      const vote2 = await Vote.create({ votechoiceId: votechoice2.id })
-      const vote3 = await Vote.create({ votechoiceId: votechoice2.id })
-      const vote4 = await Vote.create({ votechoiceId: votechoice2.id })
-      const vote5 = await Vote.create({ votechoiceId: votechoice3.id })
-      const vote6 = await Vote.create({ votechoiceId: votechoice3.id })
+
+      await Promise.all([
+        Votechoice.create({ votecycleId: votecycle1.id }),
+        Votechoice.create({ votecycleId: votecycle1.id }),
+        Votechoice.create({ votecycleId: votecycle1.id }),
+      ])
+
+      await Promise.all([
+        Vote.create({ votechoiceId: 1 }),
+        Vote.create({ votechoiceId: 2 }),
+        Vote.create({ votechoiceId: 2 }),
+        Vote.create({ votechoiceId: 2 }),
+        Vote.create({ votechoiceId: 3 }),
+        Vote.create({ votechoiceId: 3 }),
+      ])
 
       const votecycle2 = await Votecycle.create({ active: false })
 

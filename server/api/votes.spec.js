@@ -13,9 +13,11 @@ describe('Votes routes', () => {
   describe('/api/votes', async () => {
     beforeEach(async () => {
       const votecycle1 = await Votecycle.create({ active: true })
-      const votechoice1 = await Votechoice.create({ votecycleId: votecycle1.id })
-      const votechoice2 = await Votechoice.create({ votecycleId: votecycle1.id })
-      const votechoice3 = await Votechoice.create({ votecycleId: votecycle1.id })
+      Promise.all([
+        Votechoice.create({ votecycleId: votecycle1.id }),
+        Votechoice.create({ votecycleId: votecycle1.id }),
+        Votechoice.create({ votecycleId: votecycle1.id }),
+      ])
     })
 
     it('POST /api/votes', async () => {
