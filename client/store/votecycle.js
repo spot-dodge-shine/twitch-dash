@@ -15,9 +15,9 @@ const getActiveVotecycle = votecycle => ({type: GET_ACTIVE_VOTECYCLE, votecycle}
  * THUNK CREATORS
  */
 export const getActiveVotecycleServer = (userId) => {
-  return (dispatch) => {
-    const {data} = axios.get('/api/votecycles/active')
-    dispatch(getVotecycle(data))
+  return async (dispatch) => {
+    const {data} = await axios.get(`/api/votecycles/active/${userId}`)
+    dispatch(getActiveVotecycle(data))
   }
 }
 
