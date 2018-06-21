@@ -16,8 +16,6 @@ const TwitchLogin = () => {
 
   return (
     <Wrapper>
-      <h3>test</h3>
-      <div>
       <Card>
         <Card.Content>
           <Card.Header>
@@ -36,7 +34,6 @@ const TwitchLogin = () => {
           </Card.Description>
         </Card.Content>
       </Card>
-      </div>
     </Wrapper>
   )
 }
