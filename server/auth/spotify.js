@@ -31,6 +31,7 @@ if (!process.env.SPOTIFY_CLIENT_ID || !process.env.SPOTIFY_CLIENT_SECRET) {
           spotifyRefreshToken: refreshToken,
           userId: req.user.id
         })
+        req.user.spotifyId = profile.id
         req.user.spotifyAccessToken = accessToken
         done(null, req.user)
       } catch (err) {

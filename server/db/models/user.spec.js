@@ -31,10 +31,6 @@ describe('User model', () => {
         })
       })
 
-      it('returns the spotify access token associated with user', () => {
-        expect(user.spotifyAccessToken).to.be.equal('fakestringlikethis')
-      })
-
     }) // end describe('correctPassword')
   }) // end describe('instanceMethods')
 }) // end describe('User model')
