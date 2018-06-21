@@ -7,6 +7,7 @@ import {connect} from 'react-redux'
  */
 export const UserHome = props => {
   const { twitchLogin } = props.user
+  console.log(props.user)
 
   return (
     <div>
@@ -15,7 +16,7 @@ export const UserHome = props => {
         props.isLoggedIn
           ? <div>
               <h1>Connect your spotify account</h1>
-              <a href="/auth/spotify">Log in</a>
+              <a href="/auth/spotify">Connect</a>
             </div>
           : <div />
       }

@@ -3,42 +3,38 @@
 const passport = require('passport')
 const router = require('express').Router()
 const SpotifyStrategy = require('passport-spotify').Strategy
-const { User, Spotify } = require('../db/models')
-
-let userId
+const { Spotify } = require('../db/models')
 
 module.exports = router
 
 if (!process.env.SPOTIFY_CLIENT_ID || !process.env.SPOTIFY_CLIENT_SECRET) {
   console.log('Spotify client ID / secret not found. Skipping Spotify OAuth.')
 } else {
-  router.get('/', (req, res, next) => {
-    userId = req.user.id
-    next()
-  })
-
-  console.log('userId >>>>>>>', userId)
 
   const spotifyConfig = {
     clientID: process.env.SPOTIFY_CLIENT_ID,
     clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-    callbackURL: `http://localhost:${process.env.PORT}/auth/spotify/callback`
+    callbackURL: `http://localhost:${process.env.PORT}/auth/spotify/callback`,
+    passReqToCallback: true
   }
 
-  const strategy = new SpotifyStrategy(spotifyConfig, async (accessToken, refreshToken, profile, done) => {
-    const foundUser = await User.findOrCreate({ where: { id: userId } })
-    console.log('foundUser >>>>>>>', foundUser)
-    const spotifyUser = await Spotify.create({
-      spotifyEmail: profile._json.email,
-      spotifyHref: profile.href,
-      spotifyId: profile.id,
-      spotifyImg: profile.photos[0],
-      spotifyPremium: (profile.product === 'premium'),
-      spotifyAccessToken: accessToken,
-      spotifyRefreshToken: refreshToken,
-      userId: userId
-    })
-    done(null, spotifyUser)
+  const strategy = new SpotifyStrategy(spotifyConfig,
+    async (req, accessToken, refreshToken, profile, done) => {
+      try {
+        await Spotify.create({
+          spotifyEmail: profile._json.email,
+          spotifyHref: profile.href,
+          spotifyId: profile.id,
+          spotifyImg: profile.photos[0],
+          spotifyPremium: (profile.product === 'premium'),
+          spotifyAccessToken: accessToken,
+          spotifyRefreshToken: refreshToken,
+          userId: req.user.id
+        })
+        done(null, req.user)
+      } catch (err) {
+        console.error(err)
+      }
   })
 
   passport.use(strategy)
@@ -62,12 +58,15 @@ if (!process.env.SPOTIFY_CLIENT_ID || !process.env.SPOTIFY_CLIENT_SECRET) {
   }))
 
   router.get('/callback', passport.authenticate('spotify', { failureRedirect: '/' }),
-    async (req, res) => {
-      const { code, state } = req.query
-      const spotifyUser = await Spotify.findOne({ where: { userId: userId }})
-      await spotifyUser.update({ spotifyAuthCode: code, spotifyState: state })
-      req.user = await User.findById(userId)
-      res.redirect('/home')
+    async (req, res, next) => {
+      try {
+        const { code, state } = req.query
+        const spotifyAcct = await Spotify.findOne({ where: { userId: userId }})
+        await spotifyAcct.update({ spotifyAuthCode: code, spotifyState: state })
+        res.redirect('/home')
+      } catch (err) {
+        next(err)
+      }
     }
   )
 }
