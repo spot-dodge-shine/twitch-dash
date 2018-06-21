@@ -12,10 +12,10 @@ export const gotPlaylists = playlists => {
   }
 }
 
-export const selectPlaylist = selectedPlaylistId => {
+export const selectPlaylist = selectedPlaylist => {
   return {
     type: SELECT_PLAYLIST,
-    selectedPlaylistId
+    selectedPlaylist
   }
 }
 
