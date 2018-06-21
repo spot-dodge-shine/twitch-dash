@@ -10,8 +10,9 @@ import history from '../history'
 import {
   GET_PLAYLISTS,
   SELECT_PLAYLIST,
-  getPlaylistsFromSpotify,
+  gotPlaylists,
   selectPlaylist,
+  getPlaylistsFromSpotify,
   playlistsReducer,
   selectedPlaylistReducer
 } from './spotify-playlists'
@@ -68,7 +69,7 @@ describe('selectedPlaylistReducer', () => {
       type: SELECT_PLAYLIST,
       selectedPlaylist: fakePlaylists[0]
     }
-    expect(selectedPlaylistReducer({}, selectPlaylistAction)).to.deep.equal({})
+    expect(selectedPlaylistReducer({}, selectPlaylistAction)).to.deep.equal(fakePlaylists[0])
   })
 })
 
@@ -88,7 +89,7 @@ describe('Thunk creators', () => {
 
   describe('getPlaylistsFromSpotify', () => {
     beforeEach(() => {
-      mockAxios.onGet(process.env.SPOTIFY_API_URL + '/v1/me/playlists')
+      mockAxios.onGet('/api/users/me/playlists')
         .replyOnce(200, fakePlaylists)
     })
     it('dispatches the GET_PLAYLISTS action with a playlists array', () => {
@@ -103,13 +104,23 @@ describe('Thunk creators', () => {
 })
 
 describe('Actions', () => {
+  describe('gotPlaylists', () => {
+    it('should create an action with all retrieved playlists', () => {
+      const expectedAction = {
+        type: GET_PLAYLISTS,
+        playlists: fakePlaylists
+      }
+      expect(gotPlaylists(fakePlaylists)).to.be.deep.equal(expectedAction)
+    })
+  })
+
   describe('selectPlaylist', () => {
     it('should create an action to select a playlist', () => {
       const expectedAction = {
         type: SELECT_PLAYLIST,
         selectedPlaylist: fakePlaylists[0]
       }
-      expect(selectPlaylist(fakePlaylists[0])).to.be.equal(expectedAction)
+      expect(selectPlaylist(fakePlaylists[0])).to.be.deep.equal(expectedAction)
     })
   })
 })
