@@ -5,7 +5,16 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
 import votecycle from './votecycle'
 
-const reducer = combineReducers({user, votecycle})
+
+import { playlistsReducer, selectedPlaylistReducer } from './spotify-playlists'
+
+const reducer = combineReducers({
+  user: user,
+  playlists: playlistsReducer,
+  selectedPlaylistId: selectedPlaylistReducer,
+  votecycle
+})
+
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )
