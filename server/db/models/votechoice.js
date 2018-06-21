@@ -3,4 +3,4 @@ const db = require('../db')
 
 const Votechoice = db.define('votechoice', {})
 
-module.exports = Votechoice
+module.exports.Votechoice = Votechoice

@@ -1,15 +1,9 @@
-<<<<<<< HEAD
-const User = require('./user')
-const Spotify = require('./spotify')
-const Votecycle = require('./votecycle')
-const Vote = require('./vote')
-const Votechoice = require('./votechoice')
-=======
+
 const { User } = require('./user')
 const { Spotify } = require('./spotify')
 const { Votecycle } = require('./votecycle')
+const { Votechoice } = require('./votechoice')
 const { Vote } = require('./vote')
->>>>>>> bbb1be8397bc63ca9cf300c1bc16752cd578fd57
 
 /**
  * If we had any associations to make, this would be a great place to put them!
