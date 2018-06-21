@@ -1,6 +1,8 @@
+
 const { User } = require('./user')
 const { Spotify } = require('./spotify')
 const { Votecycle } = require('./votecycle')
+const { Votechoice } = require('./votechoice')
 const { Vote } = require('./vote')
 
 /**
@@ -16,8 +18,11 @@ const { Vote } = require('./vote')
  User.hasMany(Votecycle)
  Votecycle.belongsTo(User)
 
- Votecycle.hasMany(Vote)
- Vote.belongsTo(Votecycle)
+ Votecycle.hasMany(Votechoice)
+ Votechoice.belongsTo(Votecycle)
+
+ Votechoice.hasMany(Vote)
+ Vote.belongsTo(Votechoice)
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
@@ -29,5 +34,6 @@ module.exports = {
   User,
   Spotify,
   Votecycle,
-  Vote
+  Vote,
+  Votechoice
 }
