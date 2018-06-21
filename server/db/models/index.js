@@ -2,6 +2,7 @@ const User = require('./user')
 const Spotify = require('./spotify')
 const Votecycle = require('./votecycle')
 const Vote = require('./vote')
+const Votechoice = require('./votechoice')
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -16,8 +17,11 @@ const Vote = require('./vote')
  User.hasMany(Votecycle)
  Votecycle.belongsTo(User)
 
- Votecycle.hasMany(Vote)
- Vote.belongsTo(Votecycle)
+ Votecycle.hasMany(Votechoice)
+ Votechoice.belongsTo(Votecycle)
+
+ Votechoice.hasMany(Vote)
+ Vote.belongsTo(Votechoice)
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
@@ -29,5 +33,6 @@ module.exports = {
   User,
   Spotify,
   Votecycle,
-  Vote
+  Vote,
+  Votechoice
 }
