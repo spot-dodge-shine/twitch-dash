@@ -29,7 +29,7 @@ describe('thunk creators - votecycles', () => {
     store.clearActions()
   })
 
-  describe.only('getActiveVotecycleServer', () => {
+  describe('getActiveVotecycleServer', () => {
     const fakeVotecycle = {
       userId: 1,
       active: true
