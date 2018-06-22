@@ -68,7 +68,6 @@ class UserHome extends Component {
  * CONTAINER
  */
 const mapState = state => {
-  console.log('state', state)
   return {
     userId: state.user.id,
     twitchLogin: state.user.twitchLogin,
