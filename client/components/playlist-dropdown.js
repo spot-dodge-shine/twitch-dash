@@ -4,7 +4,8 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Card, Icon, Dropdown } from 'semantic-ui-react'
 import styled from 'styled-components'
-import { getPlaylistsFromSpotify } from '../store/spotify-playlists'
+import { getPlaylistsFromSpotify, selectPlaylist } from '../store/spotify-playlists'
+import { getTracksFromSpotify } from '../store/spotify-tracks'
 
 const YourPlaylistText = styled.div`
   margin-top: 5%;
@@ -26,13 +27,19 @@ export class PlaylistDropdown extends Component {
     }
   }
 
+  handleChange = async (evt, data) => {
+    await this.props.selectPlaylist(data.value)
+    return this.props.getTracks(this.props.selectedPlaylist())
+  }
+
   render () {
 
-    const dummySongs = [
-      {key: 0, value: '0', text:'My Beautiful Dark Twisted Fantasy'},
-      {key: 1, value: '1', text:'Kids See Ghosts'},
-      {key: 2, text:'ye'}
-    ]
+    const trackData = Object.values(this.props.playlists)
+      .map(playlist => ({
+        key: playlist.id,
+        value: playlist.id,
+        text: playlist.name
+      }))
 
     return (
       <div>
@@ -42,13 +49,21 @@ export class PlaylistDropdown extends Component {
                 <h3>Your Spotify Playlists</h3>
               </YourPlaylistText>
               <DropDownStyle>
-                <Dropdown button={true} placeholder='Select a Playlist' fluid search selection options={dummySongs} />
+                <Dropdown
+                  button={true}
+                  placeholder='Select a Playlist'
+                  fluid
+                  search
+                  selection
+                  options={trackData}
+                  onChange={this.handleChange}
+                />
               </DropDownStyle>
             </Card.Header>
             <Card.Content extra>
               <a>
                 <Icon name='spotify' />
-                {dummySongs.length} Playlists
+                {trackData.length} Playlists
               </a>
             </Card.Content>
           </Card>
@@ -60,13 +75,20 @@ export class PlaylistDropdown extends Component {
 const mapStateToProps = state => {
   return {
     user: state.user,
-    playlists: state.playlists
+    playlists: state.playlists,
+    selectedPlaylist: () => {
+      return Object.values(state.playlists)
+        .filter(playlist => playlist.id === state.selectedPlaylistId)[0]
+    },
+    tracks: state.tracks
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    getPlaylists: () => dispatch(getPlaylistsFromSpotify())
+    getPlaylists: () => dispatch(getPlaylistsFromSpotify()),
+    selectPlaylist: playlistId => dispatch(selectPlaylist(playlistId)),
+    getTracks: playlist => dispatch(getTracksFromSpotify(playlist))
   }
 }
 

@@ -45,7 +45,6 @@ export const createVotechoiceServer = (votecycleId) => {
 
 export const getVotesServer = (votecycle) => {
   return async (dispatch) => {
-    console.log('votecycle.id', votecycle.id)
     const {data} = await axios.get(`/api/votecycles/${votecycle.id}/votes`)
     const newVotechoices = votecycle.votechoices.map(votechoice => {
       return {...votechoice, votes: data[votechoice.id]}
