@@ -40,7 +40,6 @@ export class PlaylistDropdown extends Component {
   }
 
   render () {
-
     const trackData = Object.values(this.props.playlists)
       .map(playlist => ({
         key: playlist.id,
