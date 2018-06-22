@@ -6,34 +6,34 @@ import {logout} from '../store'
 import {Image, Divider, Button, Icon, Menu} from 'semantic-ui-react'
 import styled from 'styled-components'
 
-const Logo = styled.div`
+const LogoStyle = styled.div`
   max-width: 250px;
-  margin-top: 13px;
+  margin-right: 10px;
+  margin-bottom: 1px;
 `
 
 const Navbar = ({handleClick, isLoggedIn}) => (
+  <div>
   <Menu>
     <Menu.Menu>
-      <Logo>
+      <LogoStyle>
         <Link to="/home"><Image src='/images/navbarlogo.png' /></Link>
-      </Logo>
+      </LogoStyle>
     </Menu.Menu>
     <nav>
       {isLoggedIn ? (
         <div>
           {/* The navbar will show these links after you log in */}
-          <a href="#" onClick={handleClick}>
           <Menu.Menu position='right'>
             <Menu.Item>
-              <Button primary animated>
-                  <Button.Content hidden>Logout</Button.Content>
-                  <Button.Content visible>
-                    <Icon name='log out' />
-                  </Button.Content>
-              </Button>
+                <Button primary animated onClick={handleClick}>
+                    <Button.Content hidden>Logout</Button.Content>
+                    <Button.Content visible>
+                      <Icon name='log out' />
+                    </Button.Content>
+                </Button>
             </Menu.Item>
           </Menu.Menu>
-          </a>
         </div>
       ) : (
         <div>
@@ -43,6 +43,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
     </nav>
     <Divider />
   </Menu>
+  </div>
 )
 
 /**
