@@ -57,7 +57,7 @@ export const getVotesServer = (votecycle) => {
 
 export const deactivateVotecycleServer = (votecycleId) => {
   return async (dispatch) => {
-    const {data} = await axios.put(`/${votecycleId}`, {active: false})
+    const {data} = await axios.put(`/api/votecycles/${votecycleId}`, {active: false})
     dispatch(deactivateVotecycle(data))
   }
 }

@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import PlaylistDropdown from './playlist-dropdown'
 import SpotifyLogin from './spotify-login'
 import NavBar from './navbar'
-import {getActiveVotecycleServer, createVotechoiceServer, createActiveVotecycleServer, getVotesServer} from '../store/votecycle'
+import {getActiveVotecycleServer, createVotechoiceServer, createActiveVotecycleServer, getVotesServer, deactivateVotecycleServer} from '../store/votecycle'
 import styled from 'styled-components'
 import { playTrack } from '../store/spotify-tracks'
 
@@ -100,7 +100,8 @@ const mapDispatch = dispatch => {
     createActiveVotecycle: (userId) => dispatch(createActiveVotecycleServer(userId)),
     createVotechoice: (votecycleId) => dispatch(createVotechoiceServer(votecycleId)),
     playTrack: (track) => dispatch(playTrack(track)),
-    getVotes: (votecycle) => dispatch(getVotesServer(votecycle))
+    getVotes: (votecycle) => dispatch(getVotesServer(votecycle)),
+    deactivateVotecycle: (votecycleId) => dispatch(deactivateVotecycleServer(votecycleId))
   }
 }
 
