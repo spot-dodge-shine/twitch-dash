@@ -6,25 +6,15 @@ import {Card, Item, Button, Icon, Grid, Image, Dropdown, Menu} from 'semantic-ui
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
-display: flex;
-justify-content: center;
-text-align: center;
-align-items: center;
-margin-top: 5%;
-`
-
-const SpotifyLogo = styled.div`
+  display: flex;
   justify-content: center;
-  max-width: 100px;
-  margin-top: 10%;
-  margin-left: 10%;
-  margin-bottom: 10%;
+  text-align: center;
+  align-items: center;
+  margin-top: 5%;
 `
 
-const SpotifyButton = styled.div`
-  margin-top: 18%;
-  margin-right: 10%;
-  margin-left: 10%;
+const YourPlaylistText = styled.h3`
+  margin-top: 3px;
 `
 
 export class PlaylistDropdown extends Component {
@@ -52,39 +42,18 @@ export class PlaylistDropdown extends Component {
     return (
       <div>
         <Wrapper>
-          <Menu>
-
-
-            {/* Spotify image */}
-            <Menu.Menu>
-              <SpotifyLogo>
-                <Image src='/images/spotifylogoblue.png' />
-              </SpotifyLogo>
-            </Menu.Menu>
-
-            {/* Login to Spotify button */}
-            <a href="/auth/spotify">
-            <Menu.Menu position='right'>
-              <SpotifyButton>
-                <Button primary animated floated='right'>
-                  <Button.Content visible>
-                    Connect to Spotify
-                  </Button.Content>
-                  <Button.Content hidden>
-                    <Icon name='spotify' />
-                  </Button.Content>
-                </Button>
-              </SpotifyButton>
-            </Menu.Menu>
-            </a>
-
-            <Menu.Menu>
-              <h3><Icon name='spotify' />Your Spotify Playlists</h3>
+          <Card>
+            <Card.Header>
+              <YourPlaylistText>Your Spotify Playlists</YourPlaylistText>
               <Dropdown button='true' placeholder='Select a Playlist' fluid search selection options={dummySongs} />
-            </Menu.Menu>
-
-
-          </Menu>
+            </Card.Header>
+            <Card.Content extra>
+              <a>
+                <Icon name='spotify' />
+                {dummySongs.length} Playlists
+              </a>
+            </Card.Content>
+          </Card>
         </Wrapper>
       </div>
     )

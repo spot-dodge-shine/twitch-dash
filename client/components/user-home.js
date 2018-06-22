@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {PlaylistDropdown} from './playlist-dropdown'
+import SpotifyLogin from './spotify-login'
 import NavBar from './navbar'
 import {getActiveVotecycleServer, createVotechoiceServer, createActiveVotecycleServer} from '../store/votecycle'
 
@@ -50,6 +51,7 @@ class UserHome extends Component {
       <div>
         <NavBar />
         <h3>Welcome, {twitchLogin}</h3>
+        <SpotifyLogin />
         <PlaylistDropdown />
         {
           this.props.twitchLogin
@@ -68,7 +70,6 @@ class UserHome extends Component {
  * CONTAINER
  */
 const mapState = state => {
-  console.log('state', state)
   return {
     userId: state.user.id,
     twitchLogin: state.user.twitchLogin,
