@@ -6,7 +6,6 @@ import SpotifyLogin from './spotify-login'
 import NavBar from './navbar'
 import {getActiveVotecycleServer, createVotechoiceServer, createActiveVotecycleServer, getVotesServer} from '../store/votecycle'
 import styled from 'styled-components'
-import {getActiveVotecycleServer, createVotechoiceServer, createActiveVotecycleServer} from '../store/votecycle'
 import { playTrack } from '../store/spotify-tracks'
 
 const Wrapper = styled.div`
