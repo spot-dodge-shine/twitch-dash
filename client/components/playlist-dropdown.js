@@ -2,10 +2,10 @@
 
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {Card, Icon, Dropdown } from 'semantic-ui-react'
+import { Card, Icon, Dropdown, Button } from 'semantic-ui-react'
 import styled from 'styled-components'
 import { getPlaylistsFromSpotify, selectPlaylist } from '../store/spotify-playlists'
-import { getTracksFromSpotify } from '../store/spotify-tracks'
+import { getTracksFromSpotify, playTrack } from '../store/spotify-tracks'
 
 const YourPlaylistText = styled.div`
   margin-top: 5%;
@@ -30,6 +30,13 @@ export class PlaylistDropdown extends Component {
   handleChange = async (evt, data) => {
     await this.props.selectPlaylist(data.value)
     return this.props.getTracks(this.props.selectedPlaylist())
+  }
+
+  handlePlay = async () => {
+    const tracks = Object.values(this.props.tracks)
+    const randomTrackIndex = Math.floor(Math.random() * tracks.length)
+    const trackToPlay = tracks[randomTrackIndex]
+    await this.props.playTrack(trackToPlay)
   }
 
   render () {
@@ -59,6 +66,11 @@ export class PlaylistDropdown extends Component {
                   onChange={this.handleChange}
                 />
               </DropDownStyle>
+              <Button
+                onClick={this.handlePlay}
+              >
+                Play Random Song
+              </Button>
             </Card.Header>
             <Card.Content extra>
               <a>
@@ -80,7 +92,11 @@ const mapStateToProps = state => {
       return Object.values(state.playlists)
         .filter(playlist => playlist.id === state.selectedPlaylistId)[0]
     },
-    tracks: state.tracks
+    tracks: state.tracks,
+    currentlyPlaying: () => {
+      return Object.values(state.tracks)
+        .filter(track => track.id === state.currentlyPlayingId)[0]
+    }
   }
 }
 
@@ -88,7 +104,8 @@ const mapDispatchToProps = dispatch => {
   return {
     getPlaylists: () => dispatch(getPlaylistsFromSpotify()),
     selectPlaylist: playlistId => dispatch(selectPlaylist(playlistId)),
-    getTracks: playlist => dispatch(getTracksFromSpotify(playlist))
+    getTracks: playlist => dispatch(getTracksFromSpotify(playlist)),
+    playTrack: track => dispatch(playTrack(track))
   }
 }
 
