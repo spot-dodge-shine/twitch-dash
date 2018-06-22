@@ -40,13 +40,13 @@ class UserHome extends Component {
 
   tick = () => {
     this.counter += 1
-    if (!this.props.votecycle) {
+    if (!this.props.votecycle || !this.props.votecycle.active) {
       this.props.createActiveVotecycle(this.props.userId)
         .then(() => {
           let choiceArr = []
           for (let i = 0; i < this.props.numChoices; i++) {
             // TODO: pick random songs from playlist, associate songIds with votechoices
-            choiceArr.push(this.props.createVotechoice(this.props.votecycle.id) )
+            choiceArr.push(this.props.createVotechoice(this.props.votecycle.id, i + 1) )
           }
           return Promise.all(choiceArr)
         }
@@ -98,7 +98,7 @@ const mapDispatch = dispatch => {
   return {
     activeVotecycle: (userId) => dispatch(getActiveVotecycleServer(userId)),
     createActiveVotecycle: (userId) => dispatch(createActiveVotecycleServer(userId)),
-    createVotechoice: (votecycleId) => dispatch(createVotechoiceServer(votecycleId)),
+    createVotechoice: (votecycleId, enumId) => dispatch(createVotechoiceServer(votecycleId, enumId)),
     playTrack: (track) => dispatch(playTrack(track)),
     getVotes: (votecycle) => dispatch(getVotesServer(votecycle)),
     deactivateVotecycle: (votecycleId) => dispatch(deactivateVotecycleServer(votecycleId))

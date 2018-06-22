@@ -36,10 +36,11 @@ export const createActiveVotecycleServer = (userId) => {
   }
 }
 
-export const createVotechoiceServer = (votecycleId) => {
+export const createVotechoiceServer = (votecycleId, votecycleEnumId) => {
   return async (dispatch) => {
     const {data} = await axios.post('/api/votechoices', {
-      votecycleId: votecycleId
+      votecycleId: votecycleId,
+      votecycleEnumId: votecycleEnumId
     })
     dispatch(createVotechoice(data))
   }
