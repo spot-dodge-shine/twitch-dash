@@ -12,17 +12,45 @@ const { Vote } = require('./vote')
  *    BlogPost.belongsTo(User)
  */
 
- User.hasOne(Spotify)
- Spotify.belongsTo(User)
+  User.hasOne(Spotify)
+  Spotify.belongsTo(User)
 
- User.hasMany(Votecycle)
- Votecycle.belongsTo(User)
+  User.hasMany(Votecycle)
+  Votecycle.belongsTo(User)
 
- Votecycle.hasMany(Votechoice)
- Votechoice.belongsTo(Votecycle)
+  Votecycle.hasMany(Votechoice)
+  Votechoice.belongsTo(Votecycle)
 
- Votechoice.hasMany(Vote)
- Vote.belongsTo(Votechoice)
+  Votechoice.hasMany(Vote)
+  Vote.belongsTo(Votechoice)
+
+  User.prototype.getActiveVotecycle = async function() {
+    const votecycles = await this.getVotecycles()
+    return votecycles.filter(votecycle => {
+      return votecycle.active
+    })[0]
+  }
+
+  // Votechoice.findByUsername = async function(username, votecycleEnumId) {
+  //   const ret = await this.findOne({
+  //     where: {
+  //       votecycleEnumId: votecycleEnumId
+  //     },
+  //     include: [{
+  //       model: 'votecycle',
+  //       where: {
+  //         active: true
+  //       },
+  //       include: [{
+  //         model: 'user',
+  //         where: {
+  //           twitchLogin: username
+  //         }
+  //       }]
+  //     }]
+  //   })
+  //   return ret
+  // }
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
