@@ -51,7 +51,17 @@ router.get('/me/playlists/:playlistId/tracks/:offset', checkSpotifyAccessToken,
         `/v1/users/${req.user.spotifyId}/playlists/${req.params.playlistId}/tracks?offset=${req.params.offset}`, {
           headers: { Authorization: 'Bearer ' + req.user.spotifyAccessToken}
         })
-        res.json(data)
+      const tracks = data.items.map(item => {
+        return {
+          name: item.track.name,
+          artist: item.track.artists[0].name,
+          id: item.track.id
+        }
+      }).reduce((resultObj, track) => {
+        resultObj[track.id] = track
+        return resultObj
+      }, {})
+      res.json(tracks)
     } catch (err) {
       next(err)
     }
