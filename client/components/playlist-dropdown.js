@@ -27,7 +27,6 @@ export class PlaylistDropdown extends Component {
 
     return (
       <div>
-        <Wrapper>
           <Card>
             <Card.Header>
               <YourPlaylistText>
@@ -44,7 +43,6 @@ export class PlaylistDropdown extends Component {
               </a>
             </Card.Content>
           </Card>
-        </Wrapper>
       </div>
     )
   }

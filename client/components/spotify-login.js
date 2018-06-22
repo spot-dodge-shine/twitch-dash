@@ -18,7 +18,7 @@ const SpotifyButton = styled.div`
 
 const SpotifyLogin = () => {
   return (
-    <Wrapper>
+    <div>
       <Menu>
         {/* Spotify image */}
         <Menu.Menu>
@@ -43,7 +43,7 @@ const SpotifyLogin = () => {
       </Menu.Menu>
       </a>
     </Menu>
-   </Wrapper>
+   </div>
   )
 }
 
