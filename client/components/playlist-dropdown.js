@@ -24,7 +24,7 @@ export class PlaylistDropdown extends Component {
     super(props)
     if (this.props.user.spotifyAccessToken) {
       this.props.getPlaylists()
-    }:
+    }
   }
 
   render () {
