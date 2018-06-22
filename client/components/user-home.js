@@ -16,9 +16,6 @@ align-items: center;
 margin-top: 10%;
 `
 
-/**
- * COMPONENT
- */
 class UserHome extends Component {
   constructor(props) {
     super(props)
@@ -28,10 +25,6 @@ class UserHome extends Component {
       .then(() => {
         this.tick()
       })
-  }
-
-  componentDidMount() {
-    this.timer = setInterval(this.tick, 10000) // 10 seconds for testing purposes
   }
 
   componentWillUnmount() {
