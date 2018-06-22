@@ -52,6 +52,7 @@ if (!process.env.SPOTIFY_CLIENT_ID || !process.env.SPOTIFY_CLIENT_SECRET) {
     scope: [
       'user-read-private',
       'user-read-email',
+      'user-read-playback-state',
       'playlist-read-private',
       'playlist-read-collaborative',
       'user-modify-playback-state',

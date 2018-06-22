@@ -4,6 +4,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Card, Icon, Dropdown } from 'semantic-ui-react'
 import styled from 'styled-components'
+import { getPlaylistsFromSpotify } from '../store/spotify-playlists'
 
 const YourPlaylistText = styled.div`
   margin-top: 5%;
@@ -19,7 +20,15 @@ const DropDownStyle = styled.div`
 
 export class PlaylistDropdown extends Component {
 
+  constructor(props) {
+    super(props)
+    if (this.props.user.spotifyAccessToken) {
+      this.props.getPlaylists()
+    }
+  }
+
   render () {
+
     const dummySongs = [
       {key: 0, value: '0', text:'My Beautiful Dark Twisted Fantasy'},
       {key: 1, value: '1', text:'Kids See Ghosts'},
@@ -34,7 +43,7 @@ export class PlaylistDropdown extends Component {
                 <h3>Your Spotify Playlists</h3>
               </YourPlaylistText>
               <DropDownStyle>
-                <Dropdown button='true' placeholder='Select a Playlist' fluid search selection options={dummySongs} />
+                <Dropdown button={true} placeholder='Select a Playlist' fluid search selection options={dummySongs} />
               </DropDownStyle>
             </Card.Header>
             <Card.Content extra>
@@ -49,7 +58,17 @@ export class PlaylistDropdown extends Component {
   }
 }
 
-export default PlaylistDropdown /*connect(mapState, mapDispatch)(PlaylistDropdown)*/
+const mapStateToProps = state => {
+  return {
+    user: state.user,
+    playlists: state.playlists
+  }
+}
 
+const mapDispatchToProps = dispatch => {
+  return {
+    getPlaylists: () => dispatch(getPlaylistsFromSpotify())
+  }
+}
 
-
+export default connect(mapStateToProps, mapDispatchToProps)(PlaylistDropdown)

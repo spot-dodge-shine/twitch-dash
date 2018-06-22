@@ -1,5 +1,6 @@
 import axios from 'axios'
 import history from '../history'
+import { getPlaylistsFromSpotify } from './spotify-playlists'
 
 /**
  * ACTION TYPES
@@ -50,7 +51,7 @@ export const logout = () => async dispatch => {
   try {
     await axios.post('/auth/logout')
     dispatch(removeUser())
-    history.push('/login')
+    history.push('/')
   } catch (err) {
     console.error(err)
   }
