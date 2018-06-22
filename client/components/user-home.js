@@ -2,16 +2,9 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import PlaylistDropdown from './playlist-dropdown'
-<<<<<<< HEAD
-import NavBar from './navbar'
-import { Link } from 'react-router-dom'
-import axios from 'axios'
-import { Button } from 'semantic-ui-react'
-=======
 import SpotifyLogin from './spotify-login'
 import NavBar from './navbar'
 import styled from 'styled-components'
->>>>>>> 38ed98810d5e0c7d8a7a2d12d73186c468ce2008
 import {getActiveVotecycleServer, createVotechoiceServer, createActiveVotecycleServer} from '../store/votecycle'
 import { playTrack } from '../store/spotify-tracks'
 
@@ -74,24 +67,6 @@ class UserHome extends Component {
       <div>
         <NavBar />
         <h3>Welcome, {twitchLogin}</h3>
-<<<<<<< HEAD
-        <PlaylistDropdown />
-        {
-          !this.props.spotifyId
-            ? <div>
-                <h1>Connect your spotify account</h1>
-                <a href="/auth/spotify">Connect</a>
-              </div>
-            : <div>
-                <h1>Connected to your Spotify account: {this.props.spotifyId}</h1>
-                <Button
-                  onClick={() => this.props.playTrack(fakeTrack)}
-                >
-                  Play Track
-                </Button>
-              </div>
-        }
-=======
         <Wrapper>
           {
             this.props.spotifyId
@@ -99,7 +74,6 @@ class UserHome extends Component {
             : <SpotifyLogin />
           }
         </Wrapper>
->>>>>>> 38ed98810d5e0c7d8a7a2d12d73186c468ce2008
       </div>
     )
   }
@@ -113,7 +87,6 @@ const mapState = state => {
     userId: state.user.id,
     spotifyId: state.user.spotifyId,
     twitchLogin: state.user.twitchLogin,
-    spotifyId: state.user.spotifyId,
     votecycle: state.votecycle,
     numChoices: 3,
   }
