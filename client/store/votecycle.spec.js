@@ -1,7 +1,7 @@
 /* global describe beforeEach afterEach it */
 
 import {expect} from 'chai'
-import {getActiveVotecycleServer} from './votecycle'
+import {getActiveVotecycleServer, createVotechoiceServer, createActiveVotecycleServer} from './votecycle'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import configureMockStore from 'redux-mock-store'
@@ -44,6 +44,43 @@ describe('thunk creators - votecycles', () => {
           const actions = store.getActions()
           expect(actions[0].type).to.be.equal('GET_ACTIVE_VOTECYCLE')
           expect(actions[0].votecycle).to.be.deep.equal(fakeVotecycle)
+        })
+    })
+  })
+
+  describe('createActiveVotecycleServer', () => {
+    const fakeVotecycle = {
+      userId: 1,
+      active: true
+    }
+    beforeEach(() => {
+      mockAxios.onPost('/api/votecycles').replyOnce(200, fakeVotecycle)
+    })
+
+    it('eventually dispatches the CREATE_ACTIVE_VOTECYCLE action', async () => {      
+      return store.dispatch(createActiveVotecycleServer(1))
+        .then(() => {
+          const actions = store.getActions()
+          expect(actions[0].type).to.be.equal('CREATE_ACTIVE_VOTECYCLE')
+          expect(actions[0].votecycle).to.be.deep.equal(fakeVotecycle)
+        })
+    })
+  })
+
+  describe('createVotechoiceServer', () => {
+    const fakeVotechoice = {
+      votecycleId: 1
+    }
+    beforeEach(() => {
+      mockAxios.onPost('/api/votechoices').replyOnce(200, fakeVotechoice)
+    })
+
+    it('eventually dispatches the CREATE_VOTECHOICE action', async () => {      
+      return store.dispatch(createVotechoiceServer(1))
+        .then(() => {
+          const actions = store.getActions()
+          expect(actions[0].type).to.be.equal('CREATE_VOTECHOICE')
+          expect(actions[0].votechoice).to.be.deep.equal(fakeVotechoice)
         })
     })
   })
