@@ -17,6 +17,22 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.get('/me/player', checkSpotifyAccessToken, async (req, res, next) => {
+  try {
+    const { data } = await axios.get(process.env.SPOTIFY_API_URL + '/v1/me/player',
+    {
+      headers: { Authorization: 'Bearer ' + req.user.spotifyAccessToken}
+    })
+    let response = {
+      isPlaying: data.is_playing,
+      progress: data.progress_ms
+    }
+    res.json(response)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.get('/me/token', refreshSpotifyAccessToken)
 
 router.get('/me/playlists', checkSpotifyAccessToken, async (req, res, next) => {
