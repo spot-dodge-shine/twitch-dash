@@ -11,7 +11,10 @@ class UserHome extends Component {
   constructor(props) {
     super(props)
     this.state = {}
-    this.tick()
+    this.props.activeVotecycle(this.props.userId)
+      .then(() => {
+        this.tick()
+      })
   }
 
   componentDidMount() {
@@ -27,22 +30,18 @@ class UserHome extends Component {
     this.setState({
       counter: this.state.counter + 1
     });
-    this.props.activeVotecycle(this.props.userId)
-      .then(() => {
-        if (!this.props.votecycle) {
-          this.props.createActiveVotecycle(this.props.userId)
-            .then(() => {
-              let choiceArr = []
-              for (let i = 0; i < this.props.numChoices; i++) {
-                // TODO: pick random songs from playlist, associate songIds with votechoices
-                choiceArr.push(this.props.createVotechoice(this.props.votecycle.id) )
-              }
-              return Promise.all(choiceArr)
-            }
-          )
+    if (!this.props.votecycle) {
+      this.props.createActiveVotecycle(this.props.userId)
+        .then(() => {
+          let choiceArr = []
+          for (let i = 0; i < this.props.numChoices; i++) {
+            // TODO: pick random songs from playlist, associate songIds with votechoices
+            choiceArr.push(this.props.createVotechoice(this.props.votecycle.id) )
+          }
+          return Promise.all(choiceArr)
         }
-      }
-    )
+      )
+    }
   }
 
   render() {
