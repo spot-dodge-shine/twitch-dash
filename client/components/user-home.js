@@ -39,7 +39,7 @@ class UserHome extends Component {
           let choiceArr = []
           for (let i = 0; i < this.props.numChoices; i++) {
             // TODO: pick random songs from playlist, associate songIds with votechoices
-            choiceArr.push(this.props.createVotechoice(this.props.votecycle.id) )
+            choiceArr.push(this.props.createVotechoice(this.props.votecycle.id))
           }
           return Promise.all(choiceArr)
         }
