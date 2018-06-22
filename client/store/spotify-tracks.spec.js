@@ -28,27 +28,32 @@ const fakeTracks = {
   "76xNAVwiQccBXImICK5zUP": {
     "name": "To My Soul",
     "artist": "Jerry Folk",
-    "id": "76xNAVwiQccBXImICK5zUP"
+    "id": "76xNAVwiQccBXImICK5zUP",
+    "uri": "spotify:track:76xNAVwiQccBXImICK5zUP"
   },
   "51Vf6hJbVnvsTjsvOHoZ3A": {
     "name": "By My Side",
     "artist": "Great Good Fine Ok",
-    "id": "51Vf6hJbVnvsTjsvOHoZ3A"
+    "id": "51Vf6hJbVnvsTjsvOHoZ3A",
+    "uri": "spotify:track:51Vf6hJbVnvsTjsvOHoZ3A"
   },
   "31ZdIGyNncuufUjNTp5ZY3": {
     "name": "Generationwhy",
     "artist": "ZHU",
-    "id": "31ZdIGyNncuufUjNTp5ZY3"
+    "id": "31ZdIGyNncuufUjNTp5ZY3",
+    "uri": "spotify:track:31ZdIGyNncuufUjNTp5ZY3"
   },
   "5pvJqNwUUahJIZ9a8CFeiP": {
     "name": "Eagle Eyes - Lucas & Steve Remix Edit",
     "artist": "Felix Jaehn",
-    "id": "5pvJqNwUUahJIZ9a8CFeiP"
+    "id": "5pvJqNwUUahJIZ9a8CFeiP",
+    "uri": "spotify:track:5pvJqNwUUahJIZ9a8CFeiP"
   },
   "4K8XcIz6J1VoZQaJ0xQiOT": {
     "name": "I Want You so Bad",
     "artist": "Glades",
-    "id": "4K8XcIz6J1VoZQaJ0xQiOT"
+    "id": "4K8XcIz6J1VoZQaJ0xQiOT",
+    "uri": "spotify:track:4K8XcIz6J1VoZQaJ0xQiOT"
   }
 }
 
@@ -115,7 +120,7 @@ describe('Track thunk creators', () => {
 
   describe('playTrack', () => {
     beforeEach(() => {
-      mockAxios.onPut(`/api/users/me/playtrack/76xNAVwiQccBXImICK5zUP`, {})
+      mockAxios.onPut(`/api/users/me/playtrack/spotify:track:76xNAVwiQccBXImICK5zUP`, {})
         .replyOnce(200, fakeTracks['76xNAVwiQccBXImICK5zUP'])
     })
 

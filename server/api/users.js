@@ -68,11 +68,21 @@ router.get('/me/playlists/:playlistId/tracks/:offset', checkSpotifyAccessToken,
     }
 })
 
-router.put('/me/playtrack/:trackURI', async (req, res, next) => {
+router.put('/me/playtrack/:trackURI', checkSpotifyAccessToken, async (req, res, next) => {
   try {
     const { data } = await axios.put(process.env.SPOTIFY_API_URL + '/v1/me/player/play',
       { uris: [req.params.trackURI] },
-      { headers: { Authorization: 'Bearer' + req.user.spotifyAccessToken } })
+      { headers: { Authorization: 'Bearer ' + req.user.spotifyAccessToken } })
+    res.json(data.id)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get('/me/devices/', checkSpotifyAccessToken, async (req, res, next) => {
+  try {
+    const { data } = await axios.get(process.env.SPOTIFY_API_URL + '/v1/me/player/devices',
+      { headers: { Authorization: 'Bearer ' + req.user.spotifyAccessToken } })
     res.json(data)
   } catch (err) {
     next(err)
