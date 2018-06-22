@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import {PlaylistDropdown} from './playlist-dropdown'
 import NavBar from './navbar'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
@@ -14,7 +15,8 @@ import { playTrack } from '../store/spotify-tracks'
 class UserHome extends Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.timer = setInterval(this.tick, 10000)
+    this.counter = 0
     this.props.activeVotecycle(this.props.userId)
       .then(() => {
         this.tick()
@@ -22,18 +24,15 @@ class UserHome extends Component {
   }
 
   componentDidMount() {
-    let timer = setInterval(this.tick, 10000) // 10 seconds for testing purposes
-    this.setState({timer})
+    this.timer = setInterval(this.tick, 10000) // 10 seconds for testing purposes
   }
 
   componentWillUnmount() {
-    this.clearInterval(this.state.timer);
+    clearInterval(this.timer);
   }
 
   tick = () => {
-    this.setState({
-      counter: this.state.counter + 1
-    });
+    this.counter += 1
     if (!this.props.votecycle) {
       this.props.createActiveVotecycle(this.props.userId)
         .then(() => {
@@ -61,6 +60,7 @@ class UserHome extends Component {
       <div>
         <NavBar />
         <h3>Welcome, {twitchLogin}</h3>
+        <PlaylistDropdown />
         {
           !this.props.spotifyId
             ? <div>
@@ -106,9 +106,3 @@ const mapDispatch = dispatch => {
 
 export default connect(mapState, mapDispatch)(UserHome)
 
-/**
- * PROP TYPES
- */
-UserHome.propTypes = {
-  email: PropTypes.string
-}
