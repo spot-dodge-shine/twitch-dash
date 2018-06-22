@@ -134,7 +134,7 @@ describe('thunk creators - votecycles', () => {
     })
   })
 
-  describe.only('deactivateVotecycleServer', () => {
+  describe('deactivateVotecycleServer', () => {
     const inactiveFakeVotecycle = {
       id: 1,
       userId: 1,

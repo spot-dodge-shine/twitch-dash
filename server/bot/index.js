@@ -61,10 +61,12 @@ module.exports = async () => {
     // io.emit('random')
   }
 
-  function musicvote (target, context, params) {
+  async function musicvote (target, context, params) {
     if (params.length) {
-      if (parseInt(params[0]) > 0 && parseInt(params[0]) < 5) {
-        // do stuff with votes
+      if (parseInt(params[0])) {
+        // TODO: change link
+        const {data} = await axios.get(`http://localhost:${process.env.PORT}/api/users/username/${target.slice(1)}/${params[0]}`)
+        await axios.post(`http://localhost:${process.env.PORT}/api/votes`, {votechoiceId: data.id})
       }
     }
   }
