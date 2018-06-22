@@ -2,12 +2,26 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import PlaylistDropdown from './playlist-dropdown'
+<<<<<<< HEAD
 import NavBar from './navbar'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { Button } from 'semantic-ui-react'
+=======
+import SpotifyLogin from './spotify-login'
+import NavBar from './navbar'
+import styled from 'styled-components'
+>>>>>>> 38ed98810d5e0c7d8a7a2d12d73186c468ce2008
 import {getActiveVotecycleServer, createVotechoiceServer, createActiveVotecycleServer} from '../store/votecycle'
 import { playTrack } from '../store/spotify-tracks'
+
+const Wrapper = styled.div`
+display: flex;
+justify-content: center;
+text-align: center;
+align-items: center;
+margin-top: 10%;
+`
 
 /**
  * COMPONENT
@@ -60,6 +74,7 @@ class UserHome extends Component {
       <div>
         <NavBar />
         <h3>Welcome, {twitchLogin}</h3>
+<<<<<<< HEAD
         <PlaylistDropdown />
         {
           !this.props.spotifyId
@@ -76,6 +91,15 @@ class UserHome extends Component {
                 </Button>
               </div>
         }
+=======
+        <Wrapper>
+          {
+            this.props.spotifyId
+            ? <PlaylistDropdown />
+            : <SpotifyLogin />
+          }
+        </Wrapper>
+>>>>>>> 38ed98810d5e0c7d8a7a2d12d73186c468ce2008
       </div>
     )
   }
@@ -85,9 +109,9 @@ class UserHome extends Component {
  * CONTAINER
  */
 const mapState = state => {
-  console.log('state', state)
   return {
     userId: state.user.id,
+    spotifyId: state.user.spotifyId,
     twitchLogin: state.user.twitchLogin,
     spotifyId: state.user.spotifyId,
     votecycle: state.votecycle,
