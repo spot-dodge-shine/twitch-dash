@@ -8,26 +8,6 @@ import {getActiveVotecycleServer, createVotechoiceServer, createActiveVotecycleS
 /**
  * COMPONENT
  */
-<<<<<<< HEAD
-export const UserHome = props => {
-  const {twitchLogin} = props
-  console.log('TEST', props)
-  return (
-    <div>
-      <NavBar />
-      <h3>Welcome, {twitchLogin}</h3>
-      <PlaylistDropdown />
-      {
-        props.twitchLogin
-          ? <div>
-              <h3>Connect Your Spotify Account</h3>
-              <a href="/auth/spotify">Connect</a>
-            </div>
-          : <div />
-      }
-    </div>
-  )
-=======
 class UserHome extends Component {
   constructor(props) {
     super(props)
@@ -67,11 +47,12 @@ class UserHome extends Component {
 
   render() {
     const {twitchLogin} = this.props
-  
+
     return (
       <div>
         <NavBar />
         <h3>Welcome, {twitchLogin}</h3>
+        <PlaylistDropdown />
         {
           this.props.twitchLogin
             ? <div>
@@ -83,7 +64,6 @@ class UserHome extends Component {
       </div>
     )
   }
->>>>>>> 35f044fc129bc66ef7b5f363e0fefcb7adf17166
 }
 
 /**

@@ -49,21 +49,20 @@ export class PlaylistDropdown extends Component {
       {text:'ye'}
     ]
 
-    // const items = [{
-    //   childKey: 0,
-    //   image: '/images/spotifylogoblue.png',
-    //   description: 'log in to spotify!'
-    // }]
-
     return (
       <div>
         <Wrapper>
           <Menu>
+
+
+            {/* Spotify image */}
             <Menu.Menu>
               <SpotifyLogo>
                 <Image src='/images/spotifylogoblue.png' />
               </SpotifyLogo>
             </Menu.Menu>
+
+            {/* Login to Spotify button */}
             <a href="/auth/spotify">
             <Menu.Menu position='right'>
               <SpotifyButton>
@@ -78,14 +77,48 @@ export class PlaylistDropdown extends Component {
               </SpotifyButton>
             </Menu.Menu>
             </a>
+
+            <Menu.Menu>
+              <h3><Icon name='spotify' />Your Spotify Playlists</h3>
+              <Dropdown button='true' placeholder='Select a Playlist' fluid search selection options={dummySongs} />
+            </Menu.Menu>
+
+
           </Menu>
         </Wrapper>
-        <h3>Your Spotify Playlists</h3>
-        <Dropdown button='true' placeholder='Select a Playlist' fluid search selection options={dummySongs} />
       </div>
     )
   }
 }
+
+
+// const mapState = state => {
+//   return {
+//     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
+//     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
+//     isLoggedIn: !!state.user.id
+//   }
+// }
+
+// const mapDispatch = dispatch => {
+//   return {
+//     loadInitialData() {
+//       dispatch(me())
+//     }
+//   }
+// }
+
+// // The `withRouter` wrapper makes sure that updates are not blocked
+// // when the url changes
+// export default withRouter(connect(mapState, mapDispatch)(Routes))
+
+// /**
+//  * PROP TYPES
+//  */
+// Routes.propTypes = {
+//   loadInitialData: PropTypes.func.isRequired,
+//   isLoggedIn: PropTypes.bool.isRequired
+// }
 
 
 // const mapState = (state) => {

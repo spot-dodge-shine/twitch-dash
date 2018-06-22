@@ -9,7 +9,12 @@ display: flex;
 justify-content: center;
 text-align: center;
 align-items: center;
-margin-top: 15%;
+margin-top: 10%;
+`
+
+const TwitchDashLogo = styled.div`
+margin-top: 4%;
+margin-bottom: 5%;
 `
 
 const TwitchLogin = () => {
@@ -19,8 +24,10 @@ const TwitchLogin = () => {
       <Card>
         <Card.Content>
           <Card.Header>
-          <Image src='/images/twitchbuddylogo.png' />
-            Welcome to twitch dash
+          <TwitchDashLogo>
+            <Image src='/images/navbarlogo.png' />
+          </TwitchDashLogo>
+            {/* Welcome to twitch dash */}
           </Card.Header>
           <Card.Description>
             <a href="/auth/twitch">

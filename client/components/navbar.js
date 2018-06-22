@@ -7,8 +7,8 @@ import {Image, Divider, Button, Icon, Menu} from 'semantic-ui-react'
 import styled from 'styled-components'
 
 const Logo = styled.div`
-  max-width: 300px;
-  margin-top: 5px;
+  max-width: 250px;
+  margin-top: 13px;
 `
 
 const Navbar = ({handleClick, isLoggedIn}) => (
@@ -22,14 +22,6 @@ const Navbar = ({handleClick, isLoggedIn}) => (
       {isLoggedIn ? (
         <div>
           {/* The navbar will show these links after you log in */}
-          {/* <Link to="/home">
-            <Button primary animated>
-              <Button.Content hidden>Home</Button.Content>
-              <Button.Content visible>
-                <Icon name='home' />
-              </Button.Content>
-            </Button>
-          </Link> */}
           <a href="#" onClick={handleClick}>
           <Menu.Menu position='right'>
             <Menu.Item>
@@ -46,8 +38,6 @@ const Navbar = ({handleClick, isLoggedIn}) => (
       ) : (
         <div>
           {/* The navbar will show these links before you log in */}
-          {/* <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link> */}
         </div>
       )}
     </nav>
