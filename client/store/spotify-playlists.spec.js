@@ -20,8 +20,8 @@ import {
 const mockStore = configureMockStore([thunkMiddleware])
 
 const initialState = {
-  playlists: [],
-  selectedPlaylist: {}
+  playlists: {},
+  selectedPlaylist: ''
 }
 
 const fakePlaylists = {
@@ -51,33 +51,29 @@ const fakePlaylists = {
   }
 }
 
-describe('playlistsReducer', () => {
-  it('should return the initial state', () => {
-    expect(playlistsReducer({}, 'not-a-valid-action')).to.deep.equal({})
+describe('Playlist actions', () => {
+  describe('gotPlaylists', () => {
+    it('should create an action with all retrieved playlists', () => {
+      const expectedAction = {
+        type: GET_PLAYLISTS,
+        playlists: fakePlaylists
+      }
+      expect(gotPlaylists(fakePlaylists)).to.be.deep.equal(expectedAction)
+    })
   })
-  it('should handle GET_PLAYLISTS', () => {
-    const getPlaylistsAction = {
-      type: GET_PLAYLISTS,
-      playlists: fakePlaylists
-    }
-    expect(playlistsReducer({}, getPlaylistsAction)).to.deep.equal(fakePlaylists)
+
+  describe('selectPlaylist', () => {
+    it('should create an action to select a playlist', () => {
+      const expectedAction = {
+        type: SELECT_PLAYLIST,
+        selectedPlaylistId: "37i9dQZEVXcRaXzPPexjkm"
+      }
+      expect(selectPlaylist("37i9dQZEVXcRaXzPPexjkm")).to.be.deep.equal(expectedAction)
+    })
   })
 })
 
-describe('selectedPlaylistReducer', () => {
-  it('should return the initial state', () => {
-    expect(selectedPlaylistReducer('', 'not-a-valid-action')).to.deep.equal('')
-  })
-  it('should handle SELECT_PLAYLIST', () => {
-    const selectPlaylistAction = {
-      type: SELECT_PLAYLIST,
-      selectedPlaylistId: "37i9dQZEVXcRaXzPPexjkm"
-    }
-    expect(selectedPlaylistReducer('', selectPlaylistAction)).to.deep.equal("37i9dQZEVXcRaXzPPexjkm")
-  })
-})
-
-describe('Thunk creators', () => {
+describe('Playlist thunk creators', () => {
   let store
   let mockAxios
 
@@ -96,7 +92,7 @@ describe('Thunk creators', () => {
       mockAxios.onGet('/api/users/me/playlists')
         .replyOnce(200, fakePlaylists)
     })
-    it('dispatches the GET_PLAYLISTS action with a playlists array', () => {
+    it('dispatches the GET_PLAYLISTS action with a playlists object', () => {
       return store.dispatch(getPlaylistsFromSpotify())
         .then(() => {
           const actions = store.getActions()
@@ -107,24 +103,30 @@ describe('Thunk creators', () => {
   })
 })
 
-describe('Actions', () => {
-  describe('gotPlaylists', () => {
-    it('should create an action with all retrieved playlists', () => {
-      const expectedAction = {
+describe('Playlist reducers', () => {
+  describe('playlistsReducer', () => {
+    it('should return the initial state', () => {
+      expect(playlistsReducer({}, 'not-a-valid-action')).to.deep.equal({})
+    })
+    it('should handle GET_PLAYLISTS', () => {
+      const getPlaylistsAction = {
         type: GET_PLAYLISTS,
         playlists: fakePlaylists
       }
-      expect(gotPlaylists(fakePlaylists)).to.be.deep.equal(expectedAction)
+      expect(playlistsReducer({}, getPlaylistsAction)).to.deep.equal(fakePlaylists)
     })
   })
 
-  describe('selectPlaylist', () => {
-    it('should create an action to select a playlist', () => {
-      const expectedAction = {
+  describe('selectedPlaylistReducer', () => {
+    it('should return the initial state', () => {
+      expect(selectedPlaylistReducer('', 'not-a-valid-action')).to.deep.equal('')
+    })
+    it('should handle SELECT_PLAYLIST', () => {
+      const selectPlaylistAction = {
         type: SELECT_PLAYLIST,
         selectedPlaylistId: "37i9dQZEVXcRaXzPPexjkm"
       }
-      expect(selectPlaylist("37i9dQZEVXcRaXzPPexjkm")).to.be.deep.equal(expectedAction)
+      expect(selectedPlaylistReducer('', selectPlaylistAction)).to.deep.equal("37i9dQZEVXcRaXzPPexjkm")
     })
   })
 })
