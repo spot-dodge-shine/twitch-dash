@@ -2,26 +2,26 @@
 
 import axios from 'axios'
 
-export const GET_PLAYER_INFO = 'GET_PLAYER_INFO'
+export const GET_PLAYER_STATUS = 'GET_PLAYER_STATUS'
 
-export const gotPlayerInfo = playerInfo => {
+export const gotPlayerStatus = playerStatus => {
   return {
-    type: GET_PLAYER_INFO,
-    playerInfo
+    type: GET_PLAYER_STATUS,
+    playerStatus
   }
 }
 
-export const getPlayerInfo = () => {
+export const getPlayerStatusThunk = () => {
   return async dispatch => {
     const { data } = await axios.get('/api/users/me/player')
-    dispatch(gotPlayerInfo(data))
+    dispatch(gotPlayerStatus(data))
   }
 }
 
-export const playerInfoReducer = (state = '', action) => {
+export const playerStatusReducer = (state = '', action) => {
   switch (action.type) {
-    case GET_PLAYER_INFO:
-      return action.playerInfo
+    case GET_PLAYER_STATUS:
+      return action.playerStatus
     default:
       return state
   }
