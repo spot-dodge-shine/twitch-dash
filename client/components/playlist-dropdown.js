@@ -27,6 +27,7 @@ export class PlaylistDropdown extends Component {
   }
 
   render () {
+
     const dummySongs = [
       {key: 0, value: '0', text:'My Beautiful Dark Twisted Fantasy'},
       {key: 1, value: '1', text:'Kids See Ghosts'},
@@ -41,7 +42,7 @@ export class PlaylistDropdown extends Component {
                 <h3>Your Spotify Playlists</h3>
               </YourPlaylistText>
               <DropDownStyle>
-                <Dropdown button='true' placeholder='Select a Playlist' fluid search selection options={dummySongs} />
+                <Dropdown button={true} placeholder='Select a Playlist' fluid search selection options={dummySongs} />
               </DropDownStyle>
             </Card.Header>
             <Card.Content extra>
