@@ -1,3 +1,5 @@
+'use strict'
+
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
@@ -39,11 +41,7 @@ class UserHome extends Component {
           let choiceArr = []
           for (let i = 0; i < this.props.numChoices; i++) {
             // TODO: pick random songs from playlist, associate songIds with votechoices
-<<<<<<< HEAD
-            choiceArr.push(this.props.createVotechoice(this.props.votecycle.id))
-=======
             choiceArr.push(this.props.createVotechoice(this.props.votecycle.id, i + 1) )
->>>>>>> d3782cc45fb15fd65331388d874410a94281c4db
           }
           return Promise.all(choiceArr)
         }
