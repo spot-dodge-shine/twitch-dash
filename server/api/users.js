@@ -55,7 +55,8 @@ router.get('/me/playlists/:playlistId/tracks/:offset', checkSpotifyAccessToken,
         return {
           name: item.track.name,
           artist: item.track.artists[0].name,
-          id: item.track.id
+          id: item.track.id,
+          uri: item.track.uri
         }
       }).reduce((resultObj, track) => {
         resultObj[track.id] = track
