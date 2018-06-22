@@ -9,9 +9,21 @@ module.exports = router
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
-      attributes: ['id', 'twitchLogin']
+      attributes: ['id', 'email']
     })
     res.json(users)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get('/me/player', checkSpotifyAccessToken, async (req, res, next) => {
+  try {
+    const { data } = await axios.get(process.env.SPOTIFY_API_URL + '/v1/me/playlists',
+    {
+      headers: { Authorization: 'Bearer ' + req.user.spotifyAccessToken}
+    })
+    console.log(data)
   } catch (err) {
     next(err)
   }
