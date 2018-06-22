@@ -56,7 +56,7 @@ router.get('/me/playlists/:playlistId/tracks/:offset', checkSpotifyAccessToken,
           name: item.track.name,
           artist: item.track.artists[0].name,
           image: item.track.album.images ?
-            item.track.album.images[0].url : null,
+            item.track.album.images[1].url : null,
           id: item.track.id,
           uri: item.track.uri
         }

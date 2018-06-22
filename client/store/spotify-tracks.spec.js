@@ -28,30 +28,35 @@ const fakeTracks = {
   "76xNAVwiQccBXImICK5zUP": {
     "name": "To My Soul",
     "artist": "Jerry Folk",
+    "image": "https://i.scdn.co/image/b23eafdbe6d6b8cbce146f61e11e2e450097d7df",
     "id": "76xNAVwiQccBXImICK5zUP",
     "uri": "spotify:track:76xNAVwiQccBXImICK5zUP"
   },
   "51Vf6hJbVnvsTjsvOHoZ3A": {
     "name": "By My Side",
     "artist": "Great Good Fine Ok",
+    "image": "https://i.scdn.co/image/95250289af2e0848e8392226937b234936d17cff",
     "id": "51Vf6hJbVnvsTjsvOHoZ3A",
     "uri": "spotify:track:51Vf6hJbVnvsTjsvOHoZ3A"
   },
   "31ZdIGyNncuufUjNTp5ZY3": {
     "name": "Generationwhy",
     "artist": "ZHU",
+    "image": "https://i.scdn.co/image/01e08194d9fd549f920f23ff98f0bfd492c8c7d9",
     "id": "31ZdIGyNncuufUjNTp5ZY3",
     "uri": "spotify:track:31ZdIGyNncuufUjNTp5ZY3"
   },
   "5pvJqNwUUahJIZ9a8CFeiP": {
     "name": "Eagle Eyes - Lucas & Steve Remix Edit",
     "artist": "Felix Jaehn",
+    "image": "https://i.scdn.co/image/ebd3adec32a0e6d97523709947e817228cdca60c",
     "id": "5pvJqNwUUahJIZ9a8CFeiP",
     "uri": "spotify:track:5pvJqNwUUahJIZ9a8CFeiP"
   },
   "4K8XcIz6J1VoZQaJ0xQiOT": {
     "name": "I Want You so Bad",
     "artist": "Glades",
+    "image": "https://i.scdn.co/image/7daf09d8cead8d3295d962734fa7a5e3b1fad627",
     "id": "4K8XcIz6J1VoZQaJ0xQiOT",
     "uri": "spotify:track:4K8XcIz6J1VoZQaJ0xQiOT"
   }
