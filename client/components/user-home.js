@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {PlaylistDropdown} from './playlist-dropdown'
+import PlaylistDropdown from './playlist-dropdown'
 import NavBar from './navbar'
 import { Link } from 'react-router-dom'
 import axios from 'axios'

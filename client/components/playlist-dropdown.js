@@ -4,13 +4,14 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Card, Item, Button, Icon, Grid, Image, Dropdown, Menu} from 'semantic-ui-react'
 import styled from 'styled-components'
+import { getPlaylistsFromSpotify } from '../store/spotify-playlists'
 
 const Wrapper = styled.div`
-display: flex;
-justify-content: center;
-text-align: center;
-align-items: center;
-margin-top: 5%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  margin-top: 5%;
 `
 
 const SpotifyLogo = styled.div`
@@ -29,19 +30,13 @@ const SpotifyButton = styled.div`
 
 export class PlaylistDropdown extends Component {
 
-  // constructor(props) {
-  //   super(props)
-  //   this.props.getPlaylists()
-  //   .then(() => {
-  //     return this.props.refreshToken()
-  //   })
-  //   .then(() => {
-  //     return this.props.getPlaylists()
-  //   })
-  //   .then(() => {
-  //     return this.props.selectPlaylist(this.props.playlists[0])
-  //   })
-  // }
+  constructor(props) {
+    super(props)
+    if (this.props.user.spotifyAccessToken) {
+      this.props.getPlaylists()
+    }
+  }
+
   render () {
     const dummySongs = [
       {text:'My Beautiful Dark Twisted Fantasy'},
@@ -80,7 +75,14 @@ export class PlaylistDropdown extends Component {
 
             <Menu.Menu>
               <h3><Icon name='spotify' />Your Spotify Playlists</h3>
-              <Dropdown button='true' placeholder='Select a Playlist' fluid search selection options={dummySongs} />
+              <Dropdown
+                button={true}
+                placeholder='Select a Playlist'
+                fluid
+                search
+                selection
+                options={dummySongs}
+              />
             </Menu.Menu>
 
 
@@ -91,6 +93,20 @@ export class PlaylistDropdown extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    user: state.user,
+    playlists: state.playlists
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getPlaylists: () => dispatch(getPlaylistsFromSpotify())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PlaylistDropdown)
 
 // const mapState = state => {
 //   return {
@@ -135,9 +151,7 @@ export class PlaylistDropdown extends Component {
 //     refreshToken: () => dispatch(refreshSpotifyToken()),
 //     selectPlaylist: (playlist) => dispatch(selectPlaylist(playlist)),
 //   }
-// }
-
-export default PlaylistDropdown /*connect(mapState, mapDispatch)(PlaylistDropdown)*/
+// } /*connect(mapState, mapDispatch)(PlaylistDropdown)*/
 
 
 
