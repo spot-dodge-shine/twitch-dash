@@ -22,6 +22,7 @@ margin-top: 10%;
 class UserHome extends Component {
   constructor(props) {
     super(props)
+    console.log('constructor')
     this.timer = setInterval(this.tick, 10000)
     this.counter = 0
     this.props.activeVotecycle(this.props.userId)

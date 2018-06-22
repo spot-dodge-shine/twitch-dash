@@ -61,9 +61,9 @@ module.exports = async () => {
     // io.emit('random')
   }
 
-  function musicvote (target, context, params) {
+  async function musicvote (target, context, params) {
     if (params.length) {
-      if (parseInt(params[0]) > 0 && parseInt(params[0]) < 5) {
+      if (parseInt(params[0])) {
         // do stuff with votes
       }
     }
