@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {PlaylistDropdown} from './playlist-dropdown'
+import PlaylistDropdown from './playlist-dropdown'
 import SpotifyLogin from './spotify-login'
 import NavBar from './navbar'
 import styled from 'styled-components'
@@ -61,17 +61,12 @@ class UserHome extends Component {
         <NavBar />
         <h3>Welcome, {twitchLogin}</h3>
         <Wrapper>
-          <SpotifyLogin />
-          <PlaylistDropdown />
+          {
+            this.props.spotifyId
+            ? <PlaylistDropdown />
+            : <SpotifyLogin />
+          }
         </Wrapper>
-        {
-          this.props.twitchLogin
-            ? <div>
-                <h1>Connect your spotify account</h1>
-                <a href="/auth/spotify">Connect</a>
-              </div>
-            : <div />
-        }
       </div>
     )
   }
@@ -83,6 +78,7 @@ class UserHome extends Component {
 const mapState = state => {
   return {
     userId: state.user.id,
+    spotifyId: state.user.spotifyId,
     twitchLogin: state.user.twitchLogin,
     votecycle: state.votecycle,
     numChoices: 3,
