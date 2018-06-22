@@ -3,7 +3,7 @@ import createLogger from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
-import votecycle from './votecycle'
+import { votecycleReducer } from './votecycle'
 
 
 import { playlistsReducer, selectedPlaylistReducer } from './spotify-playlists'
@@ -12,7 +12,7 @@ const reducer = combineReducers({
   user: user,
   playlists: playlistsReducer,
   selectedPlaylistId: selectedPlaylistReducer,
-  votecycle
+  votecycle: votecycleReducer
 })
 
 const middleware = composeWithDevTools(
