@@ -3,36 +3,46 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
-import {Image} from 'semantic-ui-react'
+import {Image, Divider, Button, Icon, Menu} from 'semantic-ui-react'
 import styled from 'styled-components'
 
-const Logo = styled.div`
-  max-width: 300px;
+const LogoStyle = styled.div`
+  max-width: 250px;
+  margin-right: 10px;
+  margin-bottom: 1px;
 `
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
-    <Logo>
-      <Link to="/home"><Image src='/images/navbarlogo.png' /></Link>
-    </Logo>
+  <Menu>
+    <Menu.Menu>
+      <LogoStyle>
+        <Link to="/home"><Image src='/images/navbarlogo.png' /></Link>
+      </LogoStyle>
+    </Menu.Menu>
     <nav>
       {isLoggedIn ? (
         <div>
           {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
+          <Menu.Menu position='right'>
+            <Menu.Item>
+                <Button primary animated onClick={handleClick}>
+                    <Button.Content hidden>Logout</Button.Content>
+                    <Button.Content visible>
+                      <Icon name='log out' />
+                    </Button.Content>
+                </Button>
+            </Menu.Item>
+          </Menu.Menu>
         </div>
       ) : (
         <div>
           {/* The navbar will show these links before you log in */}
-          {/* <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link> */}
         </div>
       )}
     </nav>
-    <hr />
+    <Divider />
+  </Menu>
   </div>
 )
 
