@@ -1,9 +1,19 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {PlaylistDropdown} from './playlist-dropdown'
+import PlaylistDropdown from './playlist-dropdown'
+import SpotifyLogin from './spotify-login'
 import NavBar from './navbar'
+import styled from 'styled-components'
 import {getActiveVotecycleServer, createVotechoiceServer, createActiveVotecycleServer} from '../store/votecycle'
+
+const Wrapper = styled.div`
+display: flex;
+justify-content: center;
+text-align: center;
+align-items: center;
+margin-top: 10%;
+`
 
 /**
  * COMPONENT
@@ -50,15 +60,13 @@ class UserHome extends Component {
       <div>
         <NavBar />
         <h3>Welcome, {twitchLogin}</h3>
-        <PlaylistDropdown />
-        {
-          this.props.twitchLogin
-            ? <div>
-                <h1>Connect your spotify account</h1>
-                <a href="/auth/spotify">Connect</a>
-              </div>
-            : <div />
-        }
+        <Wrapper>
+          {
+            this.props.spotifyId
+            ? <PlaylistDropdown />
+            : <SpotifyLogin />
+          }
+        </Wrapper>
       </div>
     )
   }
@@ -68,9 +76,9 @@ class UserHome extends Component {
  * CONTAINER
  */
 const mapState = state => {
-  console.log('state', state)
   return {
     userId: state.user.id,
+    spotifyId: state.user.spotifyId,
     twitchLogin: state.user.twitchLogin,
     votecycle: state.votecycle,
     numChoices: 3,
