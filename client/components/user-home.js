@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {PlaylistDropdown} from './playlist-dropdown'
 import NavBar from './navbar'
-import {getActiveVotecycleServer, createVotechoiceServer, createActiveVotecycleServer} from '../store/votecycle'
+import {getActiveVotecycleServer, createVotechoiceServer, createActiveVotecycleServer, getVotesServer} from '../store/votecycle'
 
 /**
  * COMPONENT
@@ -40,6 +40,8 @@ class UserHome extends Component {
           return Promise.all(choiceArr)
         }
       )
+    } else {
+      this.props.getVotes(this.props.votecycle)
     }
   }
 
@@ -81,6 +83,7 @@ const mapDispatch = dispatch => {
     activeVotecycle: (userId) => dispatch(getActiveVotecycleServer(userId)),
     createActiveVotecycle: (userId) => dispatch(createActiveVotecycleServer(userId)),
     createVotechoice: (votecycleId) => dispatch(createVotechoiceServer(votecycleId)),
+    getVotes: (votecycle) => dispatch(getVotesServer(votecycle))
   }
 }
 
