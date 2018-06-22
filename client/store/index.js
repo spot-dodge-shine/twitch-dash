@@ -3,12 +3,16 @@ import createLogger from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
+import { votecycleReducer } from './votecycle'
+
+
 import { playlistsReducer, selectedPlaylistReducer } from './spotify-playlists'
 
 const reducer = combineReducers({
   user: user,
   playlists: playlistsReducer,
-  selectedPlaylistId: selectedPlaylistReducer
+  selectedPlaylistId: selectedPlaylistReducer,
+  votecycle: votecycleReducer
 })
 
 const middleware = composeWithDevTools(
@@ -18,3 +22,4 @@ const store = createStore(reducer, middleware)
 
 export default store
 export * from './user'
+export * from './votecycle'
