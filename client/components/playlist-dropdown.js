@@ -20,9 +20,9 @@ export class PlaylistDropdown extends Component {
 
   render () {
     const dummySongs = [
-      {text:'My Beautiful Dark Twisted Fantasy'},
-      {text:'Kids See Ghosts'},
-      {text:'ye'}
+      {key: 0, value: '0', text:'My Beautiful Dark Twisted Fantasy'},
+      {key: 1, value: '1', text:'Kids See Ghosts'},
+      {key: 2, text:'ye'}
     ]
 
     return (
