@@ -102,7 +102,7 @@ router.get('/active', async (req, res, next) => {
   }
 })
 
-router.get('/username/:username/enum/:enum', async (req, res, next) => {
+router.get('/username/:username/:enum', async (req, res, next) => {
   try {
     const user = await User.findOne({
       where: {
