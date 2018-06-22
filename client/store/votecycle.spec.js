@@ -1,7 +1,7 @@
 /* global describe beforeEach afterEach it */
 
 import {expect} from 'chai'
-import {getActiveVotecycleServer, createVotechoiceServer, createActiveVotecycleServer} from './votecycle'
+import {getActiveVotecycleServer, createVotechoiceServer, createActiveVotecycleServer, getVotesServer} from './votecycle'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import configureMockStore from 'redux-mock-store'
@@ -81,6 +81,55 @@ describe('thunk creators - votecycles', () => {
           const actions = store.getActions()
           expect(actions[0].type).to.be.equal('CREATE_VOTECHOICE')
           expect(actions[0].votechoice).to.be.deep.equal(fakeVotechoice)
+        })
+    })
+  })
+
+  describe('getVotesServer', () => {
+    const fakeVotecycle = {
+      id: 1,
+      userId: 1,
+      active: true,
+      votechoices: [
+        {
+          id: 1,
+          votes: 0
+        }, {
+          id: 2,
+          votes: 0
+        }
+      ]
+    }
+
+    const newFakeVotecycle = {
+      userId: 1,
+      active: true,
+      votechoices: [
+        {
+          id: 1,
+          votes: 3
+        }, {
+          id: 2,
+          votes: 5
+        }
+      ]
+    }
+
+    const fakeVotesObj = {
+      '1': 3,
+      '2': 5
+    }
+
+    beforeEach(() => {
+      mockAxios.onGet('/api/votecycles/1/votes').replyOnce(200, fakeVotesObj)
+    })
+
+    it('eventually dispatches the GET_VOTES action', async () => {      
+      return store.dispatch(getVotesServer(fakeVotecycle))
+        .then(() => {
+          const actions = store.getActions()
+          expect(actions[0].type).to.be.equal('GET_VOTES')
+          expect(actions[0].votechoices).to.be.deep.equal(newFakeVotecycle.votechoices)
         })
     })
   })

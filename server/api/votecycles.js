@@ -22,9 +22,6 @@ router.get('/active/:userId', async (req, res, next) => {
       },
       include: [{
         model: Votechoice,
-        include: [{
-          model: Vote
-        }]
       }]
     })
     res.json(activeVotecycle)
@@ -47,9 +44,6 @@ router.post('/', async (req, res, next) => {
       },
       include: [{
         model: Votechoice,
-        include: [{
-          model: Vote
-        }]
       }]
     })
     res.json(retVotecycle)
@@ -70,7 +64,7 @@ router.put('/:id', async (req, res, next) => {
   }
 })
 
-// Get song winner
+// Get song votecount
 router.get('/:id/votes', async (req, res, next) => {
   try {
     const votecycle = await Votecycle.findOne({
