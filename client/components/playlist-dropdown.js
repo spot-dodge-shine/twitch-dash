@@ -13,8 +13,15 @@ const Wrapper = styled.div`
   margin-top: 5%;
 `
 
-const YourPlaylistText = styled.h3`
-  margin-top: 3px;
+const YourPlaylistText = styled.div`
+  margin-top: 5%;
+  margin-bottom: 5%;
+`
+
+const DropDownStyle = styled.div`
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 5%
 `
 
 export class PlaylistDropdown extends Component {
@@ -44,8 +51,12 @@ export class PlaylistDropdown extends Component {
         <Wrapper>
           <Card>
             <Card.Header>
-              <YourPlaylistText>Your Spotify Playlists</YourPlaylistText>
-              <Dropdown button='true' placeholder='Select a Playlist' fluid search selection options={dummySongs} />
+              <YourPlaylistText>
+                <h3>Your Spotify Playlists</h3>
+              </YourPlaylistText>
+              <DropDownStyle>
+                <Dropdown button='true' placeholder='Select a Playlist' fluid search selection options={dummySongs} />
+              </DropDownStyle>
             </Card.Header>
             <Card.Content extra>
               <a>

@@ -13,14 +13,14 @@ margin-top: 5%;
 const SpotifyLogo = styled.div`
   justify-content: center;
   max-width: 100px;
-  margin-top: 10%;
-  margin-left: 10%;
-  margin-bottom: 10%;
+  margin-top: 20%;
+  margin-left: 20%;
+  margin-bottom: 20%;
 `
 
 const SpotifyButton = styled.div`
-  margin-top: 18%;
-  margin-right: 10%;
+  margin-top: 21%;
+  margin-right: 20%;
   margin-left: 10%;
 `
 
