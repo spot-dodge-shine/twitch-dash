@@ -36,8 +36,8 @@ export const getTracksFromSpotify = playlist => {
 
 export const playTrack = track => {
   return async dispatch => {
-    const { data } = await axios.put(`/api/users/me/playtrack/${track.uri}`, {})
-    dispatch(playingTrack(data.id))
+    await axios.put(`/api/users/me/playtrack/${track.uri}`, {})
+    dispatch(playingTrack(track.id))
   }
 }
 

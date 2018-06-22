@@ -58,12 +58,6 @@ class UserHome extends Component {
 
   render() {
     const {twitchLogin} = this.props
-    const fakeTrack = {
-      name: "To My Soul",
-      artist: "Jerry Folk",
-      id: "76xNAVwiQccBXImICK5zUP",
-      uri: "spotify:track:76xNAVwiQccBXImICK5zUP"
-    }
 
     return (
       <div>
