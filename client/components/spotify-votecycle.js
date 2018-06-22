@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import { Segment, Image, Grid } from 'semantic-ui-react'
+import { Segment, Image } from 'semantic-ui-react'
 
 const fakeVotecycle = {
   id: 1,
@@ -73,22 +73,23 @@ class SpotifyVotecycle extends Component {
             style={{ marginRight: '1rem' }}
           />
         </div>
-        <Grid columns={3}>
-          <Grid.Row>
-            <Grid.Column>
-              {fakeVotecycle.votechoices[0].track.name}<br />
-              {fakeVotecycle.votechoices[0].track.artist}
-            </Grid.Column>
-            <Grid.Column>
-              {fakeVotecycle.votechoices[0].track.name}<br />
-              {fakeVotecycle.votechoices[0].track.artist}
-            </Grid.Column>
-            <Grid.Column>
-              {fakeVotecycle.votechoices[0].track.name}<br />
-              {fakeVotecycle.votechoices[0].track.artist}
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between'
+          }}
+        >
+          <div>
+            <strong>Song:</strong> {fakeVotecycle.votechoices[0].track.name}<br />
+            <strong>Artist:</strong> {fakeVotecycle.votechoices[0].track.artist}
+          </div>
+          <div>
+          <strong>Album:</strong> {fakeVotecycle.votechoices[0].track.album}<br />
+          </div>
+          <div>
+            <h1>{fakeVotecycle.votechoices[0].votecount}</h1>
+          </div>
+        </div>
       </Segment>
     )
   }
