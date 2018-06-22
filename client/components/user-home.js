@@ -68,9 +68,6 @@ class UserHome extends Component {
   }
 }
 
-/**
- * CONTAINER
- */
 const mapState = state => {
   return {
     userId: state.user.id,

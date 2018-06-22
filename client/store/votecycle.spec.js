@@ -38,7 +38,7 @@ describe('thunk creators - votecycles', () => {
       mockAxios.onGet('/api/votecycles/active/1').replyOnce(200, fakeVotecycle)
     })
 
-    it('eventually dispatches the GET_ACTIVE_VOTECYCLE action', async () => {      
+    it('eventually dispatches the GET_ACTIVE_VOTECYCLE action', async () => {
       return store.dispatch(getActiveVotecycleServer(1))
         .then(() => {
           const actions = store.getActions()
@@ -57,7 +57,7 @@ describe('thunk creators - votecycles', () => {
       mockAxios.onPost('/api/votecycles').replyOnce(200, fakeVotecycle)
     })
 
-    it('eventually dispatches the CREATE_ACTIVE_VOTECYCLE action', async () => {      
+    it('eventually dispatches the CREATE_ACTIVE_VOTECYCLE action', async () => {
       return store.dispatch(createActiveVotecycleServer(1))
         .then(() => {
           const actions = store.getActions()
@@ -75,7 +75,7 @@ describe('thunk creators - votecycles', () => {
       mockAxios.onPost('/api/votechoices').replyOnce(200, fakeVotechoice)
     })
 
-    it('eventually dispatches the CREATE_VOTECHOICE action', async () => {      
+    it('eventually dispatches the CREATE_VOTECHOICE action', async () => {
       return store.dispatch(createVotechoiceServer(1))
         .then(() => {
           const actions = store.getActions()
@@ -124,7 +124,7 @@ describe('thunk creators - votecycles', () => {
       mockAxios.onGet('/api/votecycles/1/votes').replyOnce(200, fakeVotesObj)
     })
 
-    it('eventually dispatches the GET_VOTES action', async () => {      
+    it('eventually dispatches the GET_VOTES action', async () => {
       return store.dispatch(getVotesServer(fakeVotecycle))
         .then(() => {
           const actions = store.getActions()
@@ -134,7 +134,7 @@ describe('thunk creators - votecycles', () => {
     })
   })
 
-  describe.only('deactivateVotecycleServer', () => {
+  describe('deactivateVotecycleServer', () => {
     const inactiveFakeVotecycle = {
       id: 1,
       userId: 1,
@@ -144,7 +144,7 @@ describe('thunk creators - votecycles', () => {
       mockAxios.onPut('/api/votecycles/1').replyOnce(200, inactiveFakeVotecycle)
     })
 
-    it('eventually dispatches the DEACTIVATE_VOTECYCLE action', async () => {      
+    it('eventually dispatches the DEACTIVATE_VOTECYCLE action', async () => {
       return store.dispatch(deactivateVotecycleServer(1))
         .then(() => {
           const actions = store.getActions()
