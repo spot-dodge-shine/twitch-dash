@@ -6,6 +6,7 @@ import { withRouter, Route, Switch } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { UserHome, TwitchLogin } from './components'
 import { me } from './store'
+import SpotifyVotecycle from './components/spotify-votecycle'
 
 class Routes extends Component {
   componentDidMount() {
@@ -21,6 +22,7 @@ class Routes extends Component {
         {isLoggedIn && (
           <Switch>
             <Route path="/home" component={UserHome} />
+            <Route path="/test" component={SpotifyVotecycle} />
           </Switch>
         )}
         <Route component={TwitchLogin} />
