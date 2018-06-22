@@ -1,7 +1,7 @@
 /* global describe beforeEach afterEach it */
 
 import {expect} from 'chai'
-import {getActiveVotecycleServer, createVotechoiceServer, createActiveVotecycleServer, getVotesServer} from './votecycle'
+import {getActiveVotecycleServer, createVotechoiceServer, createActiveVotecycleServer, getVotesServer, deactivateVotecycleServer} from './votecycle'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import configureMockStore from 'redux-mock-store'
@@ -130,6 +130,26 @@ describe('thunk creators - votecycles', () => {
           const actions = store.getActions()
           expect(actions[0].type).to.be.equal('GET_VOTES')
           expect(actions[0].votechoices).to.be.deep.equal(newFakeVotecycle.votechoices)
+        })
+    })
+  })
+
+  describe('deactivateVotecycleServer', () => {
+    const inactiveFakeVotecycle = {
+      id: 1,
+      userId: 1,
+      active: false
+    }
+    beforeEach(() => {
+      mockAxios.onPut('/api/votecycles/1').replyOnce(200, inactiveFakeVotecycle)
+    })
+
+    it('eventually dispatches the DEACTIVATE_VOTECYCLE action', async () => {      
+      return store.dispatch(deactivateVotecycleServer(1))
+        .then(() => {
+          const actions = store.getActions()
+          expect(actions[0].type).to.be.equal('DEACTIVATE_VOTECYCLE')
+          expect(actions[0].votecycle).to.be.deep.equal(inactiveFakeVotecycle)
         })
     })
   })

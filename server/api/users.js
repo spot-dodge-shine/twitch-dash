@@ -117,3 +117,21 @@ router.get('/active', async (req, res, next) => {
     next(err)
   }
 })
+
+router.get('/username/:username/:enum', async (req, res, next) => {
+  try {
+    const user = await User.findOne({
+      where: {
+        twitchLogin: req.params.username
+      }
+    })
+    const votecycle = await user.getActiveVotecycle()
+    const votechoices = await votecycle.getVotechoices()
+    const votechoice = votechoices.filter(votechoice => {
+      return votechoice.votecycleEnumId === parseInt(req.params.enum)
+    })[0]
+    res.json(votechoice)
+  } catch(err) {
+    next(err)
+  }
+})

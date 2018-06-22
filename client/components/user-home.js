@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import PlaylistDropdown from './playlist-dropdown'
 import SpotifyLogin from './spotify-login'
 import NavBar from './navbar'
-import {getActiveVotecycleServer, createVotechoiceServer, createActiveVotecycleServer, getVotesServer} from '../store/votecycle'
+import {getActiveVotecycleServer, createVotechoiceServer, createActiveVotecycleServer, getVotesServer, deactivateVotecycleServer} from '../store/votecycle'
 import styled from 'styled-components'
 import { playTrack } from '../store/spotify-tracks'
 
@@ -16,9 +16,6 @@ align-items: center;
 margin-top: 10%;
 `
 
-/**
- * COMPONENT
- */
 class UserHome extends Component {
   constructor(props) {
     super(props)
@@ -30,23 +27,19 @@ class UserHome extends Component {
       })
   }
 
-  componentDidMount() {
-    this.timer = setInterval(this.tick, 10000) // 10 seconds for testing purposes
-  }
-
   componentWillUnmount() {
     clearInterval(this.timer);
   }
 
   tick = () => {
     this.counter += 1
-    if (!this.props.votecycle) {
+    if (!this.props.votecycle || !this.props.votecycle.active) {
       this.props.createActiveVotecycle(this.props.userId)
         .then(() => {
           let choiceArr = []
           for (let i = 0; i < this.props.numChoices; i++) {
             // TODO: pick random songs from playlist, associate songIds with votechoices
-            choiceArr.push(this.props.createVotechoice(this.props.votecycle.id) )
+            choiceArr.push(this.props.createVotechoice(this.props.votecycle.id, i + 1) )
           }
           return Promise.all(choiceArr)
         }
@@ -58,12 +51,6 @@ class UserHome extends Component {
 
   render() {
     const {twitchLogin} = this.props
-    const fakeTrack = {
-      name: "To My Soul",
-      artist: "Jerry Folk",
-      id: "76xNAVwiQccBXImICK5zUP",
-      uri: "spotify:track:76xNAVwiQccBXImICK5zUP"
-    }
 
     return (
       <div>
@@ -98,9 +85,10 @@ const mapDispatch = dispatch => {
   return {
     activeVotecycle: (userId) => dispatch(getActiveVotecycleServer(userId)),
     createActiveVotecycle: (userId) => dispatch(createActiveVotecycleServer(userId)),
-    createVotechoice: (votecycleId) => dispatch(createVotechoiceServer(votecycleId)),
+    createVotechoice: (votecycleId, enumId) => dispatch(createVotechoiceServer(votecycleId, enumId)),
     playTrack: (track) => dispatch(playTrack(track)),
-    getVotes: (votecycle) => dispatch(getVotesServer(votecycle))
+    getVotes: (votecycle) => dispatch(getVotesServer(votecycle)),
+    deactivateVotecycle: (votecycleId) => dispatch(deactivateVotecycleServer(votecycleId))
   }
 }
 
