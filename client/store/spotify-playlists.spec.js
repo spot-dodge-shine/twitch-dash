@@ -20,8 +20,8 @@ import {
 const mockStore = configureMockStore([thunkMiddleware])
 
 const initialState = {
-  playlists: [],
-  selectedPlaylist: {}
+  playlists: {},
+  selectedPlaylist: ''
 }
 
 const fakePlaylists = {
