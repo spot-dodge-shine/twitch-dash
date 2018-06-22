@@ -4,7 +4,16 @@ import {connect} from 'react-redux'
 import {PlaylistDropdown} from './playlist-dropdown'
 import SpotifyLogin from './spotify-login'
 import NavBar from './navbar'
+import styled from 'styled-components'
 import {getActiveVotecycleServer, createVotechoiceServer, createActiveVotecycleServer} from '../store/votecycle'
+
+const Wrapper = styled.div`
+display: flex;
+justify-content: center;
+text-align: center;
+align-items: center;
+margin-top: 10%;
+`
 
 /**
  * COMPONENT
@@ -51,8 +60,10 @@ class UserHome extends Component {
       <div>
         <NavBar />
         <h3>Welcome, {twitchLogin}</h3>
-        <SpotifyLogin />
-        <PlaylistDropdown />
+        <Wrapper>
+          <SpotifyLogin />
+          <PlaylistDropdown />
+        </Wrapper>
         {
           this.props.twitchLogin
             ? <div>

@@ -1,14 +1,6 @@
 import React from 'react'
-import {Card, Item, Button, Icon, Grid, Image, Dropdown, Menu} from 'semantic-ui-react'
+import {Button, Icon, Image, Menu} from 'semantic-ui-react'
 import styled from 'styled-components'
-
-const Wrapper = styled.div`
-display: flex;
-justify-content: center;
-text-align: center;
-align-items: center;
-margin-top: 5%;
-`
 
 const SpotifyLogo = styled.div`
   justify-content: center;
