@@ -18,6 +18,10 @@ const DropDownStyle = styled.div`
   margin-bottom: 5%
 `
 
+const ButtonStyle = styled.div`
+  margin-bottom: 5%;
+`
+
 
 export class PlaylistDropdown extends Component {
 
@@ -66,11 +70,11 @@ export class PlaylistDropdown extends Component {
                   onChange={this.handleChange}
                 />
               </DropDownStyle>
-              <Button
-                onClick={this.handlePlay}
-              >
-                Play Random Song
-              </Button>
+              <ButtonStyle>
+                <Button onClick={this.handlePlay}>
+                  Play Random Song
+                </Button>
+              </ButtonStyle>
             </Card.Header>
             <Card.Content extra>
               <a>
