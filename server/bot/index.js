@@ -64,7 +64,9 @@ module.exports = async () => {
   async function musicvote (target, context, params) {
     if (params.length) {
       if (parseInt(params[0])) {
-        // do stuff with votes
+        // TODO: change link
+        const {data} = await axios.get(`http://localhost:${process.env.PORT}/api/users/username/${target.slice(1)}/enum/${params[0]}`)
+        await axios.post(`http://localhost:${process.env.PORT}/api/votes`, {votechoiceId: data.id})
       }
     }
   }
