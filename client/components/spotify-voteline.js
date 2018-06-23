@@ -38,7 +38,7 @@ const SpotifyVoteline = props => {
           >
             <Progress
               progress='value'
-              value={votechoice.votecount}
+              value={votechoice.votes}
               total={totalVotes}
               color='green'
               style={{ width: '15rem', marginBottom: '0' }}

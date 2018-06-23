@@ -18,7 +18,7 @@ export class SpotifyModule extends Component {
     if (this.props.user.spotifyAccessToken) {
       this.props.getPlaylists()
         .then(() => {
-          this.timer = setInterval(this.tick, 5000)
+          this.timer = setInterval(this.tick, 2000)
           this.counter = 0
           this.props.activeVotecycle(this.props.user.id)
             .then(() => {
@@ -100,7 +100,11 @@ export class SpotifyModule extends Component {
     return (
       <div>
         <Card>
-          <SpotifyVoteCycle votecycle={this.props.votecycle} />
+          {
+            (this.props.votecycle && this.props.votecycle.id && this.props.votecycle.active) 
+              ? <SpotifyVoteCycle votecycle={this.props.votecycle} />
+              : <div />
+          }
           <PlaylistDropdown
             trackData = {trackData}
             handleChange = {this.handleChange}
