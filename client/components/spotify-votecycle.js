@@ -62,6 +62,10 @@ const fakeVotecycle = {
 
 class SpotifyVotecycle extends Component {
   render () {
+    const totalVotes = fakeVotecycle.votechoices.reduce((total, voteChoice) => {
+      return total + voteChoice.votecount
+    }, 0)
+
     return (
       <Segment
         style={{ display: 'flex' }}
@@ -79,16 +83,23 @@ class SpotifyVotecycle extends Component {
             justifyContent: 'space-between'
           }}
         >
-          <div>
+          <div
+            style={{ marginRight: '1rem' }}
+          >
             <strong>Song:</strong> {fakeVotecycle.votechoices[0].track.name}<br />
             <strong>Artist:</strong> {fakeVotecycle.votechoices[0].track.artist}
           </div>
-          <div>
+          <div
+            style={{ marginRight: '2rem' }}
+          >
           <strong>Album:</strong> {fakeVotecycle.votechoices[0].track.album}<br />
           </div>
-          <div>
+          <div
+            style={{ marginRight: '1rem' }}
+          >
             <h1>{fakeVotecycle.votechoices[0].votecount}</h1>
           </div>
+
         </div>
       </Segment>
     )
