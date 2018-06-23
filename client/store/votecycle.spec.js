@@ -69,14 +69,16 @@ describe('thunk creators - votecycles', () => {
 
   describe('createVotechoiceServer', () => {
     const fakeVotechoice = {
-      votecycleId: 1
+      votecycleId: 1,
+      votecycleEnumId: 1,
+      track: 'mytrack'
     }
     beforeEach(() => {
       mockAxios.onPost('/api/votechoices').replyOnce(200, fakeVotechoice)
     })
 
     it('eventually dispatches the CREATE_VOTECHOICE action', async () => {      
-      return store.dispatch(createVotechoiceServer(1))
+      return store.dispatch(createVotechoiceServer(1, 1, 'mytrack'))
         .then(() => {
           const actions = store.getActions()
           expect(actions[0].type).to.be.equal('CREATE_VOTECHOICE')

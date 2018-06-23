@@ -2,8 +2,8 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import styled from 'styled-components'
-import { Segment, Image } from 'semantic-ui-react'
+import { Segment } from 'semantic-ui-react'
+import SpotifyVoteline from './spotify-voteline'
 
 const fakeVotecycle = {
   id: 1,
@@ -67,41 +67,25 @@ class SpotifyVotecycle extends Component {
     }, 0)
 
     return (
-      <Segment
-        style={{ display: 'flex' }}
+      <div
+        style={{ width: '750px' }}
       >
-        <div>
-          <Image
-            src={fakeVotecycle.votechoices[0].track.image}
-            size='mini'
-            style={{ marginRight: '1rem' }}
-          />
-        </div>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between'
-          }}
-        >
-          <div
-            style={{ marginRight: '1rem' }}
+        {fakeVotecycle.id ?
+          fakeVotecycle.votechoices.map(votechoice => {
+            return (
+              <SpotifyVoteline
+                key={votechoice.id}
+                votechoice={votechoice}
+                totalVotes={totalVotes}
+              />)
+          }) :
+          <Segment
+            attached
           >
-            <strong>Song:</strong> {fakeVotecycle.votechoices[0].track.name}<br />
-            <strong>Artist:</strong> {fakeVotecycle.votechoices[0].track.artist}
-          </div>
-          <div
-            style={{ marginRight: '2rem' }}
-          >
-          <strong>Album:</strong> {fakeVotecycle.votechoices[0].track.album}<br />
-          </div>
-          <div
-            style={{ marginRight: '1rem' }}
-          >
-            <h1>{fakeVotecycle.votechoices[0].votecount}</h1>
-          </div>
-
-        </div>
-      </Segment>
+            Select a Spotify playlist to start a music poll!
+          </Segment>
+        }
+      </div>
     )
   }
 }
