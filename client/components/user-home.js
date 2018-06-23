@@ -9,13 +9,22 @@ import NavBar from './navbar'
 import {getActiveVotecycleServer, createVotechoiceServer, createActiveVotecycleServer, getVotesServer, deactivateVotecycleServer} from '../store/votecycle'
 import styled from 'styled-components'
 import { playTrack } from '../store/spotify-tracks'
+import { Message } from 'semantic-ui-react'
+import WelcomeText from './welcome-text'
 
 const Wrapper = styled.div`
-display: flex;
-justify-content: center;
-text-align: center;
-align-items: center;
-margin-top: 10%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  margin-top: 3%;
+`
+
+const WelcomeTextStyle = styled.div`
+  display: flex;
+  justify-content: center;
+  aligh-items: center;
+  margin-top: 10%;
 `
 
 class UserHome extends Component {
@@ -57,7 +66,9 @@ class UserHome extends Component {
     return (
       <div>
         <NavBar />
-        <h3>Welcome, {twitchLogin}</h3>
+        <WelcomeTextStyle>
+          <WelcomeText />
+        </WelcomeTextStyle>
         <Wrapper>
           {
             this.props.spotifyId
