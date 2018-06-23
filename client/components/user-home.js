@@ -2,7 +2,7 @@
 
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import PlaylistDropdown from './playlist-dropdown'
+import SpotifyModule from './spotify-module'
 import SpotifyLogin from './spotify-login'
 import NavBar from './navbar'
 import styled from 'styled-components'
@@ -14,14 +14,15 @@ const Wrapper = styled.div`
   justify-content: center;
   text-align: center;
   align-items: center;
-  margin-top: 3%;
+  margin-top: 2%;
+  margin-bottom: 2%;
 `
 
 const WelcomeTextStyle = styled.div`
   display: flex;
   justify-content: center;
   aligh-items: center;
-  margin-top: 10%;
+  margin-top: 3%;
 `
 
 class UserHome extends Component {
@@ -30,7 +31,6 @@ class UserHome extends Component {
   }
 
   render() {
-    const {twitchLogin} = this.props
 
     return (
       <div>
@@ -41,7 +41,7 @@ class UserHome extends Component {
         <Wrapper>
           {
             this.props.spotifyId
-            ? <PlaylistDropdown />
+            ? <SpotifyModule />
             : <SpotifyLogin />
           }
         </Wrapper>
