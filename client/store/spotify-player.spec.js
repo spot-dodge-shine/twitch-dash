@@ -55,7 +55,6 @@ describe('Player thunk creators', () => {
       return store.dispatch(getPlayerStatusThunk())
         .then(() => {
           const actions = store.getActions()
-          console.log('*****', actions)
           expect(actions[0].type).to.be.equal(GET_PLAYER_STATUS)
           expect(actions[0].playerStatus).to.be.deep.equal(fakePlayerStatus)
         })
