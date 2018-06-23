@@ -1,7 +1,6 @@
 'use strict'
 
 import React, {Component} from 'react'
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import PlaylistDropdown from './playlist-dropdown'
 import SpotifyLogin from './spotify-login'
@@ -9,6 +8,7 @@ import NavBar from './navbar'
 import {getActiveVotecycleServer, createVotechoiceServer, createActiveVotecycleServer, getVotesServer, deactivateVotecycleServer} from '../store/votecycle'
 import styled from 'styled-components'
 import { playTrack } from '../store/spotify-tracks'
+import { getPlayerStatusThunk } from '../store/spotify-player'
 
 const Wrapper = styled.div`
 display: flex;
@@ -21,34 +21,6 @@ margin-top: 10%;
 class UserHome extends Component {
   constructor(props) {
     super(props)
-    this.timer = setInterval(this.tick, 10000)
-    this.counter = 0
-    this.props.activeVotecycle(this.props.userId)
-      .then(() => {
-        this.tick()
-      })
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.timer);
-  }
-
-  tick = () => {
-    this.counter += 1
-    if (!this.props.votecycle || !this.props.votecycle.active) {
-      this.props.createActiveVotecycle(this.props.userId)
-        .then(() => {
-          let choiceArr = []
-          for (let i = 0; i < this.props.numChoices; i++) {
-            // TODO: pick random songs from playlist, associate songIds with votechoices
-            choiceArr.push(this.props.createVotechoice(this.props.votecycle.id, i + 1) )
-          }
-          return Promise.all(choiceArr)
-        }
-      )
-    } else {
-      this.props.getVotes(this.props.votecycle)
-    }
   }
 
   render() {
@@ -75,24 +47,11 @@ class UserHome extends Component {
  */
 const mapState = state => {
   return {
-    userId: state.user.id,
+    user: state.user,
     spotifyId: state.user.spotifyId,
     twitchLogin: state.user.twitchLogin,
-    votecycle: state.votecycle,
-    numChoices: 3,
   }
 }
 
-const mapDispatch = dispatch => {
-  return {
-    activeVotecycle: (userId) => dispatch(getActiveVotecycleServer(userId)),
-    createActiveVotecycle: (userId) => dispatch(createActiveVotecycleServer(userId)),
-    createVotechoice: (votecycleId, enumId) => dispatch(createVotechoiceServer(votecycleId, enumId)),
-    playTrack: (track) => dispatch(playTrack(track)),
-    getVotes: (votecycle) => dispatch(getVotesServer(votecycle)),
-    deactivateVotecycle: (votecycleId) => dispatch(deactivateVotecycleServer(votecycleId))
-  }
-}
-
-export default connect(mapState, mapDispatch)(UserHome)
+export default connect(mapState)(UserHome)
 
