@@ -12,10 +12,15 @@ describe('PlaylistDropdown', () => {
   let playlistDropdown
 
   beforeEach(() => {
-    playlistDropdown = shallow(<PlaylistDropdown store={store} />).dive()
+    playlistDropdown = shallow(
+      <PlaylistDropdown
+        playlists={{}}
+        handleChange={() => console.log('test')}
+        handlePlay={() => console.log('test')}
+      />)
   })
 
-  it('renders a single card', () => {
-    expect(playlistDropdown.find('Card').length).to.equal(1)
+  it('renders a Dropdown', () => {
+    expect(playlistDropdown.find('Dropdown').length).to.equal(1)
   })
 })

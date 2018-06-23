@@ -2,7 +2,7 @@
 
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import PlaylistDropdown from './playlist-dropdown'
+import PlaylistDropdown from './spotify-module'
 import SpotifyLogin from './spotify-login'
 import NavBar from './navbar'
 import styled from 'styled-components'

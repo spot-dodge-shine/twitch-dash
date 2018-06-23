@@ -22,7 +22,6 @@ class Routes extends Component {
         {isLoggedIn && (
           <Switch>
             <Route path="/home" component={UserHome} />
-            <Route path="/test" component={SpotifyVotecycle} />
           </Switch>
         )}
         <Route component={TwitchLogin} />

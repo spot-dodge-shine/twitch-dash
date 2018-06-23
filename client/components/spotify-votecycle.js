@@ -60,34 +60,34 @@ const fakeVotecycle = {
   ]
 }
 
-class SpotifyVotecycle extends Component {
-  render () {
-    const totalVotes = fakeVotecycle.votechoices.reduce((total, voteChoice) => {
-      return total + voteChoice.votecount
-    }, 0)
+const SpotifyVotecycle = props => {
+  const { votecycle } = props
+  const totalVotes = votecycle.votechoices.reduce((total, voteChoice) => {
+    return total + voteChoice.votecount
+  }, 0)
 
-    return (
-      <div
-        style={{ width: '750px' }}
-      >
-        {fakeVotecycle.id ?
-          fakeVotecycle.votechoices.map(votechoice => {
-            return (
-              <SpotifyVoteline
-                key={votechoice.id}
-                votechoice={votechoice}
-                totalVotes={totalVotes}
-              />)
-          }) :
-          <Segment
-            attached
-          >
-            Select a Spotify playlist to start a music poll!
-          </Segment>
-        }
-      </div>
-    )
-  }
+  return (
+    <div
+      style={{ width: '750px' }}
+    >
+      {votecycle.id ?
+        votecycle.votechoices.map(votechoice => {
+          return (
+            <SpotifyVoteline
+              key={votechoice.id}
+              votechoice={votechoice}
+              totalVotes={totalVotes}
+            />)
+        }) :
+        <Segment
+          attached
+        >
+          Select a Spotify playlist to start a music poll!
+        </Segment>
+      }
+    </div>
+  )
+
 }
 
 export default SpotifyVotecycle
