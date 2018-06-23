@@ -14,14 +14,15 @@ const Wrapper = styled.div`
   justify-content: center;
   text-align: center;
   align-items: center;
-  margin-top: 3%;
+  margin-top: 2%;
+  margin-bottom: 2%;
 `
 
 const WelcomeTextStyle = styled.div`
   display: flex;
   justify-content: center;
   aligh-items: center;
-  margin-top: 10%;
+  margin-top: 3%;
 `
 
 class UserHome extends Component {

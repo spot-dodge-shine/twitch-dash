@@ -25,7 +25,9 @@ const SpotifyVoteline = props => {
           }}
         >
           <div
-            style={{ marginRight: '1rem' }}
+            style={{ marginRight: '1rem',
+            textAlign: 'left'
+          }}
           >
             <strong>{votechoice.track.name}</strong><br />
             {votechoice.track.artist} - {votechoice.track.album}
@@ -41,7 +43,7 @@ const SpotifyVoteline = props => {
               value={votechoice.votes}
               total={totalVotes}
               color='green'
-              style={{ width: '15rem', marginBottom: '0' }}
+              style={{ width: '20rem', marginBottom: '0' }}
             />
           </div>
         </div>

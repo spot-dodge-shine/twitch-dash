@@ -11,12 +11,10 @@ const SpotifyVotecycle = props => {
   totalVotes = votecycle.votechoices.reduce((total, voteChoice) => {
     return total + voteChoice.votes
   }, 0)
-  
+
 
   return (
-    <div
-      style={{ width: '750px' }}
-    >
+    <div>
       {votecycle.id ?
         votecycle.votechoices.map(votechoice => {
           return (
