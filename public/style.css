@@ -19,3 +19,19 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+html, body, #app {
+  height: 100%;
+  width: 100%;
+}
+
+.landing-image {
+  height: 100%;
+  width: 100%;
+  background: url("/images/homepagebg.png") !important;
+  background-size: cover !important;
+}
+
+.routes-height {
+  height: 100%;
+}

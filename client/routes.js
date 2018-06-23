@@ -16,7 +16,7 @@ class Routes extends Component {
     const {isLoggedIn} = this.props
 
     return (
-      <div>
+      <div className='routes-height'>
         <Switch>
           <Route exact path="/" component={TwitchLogin} />
           {isLoggedIn && (

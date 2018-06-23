@@ -9,7 +9,7 @@ display: flex;
 justify-content: center;
 text-align: center;
 align-items: center;
-margin-top: 15%;
+height: 100%;
 `
 
 const TwitchDashLogo = styled.div`
@@ -20,7 +20,7 @@ margin-bottom: 5%;
 const TwitchLogin = () => {
 
   return (
-    <Wrapper>
+    <Wrapper className='landing-image'>
       <Card>
         <Card.Content>
           <Card.Header>

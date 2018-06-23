@@ -3,9 +3,7 @@ import Routes from './routes'
 
 const App = () => {
   return (
-    <div className='landing-image'>
-      <Routes />
-    </div>
+    <Routes />
   )
 }
 
