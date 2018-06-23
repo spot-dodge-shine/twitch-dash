@@ -31,12 +31,6 @@ export class PlaylistDropdown extends Component {
     super(props)
     if (this.props.user.spotifyAccessToken) {
       this.props.getPlaylists()
-        // .then(() => {
-        //   return this.props.selectPlaylist(Object.keys(this.props.playlists)[0])
-        // })
-        // .then(() => {
-        //   return this.props.getTracks(this.props.selectedPlaylist())
-        // })
         .then(() => {
           this.timer = setInterval(this.tick, 5000)
           this.counter = 0
@@ -78,7 +72,6 @@ export class PlaylistDropdown extends Component {
             maxVotes = votechoice.votes
           }
         })
-        console.log(newTrack)
         await this.props.deactivateVotecycle(this.props.votecycle.id)
         return this.props.playTrack(newTrack)
       }
