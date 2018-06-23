@@ -6,7 +6,6 @@ import { withRouter, Route, Switch } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { UserHome, TwitchLogin } from './components'
 import { me } from './store'
-import SpotifyVotecycle from './components/spotify-votecycle'
 
 class Routes extends Component {
   componentDidMount() {

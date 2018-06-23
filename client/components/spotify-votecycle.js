@@ -70,8 +70,8 @@ const SpotifyVotecycle = props => {
     <div
       style={{ width: '750px' }}
     >
-      {votecycle.id ?
-        votecycle.votechoices.map(votechoice => {
+      {fakeVotecycle.id ?
+        fakeVotecycle.votechoices.map(votechoice => {
           return (
             <SpotifyVoteline
               key={votechoice.id}

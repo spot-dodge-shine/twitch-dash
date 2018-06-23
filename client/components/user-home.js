@@ -2,7 +2,7 @@
 
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import PlaylistDropdown from './spotify-module'
+import SpotifyModule from './spotify-module'
 import SpotifyLogin from './spotify-login'
 import NavBar from './navbar'
 import styled from 'styled-components'
@@ -30,7 +30,6 @@ class UserHome extends Component {
   }
 
   render() {
-    const {twitchLogin} = this.props
 
     return (
       <div>
@@ -41,7 +40,7 @@ class UserHome extends Component {
         <Wrapper>
           {
             this.props.spotifyId
-            ? <PlaylistDropdown />
+            ? <SpotifyModule />
             : <SpotifyLogin />
           }
         </Wrapper>

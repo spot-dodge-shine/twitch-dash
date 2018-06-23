@@ -3,27 +3,12 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import { Card, Icon, Dropdown, Button } from 'semantic-ui-react'
-import styled from 'styled-components'
 import PlaylistDropdown from './playlist-dropdown'
+import SpotifyVoteCycle from './spotify-votecycle'
 import { getPlaylistsFromSpotify, selectPlaylist } from '../store/spotify-playlists'
 import { getTracksFromSpotify, playTrack } from '../store/spotify-tracks'
 import {getActiveVotecycleServer, createVotechoiceServer, createActiveVotecycleServer, getVotesServer, deactivateVotecycleServer} from '../store/votecycle'
 import { getPlayerStatusThunk } from '../store/spotify-player'
-
-const YourPlaylistText = styled.div`
-  margin-top: 5%;
-  margin-bottom: 5%;
-`
-
-const DropDownStyle = styled.div`
-  margin-left: 10%;
-  margin-right: 10%;
-  margin-bottom: 5%
-`
-
-const ButtonStyle = styled.div`
-  margin-bottom: 5%;
-`
 
 
 export class SpotifyModule extends Component {
@@ -105,14 +90,29 @@ export class SpotifyModule extends Component {
   }
 
   render () {
+    const trackData = Object.values(this.props.playlists)
+      .map(playlist => ({
+        key: playlist.id,
+        value: playlist.id,
+        text: playlist.name
+      }))
 
     return (
       <div>
+        <Card>
+          <SpotifyVoteCycle votecycle={this.props.votecycle} />
           <PlaylistDropdown
-            playlists = {this.props.playlists}
+            trackData = {trackData}
             handleChange = {this.handleChange}
             handlePlay = {this.handlePlay}
           />
+          <Card.Content extra>
+            <a>
+              <Icon name='spotify' />
+              {trackData.length} Playlists
+            </a>
+          </Card.Content>
+        </Card>
       </div>
     )
   }
