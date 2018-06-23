@@ -36,28 +36,12 @@ export class SpotifyModule extends Component {
     this.counter += 1
     if (!this.props.selectedPlaylistId) { console.log('no playlist selected') }
     else if (!this.props.votecycle || !this.props.votecycle.active) {
-      await this.props.createActiveVotecycle(this.props.user.id)
-      let choiceArr = []
-      const tracks = Object.values(this.props.tracks)
-      let myTrack, trackInd
-      for (let i = 0; i < this.props.numChoices; i++) {
-        trackInd = Math.floor(Math.random() * tracks.length)
-        myTrack = tracks[trackInd]
-        choiceArr.push(this.props.createVotechoice(this.props.votecycle.id, i + 1, myTrack) )
-      }
-      return Promise.all(choiceArr)
+      return this.createNewVotecycle()
     } else {
       await this.props.getVotes(this.props.votecycle)
       await this.props.getPlayerStatus()
       if (!this.props.playerStatus.isPlaying && !this.props.playerStatus.progress) {
-        let newTrack
-        let maxVotes = 0
-        this.props.votecycle.votechoices.forEach(votechoice => {
-          if (votechoice.votes >= maxVotes) {
-            newTrack = votechoice.track
-            maxVotes = votechoice.votes
-          }
-        })
+        let newTrack = this.getWinner()
         await this.props.deactivateVotecycle(this.props.votecycle.id)
         return this.props.playTrack(newTrack)
       }
@@ -70,16 +54,7 @@ export class SpotifyModule extends Component {
     if (this.props.votecycle && this.props.votecycle.id) {
       await this.props.deactivateVotecycle(this.props.votecycle.id)
     }
-    await this.props.createActiveVotecycle(this.props.user.id)
-    let choiceArr = []
-    const tracks = Object.values(this.props.tracks)
-    let myTrack, trackInd
-    for (let i = 0; i < this.props.numChoices; i++) {
-      trackInd = Math.floor(Math.random() * tracks.length)
-      myTrack = tracks[trackInd]
-      choiceArr.push(this.props.createVotechoice(this.props.votecycle.id, i + 1, myTrack) )
-    }
-    return Promise.all(choiceArr)
+    return this.createNewVotecycle()
   }
 
   handlePlay = async () => {
@@ -87,6 +62,32 @@ export class SpotifyModule extends Component {
     const randomTrackIndex = Math.floor(Math.random() * tracks.length)
     const trackToPlay = tracks[randomTrackIndex]
     await this.props.playTrack(trackToPlay)
+  }
+
+  createNewVotecycle = async () => {
+    await this.props.createActiveVotecycle(this.props.user.id)
+    let choiceArr = []
+    const tracks = Object.values(this.props.tracks)
+    let myTrack, trackInd
+    for (let i = 0; i < this.props.numChoices; i++) {
+      // TODO: logic to only add unique tracks to votechoices once numChoices / playlist length stuff is done
+      trackInd = Math.floor(Math.random() * tracks.length)
+      myTrack = tracks[trackInd]
+      choiceArr.push(this.props.createVotechoice(this.props.votecycle.id, i + 1, myTrack) )
+    }
+    return Promise.all(choiceArr)
+  }
+
+  getWinner = () => {
+    let newTrack
+    let maxVotes = 0
+    this.props.votecycle.votechoices.forEach(votechoice => {
+      if (votechoice.votes >= maxVotes) {
+        newTrack = votechoice.track
+        maxVotes = votechoice.votes
+      }
+    })
+    return newTrack
   }
 
   render () {
@@ -101,7 +102,7 @@ export class SpotifyModule extends Component {
       <div>
         <Card>
           {
-            (this.props.votecycle && this.props.votecycle.id && this.props.votecycle.active) 
+            (this.props.votecycle && this.props.votecycle.id && this.props.votecycle.active && this.props.currentlyPlaying()) 
               ? <SpotifyVoteCycle votecycle={this.props.votecycle} />
               : <div />
           }

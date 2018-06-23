@@ -40,7 +40,7 @@ const PlaylistDropdown = props => {
       </DropDownStyle>
       <ButtonStyle>
         <Button onClick={handlePlay}>
-          Play Random Song
+          Play Song and Start Poll
         </Button>
       </ButtonStyle>
     </Card.Header>
