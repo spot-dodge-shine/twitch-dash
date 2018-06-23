@@ -75,7 +75,8 @@ export class PlaylistDropdown extends Component {
             maxVotes = votechoice.votes
           }
         })
-        this.props.playTrack(newTrack)
+        console.log(newTrack)
+        return this.props.playTrack(newTrack)
       }
     }
   }
