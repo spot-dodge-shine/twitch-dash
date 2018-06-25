@@ -21,19 +21,26 @@ if (!process.env.SPOTIFY_CLIENT_ID || !process.env.SPOTIFY_CLIENT_SECRET) {
   const strategy = new SpotifyStrategy(spotifyConfig,
     async (req, accessToken, refreshToken, profile, done) => {
       try {
-        await Spotify.create({
-          spotifyEmail: profile._json.email,
-          spotifyHref: profile.href,
-          spotifyId: profile.id,
-          spotifyImg: profile.photos[0],
-          spotifyPremium: (profile.product === 'premium'),
-          spotifyAccessToken: accessToken,
-          spotifyRefreshToken: refreshToken,
-          userId: req.user.id
-        })
-        req.user.spotifyId = profile.id
-        req.user.spotifyAccessToken = accessToken
-        done(null, req.user)
+        const spotifyAcct = await Spotify.findOne({ where: { userId: req.user.id } })
+        if (spotifyAcct) {
+          req.user.spotifyId = profile.id
+          req.user.spotifyAccessToken = accessToken
+          done(null, req.user)
+        } else {
+          await Spotify.create({
+            spotifyEmail: profile._json.email,
+            spotifyHref: profile.href,
+            spotifyId: profile.id,
+            spotifyImg: profile.photos[0],
+            spotifyPremium: (profile.product === 'premium'),
+            spotifyAccessToken: accessToken,
+            spotifyRefreshToken: refreshToken,
+            userId: req.user.id
+          })
+          req.user.spotifyId = profile.id
+          req.user.spotifyAccessToken = accessToken
+          done(null, req.user)
+        }
       } catch (err) {
         console.error(err)
       }
