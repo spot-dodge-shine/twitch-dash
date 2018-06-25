@@ -16,13 +16,17 @@ const SpotifyVotecycle = props => {
   return (
     <div>
       {votecycle.id ?
-        votecycle.votechoices.map(votechoice => {
-          return (
-            <SpotifyVoteline
-              key={votechoice.id}
-              votechoice={votechoice}
-              totalVotes={totalVotes}
-            />)
+        votecycle.votechoices
+          .sort((prev, next) => {
+            return prev.votecycleEnumId - next.votecycleEnumId
+          })
+          .map(votechoice => {
+            return (
+              <SpotifyVoteline
+                key={votechoice.id}
+                votechoice={votechoice}
+                totalVotes={totalVotes}
+              />)
         }) :
         <Segment
           attached
