@@ -4,6 +4,7 @@ const { Spotify } = require('./spotify')
 const { Votecycle } = require('./votecycle')
 const { Votechoice } = require('./votechoice')
 const { Vote } = require('./vote')
+const { Module } = require('./module')
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -11,6 +12,9 @@ const { Vote } = require('./vote')
  *
  *    BlogPost.belongsTo(User)
  */
+
+  User.hasMany(Module)
+  Module.belongsTo(User)
 
   User.hasOne(Spotify)
   Spotify.belongsTo(User)
