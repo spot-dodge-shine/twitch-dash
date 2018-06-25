@@ -4,8 +4,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Route, Switch } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { UserHome, TwitchLogin } from './components'
+import { UserHome, TwitchLogin, Dashboard } from './components'
 import { me } from './store'
+
 
 class Routes extends Component {
   componentDidMount() {
@@ -21,6 +22,7 @@ class Routes extends Component {
           <Route exact path="/" component={TwitchLogin} />
           {isLoggedIn && (
             <Switch>
+              <Route path="/dashboard" component={Dashboard} />
               <Route path="/home" component={UserHome} />
             </Switch>
           )}

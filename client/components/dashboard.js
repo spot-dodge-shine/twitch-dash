@@ -1,9 +1,22 @@
 import React, {Component} from 'react'
 import { allModules } from '../allModules'
 import Navbar from './navbar'
+import SidebarItem from './sidebar-item'
+import DashModule from './dash-module'
 
 class Dashboard extends Component {
+
   render () {
+    let filteredNames = Object.keys(allModules).filter(name => {
+      return allModules[name].active
+    })
+    const filteredModules = {}
+    filteredNames.forEach(name => {
+      filteredModules[name] = allModules[name]
+    })
+    console.log(filteredModules, allModules)
+
+
     return (
       <div>
         <Navbar />
@@ -11,15 +24,15 @@ class Dashboard extends Component {
         <div>
         {
           Object.keys(allModules).map(name => {
-            return <SideBarModule key={name} icon={""} description={""} name={name} />
+            return <SidebarItem key={name} icon={""} description={""} name={name} enabled={""} />
            })
         }
         </div>
         <div>
         {
-          Object.keys(allModules).map(name => {
-            return <DashModule key={name} icon={""} description={""} name={name} modules={allModules[name].dashboardComponent} />
-           })
+          Object.keys(filteredModules).map(name => {
+            return <DashModule key={name} module={allModules[name].dashboardComponent} />
+          })
         }
         </div>
       </div>

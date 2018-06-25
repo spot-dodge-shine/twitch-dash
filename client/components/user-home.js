@@ -30,7 +30,6 @@ class UserHome extends Component {
     super(props)
   }
 
-
   render() {
 
     return (
