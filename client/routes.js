@@ -20,7 +20,7 @@ class Routes extends Component {
       <div className='routes-height'>
         <Switch>
           <Route exact path="/" component={TwitchLogin} />
-          <Route exact path="/overlay/:userId/:moduleName" component={OverlayModule} />
+          <Route exact path="/overlay/:userId/:moduleId" component={OverlayModule} />
           {isLoggedIn && (
             <Switch>
               <Route path="/dashboard" component={Dashboard} />

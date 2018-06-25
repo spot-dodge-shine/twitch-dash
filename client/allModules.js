@@ -1,5 +1,5 @@
 import SpotifyModule from './components/spotify-module'
-import SpotifyVotecycle from './components/spotify-votecycle'
+import SpotifyOverlay from './components/spotify-overlay'
 
 
 const allModules = {}
@@ -8,7 +8,9 @@ function registerModule (id, moduleSpec) {
   allModules[id] = moduleSpec;
 }
 
-registerModule(1, {name: 'Spotify', dashboardComponent:SpotifyModule, overlayComponent:SpotifyVotecycle})
+// TODO: get all modules and load them into allModules
+
+registerModule(1, {name: 'Spotify', dashboardComponent: SpotifyModule, overlayComponent: SpotifyOverlay })
 
 
 export { allModules, registerModule }

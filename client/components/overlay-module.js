@@ -2,8 +2,9 @@ import React from 'react'
 import {allModules} from '../allModules'
 
 const OverlayModule = (props) => {
-  const Component = allModules[props.params.match.moduleName].overlayComponent
-  return <Component />
+  console.log('overlay modulr props: ', props)
+  const Component = allModules[props.match.params.moduleId].overlayComponent
+  return <Component userId={props.match.params.userId}/>
 }
 
 export default OverlayModule
