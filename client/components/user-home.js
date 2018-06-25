@@ -6,7 +6,7 @@ import SpotifyModule from './spotify-module'
 import SpotifyLogin from './spotify-login'
 import NavBar from './navbar'
 import styled from 'styled-components'
-import { Message } from 'semantic-ui-react'
+import { Sidebar, Segment, Menu, Button, Icon } from 'semantic-ui-react'
 import WelcomeText from './welcome-text'
 
 const Wrapper = styled.div`
@@ -29,6 +29,7 @@ class UserHome extends Component {
   constructor(props) {
     super(props)
   }
+
 
   render() {
 
