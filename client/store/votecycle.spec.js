@@ -77,13 +77,8 @@ describe('thunk creators - votecycles', () => {
       mockAxios.onPost('/api/votechoices').replyOnce(200, fakeVotechoice)
     })
 
-<<<<<<< HEAD
     it('eventually dispatches the CREATE_VOTECHOICE action', async () => {      
       return store.dispatch(createVotechoiceServer(1, 1, 'mytrack'))
-=======
-    it('eventually dispatches the CREATE_VOTECHOICE action', async () => {
-      return store.dispatch(createVotechoiceServer(1))
->>>>>>> 9b42feee43526b32e36e44f50aca96348f8032c4
         .then(() => {
           const actions = store.getActions()
           expect(actions[0].type).to.be.equal('CREATE_VOTECHOICE')
