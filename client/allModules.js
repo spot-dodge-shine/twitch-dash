@@ -4,11 +4,11 @@ import SpotifyVotecycle from './components/spotify-votecycle'
 
 const allModules = {}
 
-function registerModule (name, moduleSpec) {
-  allModules[name] = moduleSpec;
+function registerModule (id, moduleSpec) {
+  allModules[id] = moduleSpec;
 }
 
-registerModule('Spotify', {dashboardComponent:SpotifyModule, overlayComponent:SpotifyVotecycle, active: true})
+registerModule(1, {name: 'Spotify', dashboardComponent:SpotifyModule, overlayComponent:SpotifyVotecycle})
 
 
 export { allModules, registerModule }
