@@ -28,7 +28,7 @@ html, body, #app {
 .landing-image {
   height: 100%;
   width: 100%;
-  background: url("/images/homepagebg.png") !important;
+  background: url("/images/homepagebg.jpg") !important;
   background-size: cover !important;
 }
 

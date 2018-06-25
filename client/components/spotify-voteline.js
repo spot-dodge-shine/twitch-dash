@@ -11,6 +11,13 @@ const SpotifyVoteline = props => {
         attached
       >
         <div>
+          <h1
+            style={{ marginRight: '1rem' }}
+          >
+            {votechoice.votecycleEnumId}
+          </h1>
+        </div>
+        <div>
           <Image
             src={votechoice.track.image}
             size='mini'
@@ -43,7 +50,7 @@ const SpotifyVoteline = props => {
               value={votechoice.votes}
               total={totalVotes}
               color='green'
-              style={{ width: '20rem', marginBottom: '0' }}
+              style={{ width: '16rem', marginBottom: '0' }}
             />
           </div>
         </div>
