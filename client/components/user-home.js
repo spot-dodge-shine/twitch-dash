@@ -6,7 +6,7 @@ import SpotifyModule from './spotify-module'
 import SpotifyLogin from './spotify-login'
 import NavBar from './navbar'
 import styled from 'styled-components'
-import { Button, Header, Icon, Image, Menu, Segment, Sidebar } from 'semantic-ui-react'
+import { Button, Header, Icon, Image, Menu, Segment, Sidebar, Dropdown } from 'semantic-ui-react'
 import WelcomeText from './welcome-text'
 
 const ModuleWrapper = styled.div`
@@ -67,11 +67,11 @@ class UserHome extends Component {
                 Twitch
               </div>
             </Menu.Item>
-            <Menu.Item as='a'>
+            <Menu.Item>
               <Icon color='blue' name='paypal' />
-              <div className="sidebar-text">
-                PayPal
-              </div>
+                <div className="sidebar-text">
+                  PayPal
+                </div>
             </Menu.Item>
           </Sidebar>
 

@@ -1,11 +1,15 @@
 import React from 'react'
+import { Menu, Icon } from 'semantic-ui-react'
 
 const SidebarItem = (props) => {
   return (
     <div>
-      <p>
-        {props.name}
-      </p>
+      <Menu.Item as='a'>
+        <Icon color='blue' id={props.id} />
+          <div className="sidebar-text">
+            {props.name}
+          </div>
+        </Menu.Item>
     </div>
   )
 }
