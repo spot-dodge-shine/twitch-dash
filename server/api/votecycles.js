@@ -33,10 +33,11 @@ router.get('/active/:userId', async (req, res, next) => {
 // Create new votecycle
 router.post('/', async (req, res, next) => {
   try {
-    const {userId} = req.body
+    const {userId, playlistId} = req.body
     const votecycle = await Votecycle.create({
       active: true,
-      userId: userId
+      userId: userId,
+      playlistId: playlistId
     })
     const retVotecycle = await Votecycle.findOne({
       where: {

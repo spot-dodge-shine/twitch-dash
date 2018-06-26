@@ -20,7 +20,7 @@ const ButtonStyle = styled.div`
 `
 
 const PlaylistDropdown = props => {
-  const { trackData, handleChange, handlePlay } = props
+  const { trackData, handleChange, handlePlay, selectedPlaylistName } = props
 
   return (
     <Card.Header>
@@ -30,7 +30,7 @@ const PlaylistDropdown = props => {
       <DropDownStyle>
         <Dropdown
           button={true}
-          placeholder='Select a Playlist'
+          placeholder={selectedPlaylistName ? selectedPlaylistName : 'Select a Playlist'}
           fluid
           search
           selection

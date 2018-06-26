@@ -39,9 +39,9 @@ export const getActiveVotecycleServer = (userId) => {
   }
 }
 
-export const createActiveVotecycleServer = (userId) => {
+export const createActiveVotecycleServer = (userId, playlistId) => {
   return async (dispatch) => {
-    const {data} = await axios.post(`/api/votecycles`, {userId: userId})
+    const {data} = await axios.post(`/api/votecycles`, {userId: userId, playlistId})
     dispatch(createActiveVotecycle(data))
   }
 }
