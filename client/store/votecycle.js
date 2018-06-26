@@ -25,13 +25,23 @@ const deactivateVotecycle = (votecycle) => ({type: DEACTIVATE_VOTECYCLE, votecyc
 export const getActiveVotecycleServer = (userId) => {
   return async (dispatch) => {
     const {data} = await axios.get(`/api/votecycles/active/${userId}`)
+    if (data) {
+      let promiseArr = []
+      data.votechoices.forEach((votechoice) => {
+        promiseArr.push(axios.get(`/api/votechoices/${votechoice.trackId}`))
+      })
+      const trackArr = await Promise.all(promiseArr)
+      for (var i = 0; i < data.votechoices.length; i++) {
+        data.votechoices[i].track = trackArr[i].data
+      }
+    }
     dispatch(getActiveVotecycle(data))
   }
 }
 
-export const createActiveVotecycleServer = (userId) => {
+export const createActiveVotecycleServer = (userId, playlistId) => {
   return async (dispatch) => {
-    const {data} = await axios.post(`/api/votecycles`, {userId: userId})
+    const {data} = await axios.post(`/api/votecycles`, {userId: userId, playlistId})
     dispatch(createActiveVotecycle(data))
   }
 }
@@ -40,7 +50,8 @@ export const createVotechoiceServer = (votecycleId, votecycleEnumId, track) => {
   return async (dispatch) => {
     const {data} = await axios.post('/api/votechoices', {
       votecycleId: votecycleId,
-      votecycleEnumId: votecycleEnumId
+      votecycleEnumId: votecycleEnumId,
+      trackId: track.id
     })
     data.track = track
     dispatch(createVotechoice(data))
