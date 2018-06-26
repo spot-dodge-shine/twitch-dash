@@ -74,7 +74,7 @@ class SpotifyVoteline extends Component {
                         progress='value'
                         value={votechoice.votes}
                         total={totalVotes}
-                        color='green'
+                        color={'#' + colorObj.textArr[0].toString(16)+ colorObj.textArr[1].toString(16)+ colorObj.textArr[2].toString(16)}
                         style={{ width: '16rem', marginBottom: '0' }}
                       />
                     </div>

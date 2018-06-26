@@ -3,7 +3,7 @@ const getColors = function(palette) {
   let diffObj = {}
   let maxDiff = 0
   if (palette.Vibrant) {
-    bgArr = palette.Vibrant._rgb
+    textArr = palette.Vibrant._rgb
     if (palette.LightVibrant) {
       diffObj = populateObj(diffObj, 'LightVibrant', 'Vibrant', palette)
     }
@@ -23,13 +23,13 @@ const getColors = function(palette) {
     Object.keys(diffObj).forEach(color => {
       if (diffObj[color].diff > maxDiff) {
         maxDiff = diffObj[color].diff
-        textArr = diffObj[color].arr
+        bgArr = diffObj[color].arr
       }
     })
 
   } 
-  else if (palette.LightMuted) {
-    bgArr = palette.Muted._rgb
+  else if (palette.Muted) {
+    textArr = palette.Muted._rgb
     if (palette.LightVibrant) {
       diffObj = populateObj(diffObj, 'LightVibrant', 'Muted', palette)
     }
@@ -39,14 +39,14 @@ const getColors = function(palette) {
     if (palette.LightMuted) {
       diffObj = populateObj(diffObj, 'Muted', 'Muted', palette)
     }
-    if (palette.Muted) {
+    if (palette.DarkMuted) {
       diffObj = populateObj(diffObj, 'DarkMuted', 'Muted', palette)
     }
 
     Object.keys(diffObj).forEach(color => {
       if (diffObj[color].diff > maxDiff) {
         maxDiff = diffObj[color].diff
-        textArr = diffObj[color].arr
+        bgArr = diffObj[color].arr
       }
     })
   }
@@ -54,8 +54,6 @@ const getColors = function(palette) {
     bgArr = [255, 255, 255]
     textArr = [0, 0, 0]
   }
-
-  console.log(bgArr)
   
   return {bgArr, textArr}
 
