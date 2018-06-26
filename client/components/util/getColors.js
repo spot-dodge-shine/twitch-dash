@@ -28,7 +28,7 @@ const getColors = function(palette) {
     })
 
   } 
-  else if (palette.Muted) {
+  else if (palette.LightMuted) {
     bgArr = palette.Muted._rgb
     if (palette.LightVibrant) {
       diffObj = populateObj(diffObj, 'LightVibrant', 'Muted', palette)
@@ -37,9 +37,9 @@ const getColors = function(palette) {
       diffObj = populateObj(diffObj, 'DarkVibrant', 'Muted', palette)
     }
     if (palette.LightMuted) {
-      diffObj = populateObj(diffObj, 'LightMuted', 'Muted', palette)
+      diffObj = populateObj(diffObj, 'Muted', 'Muted', palette)
     }
-    if (palette.DarkMuted) {
+    if (palette.Muted) {
       diffObj = populateObj(diffObj, 'DarkMuted', 'Muted', palette)
     }
 
