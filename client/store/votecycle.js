@@ -28,7 +28,7 @@ export const getActiveVotecycleServer = (userId) => {
     if (data) {
       let promiseArr = []
       data.votechoices.forEach((votechoice) => {
-        promiseArr.push(axios.get(`/api/votechoices/${votechoice.trackId}`))
+        promiseArr.push(axios.get(`/api/votechoices/${votechoice.trackId}/${userId}`))
       })
       const trackArr = await Promise.all(promiseArr)
       for (var i = 0; i < data.votechoices.length; i++) {

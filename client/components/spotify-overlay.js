@@ -4,19 +4,30 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Segment } from 'semantic-ui-react'
 import SpotifyVoteline from './spotify-voteline'
-import { getActiveVotecycleServer } from '../store'
+import { getActiveVotecycleServer, getVotesServer } from '../store'
 
 class SpotifyOverlay extends Component {
   constructor(props) {
     super(props)
     // Get this.votecycle using API route
-    this.votecycle = this.props.activeVotecycle(this.props.userId)
+    this.timer = setInterval(this.tick, 2000)
+    this.tick()
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer)
+  }
+  
+  tick = async () => {
+    await this.props.activeVotecycle(this.props.userId)
+    return this.props.getVotes(this.props.votecycle)
   }
 
   render() {
-    if (this.votecycle.id) {
-      let totalVotes = 0
-      totalVotes = this.votecycle.votechoices.reduce((total, voteChoice) => {
+    console.log(this.props)
+    let totalVotes = 0
+    if (this.props.votecycle && this.props.votecycle.id) {
+      totalVotes = this.props.votecycle.votechoices.reduce((total, voteChoice) => {
         return total + voteChoice.votes
       }, 0)
     }
@@ -24,8 +35,8 @@ class SpotifyOverlay extends Component {
   
     return (
       <div>
-        {this.votecycle.id ?
-          this.votecycle.votechoices
+        {this.props.votecycle.id ?
+          this.props.votecycle.votechoices
             .sort((prev, next) => {
               return prev.votecycleEnumId - next.votecycleEnumId
             })
@@ -49,10 +60,17 @@ class SpotifyOverlay extends Component {
 
 }
 
-const mapDispatch = (dispatch) => {
+const mapState = (state) => {
   return {
-    activeVotecycle: (userId) => dispatch(getActiveVotecycleServer(userId)),
+    votecycle: state.votecycle
   }
 }
 
-export default connect(null, mapDispatch)(SpotifyOverlay)
+const mapDispatch = (dispatch) => {
+  return {
+    activeVotecycle: (userId) => dispatch(getActiveVotecycleServer(userId)),
+    getVotes: (votecycle) => dispatch(getVotesServer(votecycle)),
+  }
+}
+
+export default connect(mapState, mapDispatch)(SpotifyOverlay)
