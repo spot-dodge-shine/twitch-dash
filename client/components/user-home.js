@@ -49,9 +49,9 @@ class UserHome extends Component {
 
     return (
       <BodyWrapper>
+        <MenuHeight>
         <Sidebar.Pushable as={Segment}>
         <NavBar />
-        <MenuHeight>
           <Sidebar
             as={Menu}
             animation='overlay'
@@ -98,8 +98,8 @@ class UserHome extends Component {
               </ModuleWrapper>
             </Segment>
           </Sidebar.Pusher>
-          </MenuHeight>
         </Sidebar.Pushable>
+        </MenuHeight>
       </BodyWrapper>
     )
   }
