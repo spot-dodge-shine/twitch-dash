@@ -43,10 +43,8 @@ class UserHome extends Component {
     const { visible } = this.state
 
     return (
-      <div>
+      <MainBodyWrapper>
         <NavBar />
-        <Button onClick={this.handleButtonClick}>Toggle visibility</Button>
-        <MainBodyWrapper>
         <Sidebar.Pushable as={Segment}>
           <Sidebar
             as={Menu}
@@ -72,8 +70,9 @@ class UserHome extends Component {
             </Menu.Item>
           </Sidebar>
 
-          <Sidebar.Pusher dimmed={visible}>
+          <Sidebar.Pusher>
             <Segment basic>
+            <Button onClick={this.handleButtonClick}>Toggle visibility</Button>
               <WelcomeTextStyle>
                 <WelcomeText />
               </WelcomeTextStyle>
@@ -87,8 +86,7 @@ class UserHome extends Component {
             </Segment>
           </Sidebar.Pusher>
         </Sidebar.Pushable>
-        </MainBodyWrapper>
-      </div>
+      </MainBodyWrapper>
     )
   }
 }
