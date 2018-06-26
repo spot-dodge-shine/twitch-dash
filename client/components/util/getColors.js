@@ -1,3 +1,4 @@
+
 const getColors = function(palette) {
   let bgArr, textArr
   let diffObj = {}
@@ -27,7 +28,7 @@ const getColors = function(palette) {
       }
     })
 
-  } 
+  }
   else if (palette.Muted) {
     textArr = palette.Muted._rgb
     if (palette.LightVibrant) {
@@ -54,7 +55,7 @@ const getColors = function(palette) {
     bgArr = [255, 255, 255]
     textArr = [0, 0, 0]
   }
-  
+
   return {bgArr, textArr}
 
 }

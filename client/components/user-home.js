@@ -6,10 +6,7 @@ import SpotifyModule from './spotify-module'
 import SpotifyLogin from './spotify-login'
 import NavBar from './navbar'
 import styled from 'styled-components'
-<<<<<<< HEAD
-=======
 import { Sidebar, Segment, Menu, Button, Icon } from 'semantic-ui-react'
->>>>>>> 26058923770338d6a5bc6ca59523f3dfc9f93668
 import WelcomeText from './welcome-text'
 import TempButtons from './tempRouteTesting'
 
