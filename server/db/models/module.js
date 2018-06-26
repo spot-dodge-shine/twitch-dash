@@ -8,10 +8,12 @@ const Module = db.define('module', {
     type: Sequelize.STRING,
     allowNull: false
   },
-  enabled: {
-    type: Sequelize.BOOLEAN,
-    allowNull: false,
-    defaultValue: false
+  description: {
+    type: Sequelize.TEXT,
+    allowNull: false
+  },
+  image: {
+    type: Sequelize.STRING
   }
 })
 

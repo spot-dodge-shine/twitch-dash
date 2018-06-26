@@ -5,6 +5,7 @@ const { Votecycle } = require('./votecycle')
 const { Votechoice } = require('./votechoice')
 const { Vote } = require('./vote')
 const { Module } = require('./module')
+const { ModuleUser } = require('./module_user')
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -13,8 +14,8 @@ const { Module } = require('./module')
  *    BlogPost.belongsTo(User)
  */
 
-  User.hasMany(Module)
-  Module.belongsTo(User)
+  User.belongsToMany(Module, { through: ModuleUser })
+  Module.belongsToMany(User, { through: ModuleUser })
 
   User.hasOne(Spotify)
   Spotify.belongsTo(User)
@@ -33,6 +34,17 @@ const { Module } = require('./module')
     return votecycles.filter(votecycle => {
       return votecycle.active
     })[0]
+  }
+
+  User.prototype.getActiveModules = async function () {
+    const modules = await this.getModules()
+    const statusLoaded = await Promise.all(
+      modules.map(module => ModuleUser.findOne({
+        where: { moduleId: module.id }
+      })))
+    const filtered = statusLoaded.filter(module => module.enabled === true )
+      .map(module => module.moduleId)
+    return filtered
   }
 
   // Votechoice.findByUsername = async function(username, votecycleEnumId) {
