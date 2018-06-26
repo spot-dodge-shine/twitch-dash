@@ -2,7 +2,7 @@
 
 const router = require('express').Router()
 const axios = require('axios')
-const { User } = require('../db/models')
+const { User, ModuleUser } = require('../db/models')
 const { checkSpotifyAccessToken, refreshSpotifyAccessToken } = require('./spotify-refresh')
 module.exports = router
 
@@ -135,6 +135,50 @@ router.get('/username/:username/:enum', async (req, res, next) => {
     })[0]
     res.json(votechoice)
   } catch(err) {
+    next(err)
+  }
+})
+
+router.get('/me/modules', async (req, res, next) => {
+  try {
+    const user = await User.findOne({ where: { twitchId: req.user.twitchId } })
+    const activeModules = await user.getActiveModules()
+    res.json(activeModules)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.post('/me/modules', async (req, res, next) => {
+  const { moduleId } = req.body
+  try {
+    const user = await User.findOne({ where: { twitchId: req.user.twitchId } })
+    await ModuleUser.create({
+      moduleId: moduleId,
+      userId: user.id,
+      enabled: true
+    })
+    res.json(await user.getActiveModules())
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.put('/me/modules', async (req, res, next) => {
+  const { moduleId } = req.body
+  try {
+    const user = await User.findOne({ where: { twitchId: req.user.twitchId } })
+    const moduleUserRelationship = await ModuleUser.findOne({
+      where: {
+        userId: user.id,
+        moduleId
+      }
+    })
+    await moduleUserRelationship.update({
+      enabled: !moduleUserRelationship.enabled
+    })
+    res.json(await user.getActiveModules())
+  } catch (err) {
     next(err)
   }
 })
