@@ -32,6 +32,10 @@ const BodyWrapper = styled.div`
   height: 100%;
 `
 
+const MenuHeight = styled.div`
+  height: 100%;
+`
+
 class UserHome extends Component {
   constructor(props) {
     super(props)
@@ -45,9 +49,9 @@ class UserHome extends Component {
 
     return (
       <BodyWrapper>
-        <BodyWrapper>
         <Sidebar.Pushable as={Segment}>
         <NavBar />
+        <MenuHeight>
           <Sidebar
             as={Menu}
             animation='overlay'
@@ -94,8 +98,8 @@ class UserHome extends Component {
               </ModuleWrapper>
             </Segment>
           </Sidebar.Pusher>
+          </MenuHeight>
         </Sidebar.Pushable>
-        </BodyWrapper>
       </BodyWrapper>
     )
   }
