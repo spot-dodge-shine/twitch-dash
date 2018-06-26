@@ -13,40 +13,29 @@ const LogoStyle = styled.div`
 `
 
 const NavbarBottomMargin = styled.div`
-  margin-bottom: 0%;
+  margin-bottom: 0;
 `
 
 
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <NavbarBottomMargin>
-    <Menu>
-      <Menu.Menu>
+    <Menu borderless>
+      {/* <Menu.Menu>
         <LogoStyle>
           <Link to="/home"><Image src='/images/navbarlogo.png' /></Link>
         </LogoStyle>
-      </Menu.Menu>
-      <nav>
-        {isLoggedIn ? (
-          <div>
-            {/* The navbar will show these links after you log in */}
-            <Menu.Menu position='right'>
-              <Menu.Item>
-                  <Button primary animated onClick={handleClick}>
-                      <Button.Content hidden>Logout</Button.Content>
-                      <Button.Content visible>
-                        <Icon name='log out' />
-                      </Button.Content>
-                  </Button>
-              </Menu.Item>
-            </Menu.Menu>
-          </div>
-        ) : (
-          <div>
-            {/* The navbar will show these links before you log in */}
-          </div>
-        )}
-      </nav>
+      </Menu.Menu> */}
+        <Menu.Menu position='right'>
+          <Menu.Item>
+              <Button color='blue' animated onClick={handleClick}>
+                  <Button.Content hidden>Logout</Button.Content>
+                  <Button.Content visible>
+                    <Icon name='log out' />
+                  </Button.Content>
+              </Button>
+          </Menu.Item>
+        </Menu.Menu>
       <Divider />
     </Menu>
   </NavbarBottomMargin>

@@ -35,3 +35,7 @@ html, body, #app {
 .routes-height {
   height: 100%;
 }
+
+.sidebar-text {
+  color: #2986ce;
+}

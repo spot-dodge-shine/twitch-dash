@@ -36,45 +36,47 @@ class UserHome extends Component {
   }
   state = { visible: false }
 
-  handleButtonClick = () => this.setState({ visible: !this.state.visible })
-
-  handleSidebarHide = () => this.setState({ visible: false })
-
   render() {
-    const { visible } = this.state
 
     return (
       <BodyWrapper>
-        <NavBar />
         <BodyWrapper>
         <Sidebar.Pushable as={Segment}>
+        <NavBar />
           <Sidebar
             as={Menu}
             animation='overlay'
             icon='labeled'
-            inverted
             onHide={this.handleSidebarHide}
             vertical
-            visible={visible}
+            visible
             width='thin'
           >
             <Menu.Item as='a'>
-              <Icon name='spotify' />
-              Spotify
+              <Image src='/images/navbarlogo.png' />
             </Menu.Item>
             <Menu.Item as='a'>
-              <Icon name='twitch' />
-              Twitch
+              <Icon color='blue' name='spotify' />
+              <div className="sidebar-text">
+                Spotify
+              </div>
             </Menu.Item>
             <Menu.Item as='a'>
-              <Icon name='paypal' />
-              PayPal
+              <Icon color='blue' name='twitch' />
+              <div className="sidebar-text">
+                Twitch
+              </div>
+            </Menu.Item>
+            <Menu.Item as='a'>
+              <Icon color='blue' name='paypal' />
+              <div className="sidebar-text">
+                PayPal
+              </div>
             </Menu.Item>
           </Sidebar>
 
           <Sidebar.Pusher>
             <Segment basic>
-            <Button onClick={this.handleButtonClick}>Toggle visibility</Button>
               <WelcomeTextStyle>
                 <WelcomeText />
               </WelcomeTextStyle>
