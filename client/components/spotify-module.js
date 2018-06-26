@@ -22,6 +22,9 @@ export class SpotifyModule extends Component {
           this.counter = 0
           this.props.activeVotecycle(this.props.user.id)
             .then(() => {
+              if (this.props.votecycle && this.props.votecycle.playlistId) {
+                return this.props.selectPlaylist(this.props.votecycle.playlistId)
+              }
               this.tick()
             })
         })
@@ -65,7 +68,7 @@ export class SpotifyModule extends Component {
   }
 
   createNewVotecycle = async () => {
-    await this.props.createActiveVotecycle(this.props.user.id)
+    await this.props.createActiveVotecycle(this.props.user.id, this.props.selectedPlaylistId)
     let choiceArr = []
     const tracks = Object.values(this.props.tracks)
     let myTrack, trackInd
@@ -98,6 +101,11 @@ export class SpotifyModule extends Component {
         text: playlist.name
       }))
 
+    let playlistName
+    if (this.props.selectedPlaylist()) {
+      playlistName = this.props.selectedPlaylist().name
+    }
+
     return (
       <div>
         <Card style={{ width: '750px' }}>
@@ -105,9 +113,10 @@ export class SpotifyModule extends Component {
             trackData = {trackData}
             handleChange = {this.handleChange}
             handlePlay = {this.handlePlay}
+            selectedPlaylistName = {playlistName}
           />
           {
-            (this.props.votecycle && this.props.votecycle.id && this.props.votecycle.active && this.props.currentlyPlaying())
+            (this.props.votecycle && this.props.votecycle.id && this.props.votecycle.active)
               ? <SpotifyVoteCycle votecycle={this.props.votecycle} />
               : <div />
           }
@@ -152,7 +161,7 @@ const mapDispatchToProps = dispatch => {
     getTracks: playlist => dispatch(getTracksFromSpotify(playlist)),
     playTrack: track => dispatch(playTrack(track)),
     activeVotecycle: (userId) => dispatch(getActiveVotecycleServer(userId)),
-    createActiveVotecycle: (userId) => dispatch(createActiveVotecycleServer(userId)),
+    createActiveVotecycle: (userId, playlistId) => dispatch(createActiveVotecycleServer(userId, playlistId)),
     createVotechoice: (votecycleId, enumId, track) => dispatch(createVotechoiceServer(votecycleId, enumId, track)),
     getVotes: (votecycle) => dispatch(getVotesServer(votecycle)),
     deactivateVotecycle: (votecycleId) => dispatch(deactivateVotecycleServer(votecycleId)),

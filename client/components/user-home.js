@@ -8,6 +8,8 @@ import NavBar from './navbar'
 import styled from 'styled-components'
 import { Button, Header, Icon, Image, Menu, Segment, Sidebar, Dropdown } from 'semantic-ui-react'
 import WelcomeText from './welcome-text'
+import TempButtons from './tempRouteTesting'
+import axios from 'axios'
 
 const ModuleWrapper = styled.div`
   display: flex;
@@ -34,7 +36,10 @@ class UserHome extends Component {
   constructor(props) {
     super(props)
   }
-  state = { visible: false }
+
+  handlePost = () => {
+    return axios.post('api/users/me/modules', { moduleId: 1 })
+  }
 
   render() {
 
@@ -55,7 +60,7 @@ class UserHome extends Component {
             <Menu.Item as='a'>
               <Image src='/images/navbarlogo.png' />
             </Menu.Item>
-            <Menu.Item as='a'>
+            <Menu.Item as='a' onClick={this.handlePost}>
               <Icon color='blue' name='spotify' />
               <div className="sidebar-text">
                 Spotify

@@ -4,6 +4,9 @@ const db = require('../db')
 const Votechoice = db.define('votechoice', {
   votecycleEnumId: {
     type: Sequelize.INTEGER
+  },
+  trackId: {
+    type: Sequelize.STRING
   }
 })
 
