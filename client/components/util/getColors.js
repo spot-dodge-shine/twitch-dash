@@ -1,74 +1,77 @@
 const getColors = function(palette) {
   let bgArr, textArr
-  let lightDiff = 0
-  let darkDiff = 0
+  let diffObj = {}
+  let maxDiff = 0
   if (palette.Vibrant) {
-    if (palette.LightVibrant && palette.DarkVibrant) {
-      lightDiff = lightDiff + Math.abs(palette.Vibrant.r - palette.LightVibrant.r)
-      lightDiff = lightDiff + Math.abs(palette.Vibrant.g - palette.LightVibrant.g)
-      lightDiff = lightDiff + Math.abs(palette.Vibrant.b - palette.LightVibrant.b)
-      
-      darkDiff = darkDiff + Math.abs(palette.Vibrant.r - palette.DarkVibrant.r)
-      darkDiff = darkDiff + Math.abs(palette.Vibrant.g - palette.DarkVibrant.g)
-      darkDiff = darkDiff + Math.abs(palette.Vibrant.b - palette.DarkVibrant.b)
-  
-      if (lightDiff > darkDiff) {
-        bgArr = palette.LightVibrant._rgb,
-        textArr = palette.Vibrant._rgb
-      } else {
-        bgArr = palette.DarkVibrant._rgb,
-        textArr = palette.Vibrant._rgb
+    bgArr = palette.Vibrant._rgb
+    if (palette.LightVibrant) {
+      diffObj = populateObj(diffObj, 'LightVibrant', 'Vibrant', palette)
+    }
+    if (palette.DarkVibrant) {
+      diffObj = populateObj(diffObj, 'DarkVibrant', 'Vibrant', palette)
+    }
+    if (palette.Muted) {
+      diffObj = populateObj(diffObj, 'Muted', 'Vibrant', palette)
+    }
+    if (palette.LightMuted) {
+      diffObj = populateObj(diffObj, 'LightMuted', 'Vibrant', palette)
+    }
+    if (palette.DarkMuted) {
+      diffObj = populateObj(diffObj, 'DarkMuted', 'Vibrant', palette)
+    }
+
+    Object.keys(diffObj).forEach(color => {
+      if (diffObj[color].diff > maxDiff) {
+        maxDiff = diffObj[color].diff
+        textArr = diffObj[color].arr
       }
+    })
+
+  } 
+  else if (palette.Muted) {
+    bgArr = palette.Muted._rgb
+    if (palette.LightVibrant) {
+      diffObj = populateObj(diffObj, 'LightVibrant', 'Muted', palette)
     }
-    else if (palette.LightVibrant) {
-      bgArr = palette.LightVibrant._rgb,
-      textArr = palette.Vibrant._rgb
+    if (palette.DarkVibrant) {
+      diffObj = populateObj(diffObj, 'DarkVibrant', 'Muted', palette)
     }
-    else if (palette.DarkVibrant) {
-      bgArr = palette.DarkVibrant._rgb,
-      textArr = palette.Vibrant._rgb
+    if (palette.LightMuted) {
+      diffObj = populateObj(diffObj, 'LightMuted', 'Muted', palette)
     }
-    else {
-      bgArr = [255, 255, 255]
-      textArr = [0, 0, 0]
+    if (palette.DarkMuted) {
+      diffObj = populateObj(diffObj, 'DarkMuted', 'Muted', palette)
     }
-    
-  } else if (palette.Muted) {
-    if (palette.LightMuted && palette.DarkMuted) {
-      lightDiff = lightDiff + Math.abs(palette.Muted.r - palette.LightMuted.r)
-      lightDiff = lightDiff + Math.abs(palette.Muted.g - palette.LightMuted.g)
-      lightDiff = lightDiff + Math.abs(palette.Muted.b - palette.LightMuted.b)
-      
-      darkDiff = darkDiff + Math.abs(palette.Muted.r - palette.DarkMuted.r)
-      darkDiff = darkDiff + Math.abs(palette.Muted.g - palette.DarkMuted.g)
-      darkDiff = darkDiff + Math.abs(palette.Muted.b - palette.DarkMuted.b)
-  
-      if (lightDiff > darkDiff) {
-        bgArr = palette.LightMuted._rgb,
-        textArr = palette.Muted._rgb
-      } else {
-        bgArr = palette.DarkMuted._rgb,
-        textArr = palette.Muted._rgb
+
+    Object.keys(diffObj).forEach(color => {
+      if (diffObj[color].diff > maxDiff) {
+        maxDiff = diffObj[color].diff
+        textArr = diffObj[color].arr
       }
-    }
-    else if (palette.LightMuted) {
-      bgArr = palette.LightMuted._rgb,
-      textArr = palette.Muted._rgb
-    }
-    else if (palette.DarkMuted) {
-      bgArr = palette.DarkMuted._rgb,
-      textArr = palette.Muted._rgb
-    }
-    else {
-      bgArr = [255, 255, 255]
-      textArr = [0, 0, 0]
-    }
-  } else {
+    })
+  }
+  else {
     bgArr = [255, 255, 255]
     textArr = [0, 0, 0]
   }
 
-  return { bgArr, textArr }
+  console.log(bgArr)
+  
+  return {bgArr, textArr}
+
+}
+
+function populateObj(diffObj, color, compColor, palette) {
+  if (palette[color]) {
+    diffObj[color] = {}
+    diffObj[color].diff = 0
+    diffObj[color].arr = palette[color]._rgb
+
+    diffObj[color].diff = diffObj[color].diff + Math.abs(palette[compColor].r - palette[color].r)
+    diffObj[color].diff = diffObj[color].diff + Math.abs(palette[compColor].g - palette[color].g)
+    diffObj[color].diff = diffObj[color].diff + Math.abs(palette[compColor].b - palette[color].b)
+  }
+  return diffObj
 }
 
 export default getColors
