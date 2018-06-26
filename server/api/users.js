@@ -138,3 +138,25 @@ router.get('/username/:username/:enum', async (req, res, next) => {
     next(err)
   }
 })
+
+router.get('/me/modules', async (req, res, next) => {
+  try {
+    const user = await User.findOne({ where: { twitchId: req.user.twitchId } })
+    const activeModules = await user.getActiveModules()
+    res.json(activeModules)
+  } catch (err) {
+    next(err)
+  }
+})
+
+// router.post('/me/modules', async (req, res, next) => {
+//   const { moduleId } = req.body
+//   try {
+//     const user = await User.findOne({ where: { twitchId: req.user.twitchId } })
+
+//     const activeModules = await user.getActiveModules()
+//     res.json(activeModules)
+//   } catch (err) {
+//     next(err)
+//   }
+// })
