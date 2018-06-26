@@ -130,8 +130,8 @@ router.get('/username/:username/:enum', async (req, res, next) => {
     })
     const votecycle = await user.getActiveVotecycle()
     const votechoices = await votecycle.getVotechoices()
-    const votechoice = votechoices.filter(votechoice => {
-      return votechoice.votecycleEnumId === parseInt(req.params.enum)
+    const votechoice = votechoices.filter(choice => {
+      return choice.votecycleEnumId === parseInt(req.params.enum, 10)
     })[0]
     res.json(votechoice)
   } catch(err) {
