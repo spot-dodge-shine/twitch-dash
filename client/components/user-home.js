@@ -25,8 +25,9 @@ const WelcomeTextStyle = styled.div`
   margin-top: 3%;
 `
 
-const MainBodyWrapper = styled.div`
-  height: 100%
+const BodyWrapper = styled.div`
+  margin-top: 0%;
+  height: 100%;
 `
 
 class UserHome extends Component {
@@ -43,8 +44,9 @@ class UserHome extends Component {
     const { visible } = this.state
 
     return (
-      <MainBodyWrapper>
+      <BodyWrapper>
         <NavBar />
+        <BodyWrapper>
         <Sidebar.Pushable as={Segment}>
           <Sidebar
             as={Menu}
@@ -86,7 +88,8 @@ class UserHome extends Component {
             </Segment>
           </Sidebar.Pusher>
         </Sidebar.Pushable>
-      </MainBodyWrapper>
+        </BodyWrapper>
+      </BodyWrapper>
     )
   }
 }
