@@ -4,6 +4,7 @@ import Navbar from './navbar'
 import SidebarItem from './sidebar-item'
 import DashModule from './dash-module'
 
+
 class Dashboard extends Component {
 
   render () {

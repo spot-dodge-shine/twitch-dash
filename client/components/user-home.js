@@ -6,10 +6,10 @@ import SpotifyModule from './spotify-module'
 import SpotifyLogin from './spotify-login'
 import NavBar from './navbar'
 import styled from 'styled-components'
-import { Sidebar, Segment, Menu, Button, Icon } from 'semantic-ui-react'
+import { Button, Header, Icon, Image, Menu, Segment, Sidebar } from 'semantic-ui-react'
 import WelcomeText from './welcome-text'
 
-const Wrapper = styled.div`
+const ModuleWrapper = styled.div`
   display: flex;
   justify-content: center;
   text-align: center;
@@ -25,26 +25,69 @@ const WelcomeTextStyle = styled.div`
   margin-top: 3%;
 `
 
+const MainBodyWrapper = styled.div`
+  height: 100%
+`
+
 class UserHome extends Component {
   constructor(props) {
     super(props)
   }
+  state = { visible: false }
+
+  handleButtonClick = () => this.setState({ visible: !this.state.visible })
+
+  handleSidebarHide = () => this.setState({ visible: false })
 
   render() {
+    const { visible } = this.state
 
     return (
       <div>
         <NavBar />
-        <WelcomeTextStyle>
-          <WelcomeText />
-        </WelcomeTextStyle>
-        <Wrapper>
-          {
-            this.props.spotifyId
-            ? <SpotifyModule />
-            : <SpotifyLogin />
-          }
-        </Wrapper>
+        <Button onClick={this.handleButtonClick}>Toggle visibility</Button>
+        <MainBodyWrapper>
+        <Sidebar.Pushable as={Segment}>
+          <Sidebar
+            as={Menu}
+            animation='overlay'
+            icon='labeled'
+            inverted
+            onHide={this.handleSidebarHide}
+            vertical
+            visible={visible}
+            width='thin'
+          >
+            <Menu.Item as='a'>
+              <Icon name='spotify' />
+              Spotify
+            </Menu.Item>
+            <Menu.Item as='a'>
+              <Icon name='twitch' />
+              Twitch
+            </Menu.Item>
+            <Menu.Item as='a'>
+              <Icon name='paypal' />
+              PayPal
+            </Menu.Item>
+          </Sidebar>
+
+          <Sidebar.Pusher dimmed={visible}>
+            <Segment basic>
+              <WelcomeTextStyle>
+                <WelcomeText />
+              </WelcomeTextStyle>
+              <ModuleWrapper>
+                {
+                  this.props.spotifyId
+                  ? <SpotifyModule />
+                  : <SpotifyLogin />
+                }
+              </ModuleWrapper>
+            </Segment>
+          </Sidebar.Pusher>
+        </Sidebar.Pushable>
+        </MainBodyWrapper>
       </div>
     )
   }
