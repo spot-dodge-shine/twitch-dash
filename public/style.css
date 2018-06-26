@@ -35,3 +35,7 @@ html, body, #app {
 .routes-height {
   height: 100%;
 }
+
+.ui.inverted.progress .bar>.progress {
+  color: #000000 !important;
+}

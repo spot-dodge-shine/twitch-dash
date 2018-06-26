@@ -4,8 +4,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Route, Switch } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { UserHome, TwitchLogin } from './components'
+import { UserHome, TwitchLogin, Dashboard, OverlayModule } from './components'
 import { me } from './store'
+
 
 class Routes extends Component {
   componentDidMount() {
@@ -19,8 +20,10 @@ class Routes extends Component {
       <div className='routes-height'>
         <Switch>
           <Route exact path="/" component={TwitchLogin} />
+          <Route exact path="/overlay/:userId/:moduleId" component={OverlayModule} />
           {isLoggedIn && (
             <Switch>
+              <Route path="/dashboard" component={Dashboard} />
               <Route path="/home" component={UserHome} />
             </Switch>
           )}
