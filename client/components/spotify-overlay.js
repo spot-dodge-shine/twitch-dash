@@ -40,7 +40,7 @@ class SpotifyOverlay extends Component {
           <Segment
             attached
           >
-            Select a Spotify playlist to start a music poll!
+            PLACEHOLDER FOR OVERLAY
           </Segment>
         }
       </div>
