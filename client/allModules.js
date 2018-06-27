@@ -1,4 +1,4 @@
-import SpotifyModule from './components/spotify-module'
+import SpotifyDashboard from './components/spotify-dashboard'
 import SpotifyOverlay from './components/spotify-overlay'
 import axios from 'axios'
 
@@ -10,7 +10,7 @@ function registerModule (id, moduleSpec) {
 }
 
 // Hard-code registerModules here:
-registerModule(1, {dashboardComponent: SpotifyModule, overlayComponent: SpotifyOverlay })
+registerModule(1, {dashboardComponent: SpotifyDashboard, overlayComponent: SpotifyOverlay })
 
 // TODO: get all modules and load them into allModules
 axios.get('/api/modules')

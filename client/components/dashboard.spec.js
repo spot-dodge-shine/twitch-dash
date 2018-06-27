@@ -2,23 +2,21 @@ import {expect} from 'chai'
 import React from 'react'
 import enzyme, {shallow} from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
-import Navbar from './navbar'
-import {Menu} from 'semantic-ui-react'
+import Dashboard from './dashboard'
 import store from '../store'
 
 const adapter = new Adapter()
 enzyme.configure({adapter})
 
-describe('Navbar', () => {
-  let navbar
+describe('Dashboard', () => {
+  let dashboard
 
   beforeEach(() => {
-    navbar = shallow(
-      <Navbar store={store} />)
+    dashboard = shallow(
+      <Dashboard store={store} />)
   })
 
-  xit('renders', () => {
-    expect(navbar.find(Menu).exists()).to.equal(true)
+  xit('renders a div with components in it', () => {
+    expect(dashboard.find('div').exists()).to.equal(true)
   })
 })
-

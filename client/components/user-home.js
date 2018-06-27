@@ -2,14 +2,16 @@
 
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import SpotifyModule from './spotify-module'
-import SpotifyLogin from './spotify-login'
+import Dashboard from './dashboard'
+import SidebarItem from './sidebar-item'
 import NavBar from './navbar'
 import styled from 'styled-components'
-import { Sidebar, Segment, Menu, Button, Icon } from 'semantic-ui-react'
+import { allModules } from '../allModules'
+import { Image, Sidebar, Segment, Menu, Button, Icon } from 'semantic-ui-react'
 import WelcomeText from './welcome-text'
+import { toggleModuleServer, getModulesServer } from '../store'
 
-const Wrapper = styled.div`
+const ModuleWrapper = styled.div`
   display: flex;
   justify-content: center;
   text-align: center;
@@ -25,27 +27,62 @@ const WelcomeTextStyle = styled.div`
   margin-top: 3%;
 `
 
+const BodyWrapper = styled.div`
+  margin-top: 0%;
+  height: 100%;
+`
+
+const MenuHeight = styled.div`
+  height: 100%;
+`
+
 class UserHome extends Component {
   constructor(props) {
     super(props)
   }
 
-  render() {
+  toggleModule = (event) => {
+    this.props.toggleModuleServerProps(event)
+  }
 
+  render() {
     return (
-      <div>
+      <BodyWrapper>
+        <MenuHeight>
+        <Sidebar.Pushable as={Segment}>
         <NavBar />
-        <WelcomeTextStyle>
-          <WelcomeText />
-        </WelcomeTextStyle>
-        <Wrapper>
+          <Sidebar
+            as={Menu}
+            animation='overlay'
+            icon='labeled'
+            onHide={this.handleSidebarHide}
+            vertical
+            visible
+            width='thin'
+          >
+           <Menu.Item as='a'>
+              <Image src='/images/navbarlogo.png' />
+            </Menu.Item>
           {
-            this.props.spotifyId
-            ? <SpotifyModule />
-            : <SpotifyLogin />
+          Object.keys(allModules).map(id => {
+            return <SidebarItem key={id} icon="" name={allModules[id].name} value={id} onClick={this.toggleModule} />
+          })
           }
-        </Wrapper>
-      </div>
+          </Sidebar>
+
+          <Sidebar.Pusher>
+            <Segment basic>
+              <WelcomeTextStyle>
+                <WelcomeText />
+              </WelcomeTextStyle>
+              <ModuleWrapper>
+                <Dashboard />
+              </ModuleWrapper>
+            </Segment>
+          </Sidebar.Pusher>
+        </Sidebar.Pushable>
+        </MenuHeight>
+      </BodyWrapper>
     )
   }
 }
@@ -58,5 +95,13 @@ const mapState = state => {
   }
 }
 
-export default connect(mapState)(UserHome)
+const mapDispatch = dispatch => {
+  return {
+    toggleModuleServerProps: moduleId => dispatch(toggleModuleServer(moduleId)),
+    getModulesServerProps: () => dispatch(getModulesServer())
+  }
+}
+
+
+export default connect(mapState, mapDispatch)(UserHome)
 
