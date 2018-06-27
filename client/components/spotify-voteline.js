@@ -79,37 +79,37 @@ class SpotifyVoteline extends Component {
                 style={{ marginRight: '1rem' }}
               />
             </div>
+              <div
+                style={{
+                  width: '100%',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                }}
+              >
                 <div
-                    style={{
-                      width: '100%',
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                    }}
-                  >
-                    <div
-                      style={{ marginRight: '1rem',
-                      textAlign: 'left'
-                    }}
-                    >
-                      <strong>{votechoice.track.name}</strong><br />
-                      {votechoice.track.artist} - {votechoice.track.album}
-                    </div>
-                    <div
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center'
-                      }}
-                    >
-                      <Progress
-                        progress='value'
-                        value={votechoice.votes}
-                        total={totalVotes}
-                        inverted
-                        color='grey'
-                        style={{ width: '14rem', marginBottom: '0' }}
-                      />
-                    </div>
-                  </div>
+                  style={{ marginRight: '1rem',
+                  textAlign: 'left'
+                }}
+                >
+                  <strong>{votechoice.track.name}</strong><br />
+                  {votechoice.track.artist} - {votechoice.track.album}
+                </div>
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center'
+                  }}
+                >
+                  <Progress
+                    progress='value'
+                    value={votechoice.votes}
+                    total={totalVotes}
+                    inverted
+                    color='grey'
+                    style={{ width: '14rem', marginBottom: '0' }}
+                  />
+                </div>
+              </div>
             </Segment>
           : <div />
       }

@@ -5,11 +5,11 @@ import {connect} from 'react-redux'
 import { Card, Icon, Dropdown, Button } from 'semantic-ui-react'
 import PlaylistDropdown from './playlist-dropdown'
 import SpotifyVoteCycle from './spotify-votecycle'
+import SpotifyPlayer from './spotify-player'
 import { getPlaylistsFromSpotify, selectPlaylist } from '../store/spotify-playlists'
 import { getTracksFromSpotify, playTrack } from '../store/spotify-tracks'
 import {getActiveVotecycleServer, createVotechoiceServer, createActiveVotecycleServer, getVotesServer, deactivateVotecycleServer} from '../store/votecycle'
 import { getPlayerStatusThunk } from '../store/spotify-player'
-
 
 export class SpotifyModule extends Component {
 
@@ -21,10 +21,13 @@ export class SpotifyModule extends Component {
           this.timer = setInterval(this.tick, 2000)
           this.counter = 0
           this.props.activeVotecycle(this.props.user.id)
-            .then(() => {
+            .then(async () => {
               if (this.props.votecycle && this.props.votecycle.playlistId) {
-                return this.props.selectPlaylist(this.props.votecycle.playlistId)
+                await this.props.selectPlaylist(this.props.votecycle.playlistId)
+                return this.props.getTracks(this.props.selectedPlaylist())
               }
+            })
+            .then(() => {
               this.tick()
             })
         })
@@ -115,6 +118,7 @@ export class SpotifyModule extends Component {
             handlePlay = {this.handlePlay}
             selectedPlaylistName = {playlistName}
           />
+          <SpotifyPlayer />
           {
             (this.props.votecycle && this.props.votecycle.id && this.props.votecycle.active)
               ? <SpotifyVoteCycle votecycle={this.props.votecycle} />
@@ -147,10 +151,6 @@ const mapStateToProps = state => {
     selectedPlaylistId: state.selectedPlaylistId,
     tracks: state.tracks,
     playerStatus: state.playerStatus,
-    currentlyPlaying: () => {
-      return Object.values(state.tracks)
-        .filter(track => track.id === state.currentlyPlayingId)[0]
-    }
   }
 }
 
