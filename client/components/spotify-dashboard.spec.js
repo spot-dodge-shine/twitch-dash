@@ -8,7 +8,7 @@ import store from '../store'
 const adapter = new Adapter()
 enzyme.configure({adapter})
 
-describe.only('SpotifyDashboard', () => {
+describe('SpotifyDashboard', () => {
   let spotifyDashboard
 
   beforeEach(() => {
