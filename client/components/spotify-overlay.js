@@ -34,7 +34,11 @@ class SpotifyOverlay extends Component {
   
   
     return (
-      <div>
+      <div
+        style={{
+          width:'600px'
+        }}  
+      >
         {this.props.votecycle.id ?
           this.props.votecycle.votechoices
             .sort((prev, next) => {
