@@ -2,7 +2,6 @@
 
 import React, {Component} from 'react'
 import { Menu, Icon } from 'semantic-ui-react'
-import axios from 'axios'
 
 class SidebarItem extends Component {
   constructor (props){

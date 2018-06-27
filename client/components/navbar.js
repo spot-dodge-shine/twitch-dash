@@ -17,7 +17,7 @@ const NavbarBottomMargin = styled.div`
 
 
 
-const Navbar = ({handleClick, isLoggedIn}) => (
+const Navbar = ({handleClick}) => (
   <NavbarBottomMargin>
     <Menu borderless>
       {/* <Menu.Menu>

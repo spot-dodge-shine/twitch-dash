@@ -7,7 +7,7 @@ import SidebarItem from './sidebar-item'
 const adapter = new Adapter()
 enzyme.configure({adapter})
 
-describe.only('SidebarItem', () => {
+describe('SidebarItem', () => {
   let sidebarItem
 
   beforeEach(() => {
