@@ -8,7 +8,7 @@ const User = db.model('user')
 const Module = db.model('module')
 const ModuleUser = db.model('module_user')
 
-xdescribe('Modules routes', () => {
+describe('Modules routes', () => {
   let user
 
   const fakeUser = {
@@ -31,6 +31,22 @@ xdescribe('Modules routes', () => {
     userId: 1,
     moduleId: 1
   }
+
+  describe('/api/modules', () => {
+    beforeEach(async () => {
+      await Module.create(fakeModule)
+    })
+
+    it('returns an array of all modules', async () => {
+      const res = await request(app)
+        .get('/api/modules')
+        .expect(200)
+
+      expect(res.body).to.be.an('array')
+      expect(res.body.length).to.be.equal(1)
+      expect(res.body[0].id).to.be.equal(1)
+    })
+  })
 
   describe('/api/users/me/modules', () => {
     user = request.agent(app)

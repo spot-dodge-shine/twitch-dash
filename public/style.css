@@ -39,3 +39,7 @@ html, body, #app {
 .sidebar-text {
   color: #2986ce;
 }
+
+.ui.inverted.progress .bar>.progress {
+  color: #000000 !important;
+}

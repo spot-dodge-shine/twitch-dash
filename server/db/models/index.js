@@ -36,15 +36,24 @@ const { ModuleUser } = require('./module_user')
     })[0]
   }
 
-  User.prototype.getActiveModules = async function () {
+  User.prototype.getAllModules = async function () {
     const modules = await this.getModules()
     const statusLoaded = await Promise.all(
       modules.map(module => ModuleUser.findOne({
         where: { moduleId: module.id }
       })))
-    const filtered = statusLoaded.filter(module => module.enabled === true )
-      .map(module => module.moduleId)
-    return filtered
+    const resultObj = statusLoaded.reduce((obj, module) => {
+      if (module.enabled === true) {
+        obj.active.push(module.moduleId)
+      } else {
+        obj.deactivated.push(module.moduleId)
+      }
+      return obj
+    }, {
+      active: [],
+      deactivated: []
+    })
+    return resultObj
   }
 
   // Votechoice.findByUsername = async function(username, votecycleEnumId) {

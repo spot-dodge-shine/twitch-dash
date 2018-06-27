@@ -1,26 +1,24 @@
 import React, {Component} from 'react'
+import { connect } from 'react-redux'
 import { allModules } from '../allModules'
 import Navbar from './navbar'
 import SidebarItem from './sidebar-item'
 import DashModule from './dash-module'
+import {getModulesServer, toggleModuleServer} from '../store'
 
 
 class Dashboard extends Component {
 
+  constructor(props) {
+    super(props)
+    this.props.getModules()
+    // FOR TESTING PURPOSES
+      .then(() => {
+        this.props.toggleModule(1)
+      })
+  }
+
   render () {
-    // let filteredNames = Object.keys(allModules).filter(name => {
-    //   return allModules[name].active
-    // })
-    // const filteredModules = {}
-    // filteredNames.forEach(name => {
-    //   filteredModules[name] = allModules[name]
-    // })
-    // console.log(filteredModules, allModules)
-    let filteredModules = allModules
-
-    // TODO: get info from database
-
-
     return (
       <div>
         <Navbar />
@@ -34,7 +32,7 @@ class Dashboard extends Component {
         </div>
         <div>
         {
-          Object.keys(filteredModules).map(id => {
+          this.props.modules.active.map(id => {
             return <DashModule key={id} module={allModules[id].dashboardComponent} />
           })
         }
@@ -44,5 +42,18 @@ class Dashboard extends Component {
   }
 }
 
-export default Dashboard
+const mapState = (state) => {
+  return {
+    modules: state.modules
+  }
+}
+
+const mapDispatch = (dispatch) => {
+  return {
+    getModules: () => dispatch(getModulesServer()),
+    toggleModule: (moduleId) => dispatch(toggleModuleServer(moduleId))
+  }
+}
+
+export default connect(mapState, mapDispatch)(Dashboard)
 

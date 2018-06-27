@@ -1,8 +1,8 @@
 import React from 'react'
 
 const DashModule = (props) => {
-  const Component = props.module
-  return <Component />
+  const Module = props.module
+  return <Module />
 }
 
 export default DashModule
