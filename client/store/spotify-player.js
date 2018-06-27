@@ -18,26 +18,6 @@ export const getPlayerStatusThunk = () => {
   }
 }
 
-// The following three thunks intentionally do not dispatch any actions, wanted to keep them with the other network things!
-
-export const pausePlaybackThunk = () => {
-  return () => {
-    return axios.put('/api/users/me/player/pause', {})
-  }
-}
-
-export const resumePlaybackThunk = id => {
-  return () => {
-    return axios.put('/api/users/me/player/resume', { id })
-  }
-}
-
-export const nextPlaybackThunk = () => {
-  return () => {
-    return axios.put('/api/users/me/player/next', {})
-  }
-}
-
 export const playerStatusReducer = (state = '', action) => {
   switch (action.type) {
     case GET_PLAYER_STATUS:
