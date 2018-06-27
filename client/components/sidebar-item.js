@@ -14,7 +14,6 @@ class SidebarItem extends Component {
   }
 
   render(){
-    console.log('***THIS.PROPS.VALUE***', this.props)
     return (
       <Menu.Item as='a' onClick={this.handleClick}>
         <Icon color='blue' name='spotify' />

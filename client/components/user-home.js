@@ -46,7 +46,6 @@ class UserHome extends Component {
   }
 
   render() {
-    console.log('props: ', this.props)
     return (
       <BodyWrapper>
         <MenuHeight>
