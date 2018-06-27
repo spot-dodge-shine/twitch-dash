@@ -75,7 +75,7 @@ class SpotifyVoteline extends Component {
             <div>
               <Image
                 src={votechoice.track.image}
-                size='mini'
+                size='tiny'
                 style={{ marginRight: '1rem' }}
               />
             </div>
