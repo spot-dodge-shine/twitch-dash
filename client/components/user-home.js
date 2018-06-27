@@ -8,7 +8,6 @@ import NavBar from './navbar'
 import styled from 'styled-components'
 import { Sidebar, Segment, Menu, Button, Icon } from 'semantic-ui-react'
 import WelcomeText from './welcome-text'
-import TempButtons from './tempRouteTesting'
 
 const Wrapper = styled.div`
   display: flex;
@@ -39,7 +38,6 @@ class UserHome extends Component {
         <WelcomeTextStyle>
           <WelcomeText />
         </WelcomeTextStyle>
-        <TempButtons />
         <Wrapper>
           {
             this.props.spotifyId
