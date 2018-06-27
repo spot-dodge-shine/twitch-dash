@@ -6,9 +6,13 @@ module.exports = async () => {
   // Valid commands start with:
   let commandPrefix = '!'
 
+  const appUrl = (process.env.NODE_ENV === 'production')
+  ? `https://twitch-dash.herokuapp.com`
+  : `http://localhost:${process.env.PORT}`
+
   // Get all active channels
   // TODO: change this link to make it work in deployed version
-  const {data} = await axios.get(`http://localhost:${process.env.PORT}/api/users/active`)
+  const {data} = await axios.get(`${appUrl}/api/users/active`)
   const channels = data.map((user) => {
     return user.twitchLogin
   })
@@ -30,7 +34,7 @@ module.exports = async () => {
     // .catch((err) => {
     //   console.log(err)
     // })
-  
+
   // Define configuration options:
   console.log('channels', channels)
 
@@ -65,8 +69,8 @@ module.exports = async () => {
     if (params.length) {
       if (parseInt(params[0])) {
         // TODO: change link
-        const {data} = await axios.get(`http://localhost:${process.env.PORT}/api/users/username/${target.slice(1)}/${params[0]}`)
-        await axios.post(`http://localhost:${process.env.PORT}/api/votes`, {votechoiceId: data.id})
+        const {data} = await axios.get(`${appUrl}/api/users/username/${target.slice(1)}/${params[0]}`)
+        await axios.post(`${appUrl}/api/votes`, {votechoiceId: data.id})
       }
     }
   }
@@ -133,5 +137,5 @@ module.exports = async () => {
 }
 
 const getActiveUsers = async () => {
-  return await axios.get(`http://localhost:${process.env.PORT}/api/users/active`)
+  return await axios.get(`${appUrl}/api/users/active`)
 }
