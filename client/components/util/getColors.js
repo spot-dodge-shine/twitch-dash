@@ -34,7 +34,7 @@ const getColors = function(palette) {
     }
   })
 
-  return {bgArr, textArr}
+  return {bgArr}
 
 }
 

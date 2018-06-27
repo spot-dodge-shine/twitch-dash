@@ -25,9 +25,38 @@ router.get('/me/player', checkSpotifyAccessToken, async (req, res, next) => {
     })
     let response = {
       isPlaying: data.is_playing,
-      progress: data.progress_ms
+      progress: data.progress_ms,
+      currentlyPlaying: {
+        name: data.item.name,
+        artist: data.item.artists[0].name,
+        id: data.item.id
+      }
     }
     res.json(response)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.put('/me/player/pause', checkSpotifyAccessToken, async (req, res, next) => {
+  try {
+    const { data } = await axios.put(process.env.SPOTIFY_API_URL + '/v1/me/player/pause', {},
+    {
+      headers: { Authorization: 'Bearer ' + req.user.spotifyAccessToken}
+    })
+    res.json(data)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.put('/me/player/next', checkSpotifyAccessToken, async (req, res, next) => {
+  try {
+    const { data } = await axios.post(process.env.SPOTIFY_API_URL + '/v1/me/player/next', {},
+    {
+      headers: { Authorization: 'Bearer ' + req.user.spotifyAccessToken}
+    })
+    res.json(data)
   } catch (err) {
     next(err)
   }
