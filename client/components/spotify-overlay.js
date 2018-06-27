@@ -39,7 +39,7 @@ class SpotifyOverlay extends Component {
           width:'600px'
         }}  
       >
-        {this.props.votecycle.id ?
+        {this.props.votecycle && this.props.votecycle.id ?
           this.props.votecycle.votechoices
             .sort((prev, next) => {
               return prev.votecycleEnumId - next.votecycleEnumId
@@ -55,7 +55,7 @@ class SpotifyOverlay extends Component {
           <Segment
             attached
           >
-            PLACEHOLDER FOR OVERLAY
+            Getting New Songs...
           </Segment>
         }
       </div>
