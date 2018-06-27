@@ -2,7 +2,7 @@
 
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import Dashboard from './spotify-dashboard'
+import Dashboard from './dashboard'
 import SidebarItem from './sidebar-item'
 import NavBar from './navbar'
 import styled from 'styled-components'

@@ -8,13 +8,11 @@ import {getModulesServer, toggleModuleServer} from '../store'
 class Dashboard extends Component {
 
   constructor(props) {
-    console.log('CONSTRUCTOR')
     super(props)
     this.props.getModules()
   }
 
   render () {
-    console.log('allModules', this.props.modules)
     return (
       <div>
         {
