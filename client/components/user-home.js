@@ -2,14 +2,14 @@
 
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import SpotifyModule from './spotify-module'
-import SpotifyLogin from './spotify-login'
+import Dashboard from './spotify-dashboard'
+import SidebarItem from './sidebar-item'
 import NavBar from './navbar'
 import styled from 'styled-components'
+import { allModules } from '../allModules'
 import { Image, Sidebar, Segment, Menu, Button, Icon } from 'semantic-ui-react'
 import WelcomeText from './welcome-text'
-import TempButtons from './tempRouteTesting'
-import axios from 'axios'
+import { toggleModuleServer, getModulesServer } from '../store'
 
 const ModuleWrapper = styled.div`
   display: flex;
@@ -41,12 +41,12 @@ class UserHome extends Component {
     super(props)
   }
 
-  handlePost = () => {
-    return axios.post('api/users/me/modules', { moduleId: 1 })
+  toggleModule = (event) => {
+    this.props.toggleModuleServerProps(event)
   }
 
   render() {
-
+    console.log('props: ', this.props)
     return (
       <BodyWrapper>
         <MenuHeight>
@@ -61,27 +61,14 @@ class UserHome extends Component {
             visible
             width='thin'
           >
-            <Menu.Item as='a'>
+           <Menu.Item as='a'>
               <Image src='/images/navbarlogo.png' />
             </Menu.Item>
-            <Menu.Item as='a' onClick={this.handlePost}>
-              <Icon color='blue' name='spotify' />
-              <div className="sidebar-text">
-                Spotify
-              </div>
-            </Menu.Item>
-            <Menu.Item as='a'>
-              <Icon color='blue' name='twitch' />
-              <div className="sidebar-text">
-                Twitch
-              </div>
-            </Menu.Item>
-            <Menu.Item>
-              <Icon color='blue' name='paypal' />
-                <div className="sidebar-text">
-                  PayPal
-                </div>
-            </Menu.Item>
+          {
+          Object.keys(allModules).map(id => {
+            return <SidebarItem key={id} icon="" name={allModules[id].name} value={id} onClick={this.toggleModule} />
+          })
+          }
           </Sidebar>
 
           <Sidebar.Pusher>
@@ -90,11 +77,7 @@ class UserHome extends Component {
                 <WelcomeText />
               </WelcomeTextStyle>
               <ModuleWrapper>
-                {
-                  this.props.spotifyId
-                  ? <SpotifyModule />
-                  : <SpotifyLogin />
-                }
+                <Dashboard />
               </ModuleWrapper>
             </Segment>
           </Sidebar.Pusher>
@@ -113,5 +96,13 @@ const mapState = state => {
   }
 }
 
-export default connect(mapState)(UserHome)
+const mapDispatch = dispatch => {
+  return {
+    toggleModuleServerProps: moduleId => dispatch(toggleModuleServer(moduleId)),
+    getModulesServerProps: () => dispatch(getModulesServer())
+  }
+}
+
+
+export default connect(mapState, mapDispatch)(UserHome)
 

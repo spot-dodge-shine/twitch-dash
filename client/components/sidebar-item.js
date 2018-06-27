@@ -9,19 +9,19 @@ class SidebarItem extends Component {
     super(props)
   }
 
-  handlePost = () => {
-    return axios.post('api/users/me/modules', { moduleId: 1 })
+  handleClick = () => {
+    this.props.onClick(this.props.value)
   }
+
   render(){
+    console.log('***THIS.PROPS.VALUE***', this.props)
     return (
-      <div>
-        <Menu.Item as='a'>
-          <Icon color='blue' id={props.id} />
-            <div className="sidebar-text">
-              {props.name}
-            </div>
-          </Menu.Item>
-      </div>
+      <Menu.Item as='a' onClick={this.handleClick}>
+        <Icon color='blue' name='spotify' />
+          <div className="sidebar-text">
+            {this.props.name}
+          </div>
+        </Menu.Item>
     )
   }
 }

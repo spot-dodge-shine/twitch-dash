@@ -8,5 +8,6 @@ export {default as UserHome} from './user-home'
 export {default as TwitchLogin} from './twitch-login'
 export {default as Dashboard} from './dashboard'
 export {default as OverlayModule} from './overlay-module'
+export {default as SpotifyDashboard} from './spotify-dashboard'
 
 export {Login, Signup} from './auth-form'

@@ -10,6 +10,7 @@ import { getPlaylistsFromSpotify, selectPlaylist } from '../store/spotify-playli
 import { getTracksFromSpotify, playTrack } from '../store/spotify-tracks'
 import {getActiveVotecycleServer, createVotechoiceServer, createActiveVotecycleServer, getVotesServer, deactivateVotecycleServer} from '../store/votecycle'
 import { getPlayerStatusThunk } from '../store/spotify-player'
+import SpotifyLogin from './spotify-login'
 
 export class SpotifyModule extends Component {
 

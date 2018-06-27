@@ -12,31 +12,16 @@ class Dashboard extends Component {
   constructor(props) {
     super(props)
     this.props.getModules()
-    // FOR TESTING PURPOSES
-      .then(() => {
-        this.props.toggleModule(1)
-      })
   }
 
   render () {
     return (
       <div>
-        <Navbar />
-        {/*THIS IS THE SIDEBAR*/}
-        <div>
-        {
-          Object.keys(allModules).map(id => {
-            return <SidebarItem key={id} icon="" description="" name={allModules[id].name} enabled="" />
-           })
-        }
-        </div>
-        <div>
         {
           this.props.modules.active.map(id => {
             return <DashModule key={id} module={allModules[id].dashboardComponent} />
           })
         }
-        </div>
       </div>
     )
   }
