@@ -4,18 +4,18 @@ import history from '../history'
 const GET_MODULES = 'GET_MODULES'
 const TOGGLE_MODULE = 'TOGGLE_MODULE'
 
-const getModules = activeModules => ({type: GET_MODULES, modules})
+const getModules = modules => ({type: GET_MODULES, modules})
 const toggleModule = modules => ({type: TOGGLE_MODULE, modules})
 
-export const getModulesServer = (dispatch) => {
-  return async () => {
+export const getModulesServer = () => {
+  return async (dispatch) => {
     const {data} = await axios.get('/api/users/me/modules')
     dispatch(getModules(data))
   }
 }
 
-export const toggleModuleServer = (dispatch) => {
-  return async (moduleId) => {
+export const toggleModuleServer = (moduleId) => {
+  return async (dispatch) => {
     let res = await axios.get('/api/users/me/modules')
     const myModules = res.data
     let changedRes
@@ -24,7 +24,8 @@ export const toggleModuleServer = (dispatch) => {
     } else {
       changedRes = await axios.post('/api/users/me/modules', { moduleId })
     }
-    dispatch(toggleModule, changedRes.data)
+    console.log()
+    dispatch(toggleModule(changedRes.data))
   }
 }
 
