@@ -28,9 +28,9 @@ const SpotifyLogin = () => {
       </Menu.Menu>
 
       {/* Login to Spotify button */}
-      <a href="/auth/spotify">
       <Menu.Menu position='right'>
         <SpotifyButton>
+        <a href="/auth/spotify">
           <Button primary animated floated='right'>
             <Button.Content visible>
               Connect to Spotify
@@ -39,9 +39,9 @@ const SpotifyLogin = () => {
               <Icon name='spotify' />
             </Button.Content>
           </Button>
+          </a>
         </SpotifyButton>
       </Menu.Menu>
-      </a>
     </Menu>
    </div>
   )
