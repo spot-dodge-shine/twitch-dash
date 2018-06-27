@@ -30,12 +30,29 @@ describe('thunk creators - votecycles', () => {
   })
 
   describe('getActiveVotecycleServer', () => {
+    const fakeTrack = {
+      name: 'XXX',
+      artist: 'Danny Brown',
+      album: 'XXX',
+      image: 'Adderall.jpg',
+      id: '30',
+      uri: 'eyyy'
+    }
+
     const fakeVotecycle = {
       userId: 1,
-      active: true
+      active: true,
+      playlistId: 'fakeId333',
+      votechoices: [
+        {
+          id: 1,
+          trackId: 'fakeIdTrk',
+        }
+      ]
     }
     beforeEach(() => {
       mockAxios.onGet('/api/votecycles/active/1').replyOnce(200, fakeVotecycle)
+      mockAxios.onGet('/api/votechoices/fakeIdTrk/1').replyOnce(200, fakeTrack)
     })
 
     it('eventually dispatches the GET_ACTIVE_VOTECYCLE action', async () => {
@@ -43,7 +60,11 @@ describe('thunk creators - votecycles', () => {
         .then(() => {
           const actions = store.getActions()
           expect(actions[0].type).to.be.equal('GET_ACTIVE_VOTECYCLE')
-          expect(actions[0].votecycle).to.be.deep.equal(fakeVotecycle)
+          expect(actions[0].votecycle.playlistId).to.be.equal('fakeId333')
+          expect(actions[0].votecycle.votechoices.length).to.be.equal(1)
+          expect(actions[0].votecycle.votechoices[0].trackId).to.be.equal('fakeIdTrk')
+          expect(actions[0].votecycle.votechoices[0].track).to.be.deep.equal(fakeTrack)
+
         })
     })
   })

@@ -9,11 +9,7 @@ function registerModule (id, moduleSpec) {
   allModules[id] = moduleSpec;
 }
 
-const getModules = async () => {
-  const modules = axios.get('/api/modules')
-}
-
-
+// Hard-code registerModules here:
 registerModule(1, {dashboardComponent: SpotifyModule, overlayComponent: SpotifyOverlay })
 
 // TODO: get all modules and load them into allModules
@@ -25,5 +21,6 @@ axios.get('/api/modules')
       allModules[module.id].image = module.image
     })
   })
+
 export { allModules, registerModule }
 
