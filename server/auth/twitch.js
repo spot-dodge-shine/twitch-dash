@@ -11,7 +11,7 @@ if (!process.env.TWITCH_CLIENT_ID || !process.env.TWITCH_CLIENT_SECRET) {
   const twitchConfig = {
     clientID: process.env.TWITCH_CLIENT_ID,
     clientSecret: process.env.TWITCH_CLIENT_SECRET,
-    callbackURL: `http://localhost:${process.env.PORT}/auth/twitch/callback/`
+    callbackURL: process.env.TWITCH_CALLBACK_URL
   }
 
   const strategy = new TwitchStrategy(
