@@ -32,7 +32,7 @@ describe('Modules routes', () => {
     moduleId: 1
   }
 
-  describe.only('/api/modules', () => {
+  describe('/api/modules', () => {
     beforeEach(async () => {
       await Module.create(fakeModule)
     })
