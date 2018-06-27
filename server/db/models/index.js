@@ -42,7 +42,6 @@ const { ModuleUser } = require('./module_user')
       modules.map(module => ModuleUser.findOne({
         where: { moduleId: module.id }
       })))
-    console.log(statusLoaded)
     const resultObj = statusLoaded.reduce((obj, module) => {
       if (module.enabled === true) {
         obj.active.push(module.moduleId)
