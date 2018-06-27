@@ -23,6 +23,10 @@ const getColors = function(palette) {
     colorObj = populateObj(colorObj, 'DarkMuted', palette)
   }
 
+  if (!Object.keys(colorObj).length) {
+    bgArr = [255, 255, 255]
+  }
+
   Object.keys(colorObj).forEach(color => {
     if (colorObj[color].pop > maxPop) {
       maxPop = colorObj[color].pop
