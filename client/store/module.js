@@ -16,13 +16,14 @@ export const getModulesServer = () => {
 
 export const toggleModuleServer = (moduleId) => {
   return async (dispatch) => {
+    let numberModuleId = Number(moduleId)
     let res = await axios.get('/api/users/me/modules')
     const myModules = res.data
     let changedRes
-    if (myModules.active.includes(moduleId) || myModules.deactivated.includes(moduleId)) {
-      changedRes = await axios.put('/api/users/me/modules', { moduleId }) 
+    if (myModules.active.includes(numberModuleId) || myModules.deactivated.includes(numberModuleId)) {
+      changedRes = await axios.put('/api/users/me/modules', { moduleId: numberModuleId })
     } else {
-      changedRes = await axios.post('/api/users/me/modules', { moduleId })
+      changedRes = await axios.post('/api/users/me/modules', { moduleId: numberModuleId })
     }
     dispatch(toggleModule(changedRes.data))
   }

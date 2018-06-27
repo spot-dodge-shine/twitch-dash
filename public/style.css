@@ -36,6 +36,10 @@ html, body, #app {
   height: 100%;
 }
 
+.sidebar-text {
+  color: #2986ce;
+}
+
 .ui.inverted.progress .bar>.progress {
   color: #000000 !important;
 }
