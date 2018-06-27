@@ -40,21 +40,7 @@ router.get('/me/player', checkSpotifyAccessToken, async (req, res, next) => {
 
 router.put('/me/player/pause', checkSpotifyAccessToken, async (req, res, next) => {
   try {
-    const { data } = await axios.put(process.env.SPOTIFY_API_URL + '/v1/me/player/pause',
-    {
-      headers: { Authorization: 'Bearer ' + req.user.spotifyAccessToken}
-    })
-    res.json(data)
-  } catch (err) {
-    next(err)
-  }
-})
-
-router.put('/me/player/resume', checkSpotifyAccessToken, async (req, res, next) => {
-  const { id } = req.body
-  try {
-    const { data } = await axios.put(process.env.SPOTIFY_API_URL + '/v1/me/player',
-    { uris: [`spotify:track:${id}`] },
+    const { data } = await axios.put(process.env.SPOTIFY_API_URL + '/v1/me/player/pause', {},
     {
       headers: { Authorization: 'Bearer ' + req.user.spotifyAccessToken}
     })
@@ -66,7 +52,7 @@ router.put('/me/player/resume', checkSpotifyAccessToken, async (req, res, next) 
 
 router.put('/me/player/next', checkSpotifyAccessToken, async (req, res, next) => {
   try {
-    const { data } = await axios.put(process.env.SPOTIFY_API_URL + '/v1/me/player/next',
+    const { data } = await axios.post(process.env.SPOTIFY_API_URL + '/v1/me/player/next', {},
     {
       headers: { Authorization: 'Bearer ' + req.user.spotifyAccessToken}
     })

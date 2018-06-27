@@ -1,9 +1,9 @@
 'use strict'
 
 import React, { Component } from 'react'
+import axios from 'axios'
 import { connect } from 'react-redux'
-import { Segment, Header, Icon } from 'semantic-ui-react'
-import { pausePlaybackThunk, resumePlaybackThunk, nextPlaybackThunk } from '../store/spotify-player'
+import { Segment, Header, Button, Icon } from 'semantic-ui-react'
 
 // const currentlyPlaying = {
 //   name: "To My Soul",
@@ -15,17 +15,24 @@ import { pausePlaybackThunk, resumePlaybackThunk, nextPlaybackThunk } from '../s
 // }
 
 class SpotifyPlayer extends Component {
-  constructor(props) {
-    super(props)
+
+  handlePause = () => {
+    return axios.put('/api/users/me/player/pause', {})
+  }
+
+  handleResume = () => {
+    const { currentlyPlaying } = this.props.playerStatus
+    return axios.put(`/api/users/me/playtrack/spotify:track:${currentlyPlaying.id}`, {})
+  }
+
+  handleNext = () => {
+    return axios.put(`/api/users/me/player/next`, {})
   }
 
   render () {
     const {
       isPlaying,
-      currentlyPlaying,
-      pausePlayback,
-      resumePlayback,
-      nextPlayback
+      currentlyPlaying
     } = this.props.playerStatus
 
     return (
@@ -67,23 +74,34 @@ class SpotifyPlayer extends Component {
           >
           {
             isPlaying
-              ? <Icon
-                  name='pause'
-                  size='large'
-                  onClick={pausePlayback}
-                />
-              : <Icon
-                  name='play'
-                  size='large'
-                  onClick={resumePlayback}
-                />
+              ? <Button
+                  icon
+                  onClick={this.handlePause}
+                >
+                  <Icon
+                    name='pause'
+                    size='large'
+                  />
+                </Button>
+              : <Button
+                  icon
+                  onClick={this.handleResume}
+                >
+                  <Icon
+                    name='play'
+                    size='large'
+                  />
+                </Button>
           }
-
-          <Icon
-            name='forward'
-            size='large'
-            onClick={nextPlayback}
-          />
+          <Button
+            icon
+            onClick={this.handleNext}
+          >
+            <Icon
+              name='forward'
+              size='large'
+            />
+          </Button>
           </div>
         </div>
       </Segment>
@@ -97,12 +115,4 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    pausePlayback: () => dispatch(pausePlaybackThunk()),
-    resumePlayback: id => dispatch(resumePlaybackThunk(id)),
-    nextPlayback: () => dispatch(nextPlaybackThunk())
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(SpotifyPlayer)
+export default connect(mapStateToProps)(SpotifyPlayer)
