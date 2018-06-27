@@ -24,7 +24,6 @@ class SpotifyOverlay extends Component {
   }
 
   render() {
-    console.log(this.props)
     let totalVotes = 0
     if (this.props.votecycle && this.props.votecycle.id) {
       totalVotes = this.props.votecycle.votechoices.reduce((total, voteChoice) => {
@@ -52,11 +51,7 @@ class SpotifyOverlay extends Component {
                   totalVotes={totalVotes}
                 />)
           }) :
-          <Segment
-            attached
-          >
-            Getting New Songs...
-          </Segment>
+          <div />
         }
       </div>
     )
