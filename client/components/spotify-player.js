@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Segment, Header, Icon } from 'semantic-ui-react'
+import { pausePlaybackThunk, resumePlaybackThunk, nextPlaybackThunk } from '../store/spotify-player'
 
 // const currentlyPlaying = {
 //   name: "To My Soul",
@@ -19,21 +20,13 @@ class SpotifyPlayer extends Component {
   }
 
   render () {
-    const { currentlyPlaying } = this.props
-    console.log(this.props)
+    const { isPlaying, currentlyPlaying } = this.props.playerStatus
 
     return (
       <Segment
         attached
         style={{ display: 'flex' }}
       >
-      {/* <div>
-        <Image
-          src={currentlyPlaying.track.image}
-          size='mini'
-          style={{ marginRight: '1rem' }}
-        />
-      </div> */}
         <div
           style={{
             width: '100%',
@@ -83,7 +76,15 @@ class SpotifyPlayer extends Component {
 
 const mapStateToProps = state => {
   return {
-    currentlyPlaying: state.playerStatus.track
+    playerStatus: state.playerStatus
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    pausePlayback: () => dispatch(pausePlaybackThunk()),
+    resumePlayback: id => dispatch(resumePlaybackThunk(id)),
+
   }
 }
 

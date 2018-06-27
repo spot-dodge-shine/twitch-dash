@@ -27,10 +27,10 @@ router.get('/me/player', checkSpotifyAccessToken, async (req, res, next) => {
     let response = {
       isPlaying: data.is_playing,
       progress: data.progress_ms,
-      track: {
+      currentlyPlaying: {
         name: data.item.name,
         artist: artistStr,
-        uri: data.item.uri
+        id: data.item.id
       }
     }
     res.json(response)
