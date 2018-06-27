@@ -1,7 +1,7 @@
 'use strict'
 
 import React, {Component} from 'react'
-import { Segment, Image, Progress } from 'semantic-ui-react'
+import { Segment, Image, Progress, Loader, Dimmer } from 'semantic-ui-react'
 import Vibrant from 'node-vibrant'
 import getColors from './util/getColors'
 
@@ -135,7 +135,15 @@ class SpotifyVoteline extends Component {
                     </div>
                   </div>
             </Segment>
-          : <div />
+          : <Segment
+              style={{
+                height: '100px'
+              }}
+            >
+              <Dimmer active>
+                <Loader>Loading</Loader>
+              </Dimmer>
+            </Segment>
       }
       </div>
     )

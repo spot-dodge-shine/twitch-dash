@@ -24,7 +24,6 @@ class SpotifyOverlay extends Component {
   }
 
   render() {
-    console.log(this.props)
     let totalVotes = 0
     if (this.props.votecycle && this.props.votecycle.id) {
       totalVotes = this.props.votecycle.votechoices.reduce((total, voteChoice) => {
@@ -34,8 +33,12 @@ class SpotifyOverlay extends Component {
   
   
     return (
-      <div>
-        {this.props.votecycle.id ?
+      <div
+        style={{
+          width:'600px'
+        }}  
+      >
+        {this.props.votecycle && this.props.votecycle.id ?
           this.props.votecycle.votechoices
             .sort((prev, next) => {
               return prev.votecycleEnumId - next.votecycleEnumId
@@ -48,11 +51,7 @@ class SpotifyOverlay extends Component {
                   totalVotes={totalVotes}
                 />)
           }) :
-          <Segment
-            attached
-          >
-            PLACEHOLDER FOR OVERLAY
-          </Segment>
+          <div />
         }
       </div>
     )
