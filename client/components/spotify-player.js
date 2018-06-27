@@ -5,15 +5,6 @@ import axios from 'axios'
 import { connect } from 'react-redux'
 import { Segment, Header, Button, Icon } from 'semantic-ui-react'
 
-// const currentlyPlaying = {
-//   name: "To My Soul",
-//   artist: "Jerry Folk",
-//   album: "To My Soul",
-//   image: "https://i.scdn.co/image/b23eafdbe6d6b8cbce146f61e11e2e450097d7df",
-//   id: "76xNAVwiQccBXImICK5zUP",
-//   uri: "spotify:track:76xNAVwiQccBXImICK5zUP"
-// }
-
 class SpotifyPlayer extends Component {
 
   handlePause = () => {
