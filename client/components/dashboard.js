@@ -1,8 +1,6 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { allModules } from '../allModules'
-import Navbar from './navbar'
-import SidebarItem from './sidebar-item'
 import DashModule from './dash-module'
 import {getModulesServer, toggleModuleServer} from '../store'
 
@@ -10,11 +8,13 @@ import {getModulesServer, toggleModuleServer} from '../store'
 class Dashboard extends Component {
 
   constructor(props) {
+    console.log('CONSTRUCTOR')
     super(props)
     this.props.getModules()
   }
 
   render () {
+    console.log('allModules', this.props.modules)
     return (
       <div>
         {
