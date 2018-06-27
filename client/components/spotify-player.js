@@ -20,7 +20,13 @@ class SpotifyPlayer extends Component {
   }
 
   render () {
-    const { isPlaying, currentlyPlaying } = this.props.playerStatus
+    const {
+      isPlaying,
+      currentlyPlaying,
+      pausePlayback,
+      resumePlayback,
+      nextPlayback
+    } = this.props.playerStatus
 
     return (
       <Segment
@@ -59,13 +65,24 @@ class SpotifyPlayer extends Component {
               justifyContent: 'space-around'
             }}
           >
-          <Icon
-            name='pause'
-            size='large'
-          />
+          {
+            isPlaying
+              ? <Icon
+                  name='pause'
+                  size='large'
+                  onClick={pausePlayback}
+                />
+              : <Icon
+                  name='play'
+                  size='large'
+                  onClick={resumePlayback}
+                />
+          }
+
           <Icon
             name='forward'
             size='large'
+            onClick={nextPlayback}
           />
           </div>
         </div>
@@ -84,8 +101,8 @@ const mapDispatchToProps = dispatch => {
   return {
     pausePlayback: () => dispatch(pausePlaybackThunk()),
     resumePlayback: id => dispatch(resumePlaybackThunk(id)),
-
+    nextPlayback: () => dispatch(nextPlaybackThunk())
   }
 }
 
-export default connect(mapStateToProps)(SpotifyPlayer)
+export default connect(mapStateToProps, mapDispatchToProps)(SpotifyPlayer)

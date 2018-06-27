@@ -21,10 +21,13 @@ export class SpotifyModule extends Component {
           this.timer = setInterval(this.tick, 2000)
           this.counter = 0
           this.props.activeVotecycle(this.props.user.id)
-            .then(() => {
+            .then(async () => {
               if (this.props.votecycle && this.props.votecycle.playlistId) {
-                return this.props.selectPlaylist(this.props.votecycle.playlistId)
+                await this.props.selectPlaylist(this.props.votecycle.playlistId)
+                return this.props.getTracks(this.props.selectedPlaylist())
               }
+            })
+            .then(() => {
               this.tick()
             })
         })
@@ -86,7 +89,7 @@ export class SpotifyModule extends Component {
     let maxVotes = 0
     this.props.votecycle.votechoices.forEach(votechoice => {
       if (votechoice.votes >= maxVotes) {
-        newTrack = votechoice.trackId
+        newTrack = votechoice.track
         maxVotes = votechoice.votes
       }
     })

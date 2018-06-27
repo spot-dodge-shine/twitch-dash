@@ -23,13 +23,12 @@ router.get('/me/player', checkSpotifyAccessToken, async (req, res, next) => {
     {
       headers: { Authorization: 'Bearer ' + req.user.spotifyAccessToken}
     })
-    const artistStr = data.item.artists.map(artist => artist.name).join(', ')
     let response = {
       isPlaying: data.is_playing,
       progress: data.progress_ms,
       currentlyPlaying: {
         name: data.item.name,
-        artist: artistStr,
+        artist: data.item.artists[0].name,
         id: data.item.id
       }
     }
