@@ -20,6 +20,7 @@ if (!process.env.TWITCH_CLIENT_ID || !process.env.TWITCH_CLIENT_SECRET) {
 
       const user = await User.findOne({where: {twitchId: profile.id}})
       if (user) {
+        twitchBot()
         done(null, user)
       } else {
         const newUser = await User.create({
