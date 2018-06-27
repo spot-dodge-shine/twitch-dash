@@ -142,8 +142,8 @@ router.get('/username/:username/:enum', async (req, res, next) => {
 router.get('/me/modules', async (req, res, next) => {
   try {
     const user = await User.findOne({ where: { twitchId: req.user.twitchId } })
-    const activeModules = await user.getActiveModules()
-    res.json(activeModules)
+    const modules = await user.getAllModules()
+    res.json(modules)
   } catch (err) {
     next(err)
   }
@@ -158,7 +158,7 @@ router.post('/me/modules', async (req, res, next) => {
       userId: user.id,
       enabled: true
     })
-    res.json(await user.getActiveModules())
+    res.json(await user.getAllModules())
   } catch (err) {
     next(err)
   }
@@ -177,7 +177,7 @@ router.put('/me/modules', async (req, res, next) => {
     await moduleUserRelationship.update({
       enabled: !moduleUserRelationship.enabled
     })
-    res.json(await user.getActiveModules())
+    res.json(await user.getAllModules())
   } catch (err) {
     next(err)
   }
