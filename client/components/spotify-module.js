@@ -115,7 +115,7 @@ export class SpotifyModule extends Component {
             handlePlay = {this.handlePlay}
             selectedPlaylistName = {playlistName}
           />
-          <SpotifyPlayer currentPlaying={this.props.currentPlaying} />
+          <SpotifyPlayer />
           {
             (this.props.votecycle && this.props.votecycle.id && this.props.votecycle.active)
               ? <SpotifyVoteCycle votecycle={this.props.votecycle} />
@@ -148,8 +148,6 @@ const mapStateToProps = state => {
     selectedPlaylistId: state.selectedPlaylistId,
     tracks: state.tracks,
     playerStatus: state.playerStatus,
-    currentPlaying: Object.values(state.tracks)
-      .filter(track => track.id === state.currentPlayingId)[0]
   }
 }
 

@@ -18,6 +18,8 @@ export const getPlayerStatusThunk = () => {
   }
 }
 
+// The following three thunks intentionally do not dispatch any actions, wanted to keep them with the other network things!
+
 export const pausePlaybackThunk = () => {
   return () => {
     return axios.put('/api/users/me/player/pause', {})
