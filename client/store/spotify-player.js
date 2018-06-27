@@ -18,6 +18,24 @@ export const getPlayerStatusThunk = () => {
   }
 }
 
+export const pausePlaybackThunk = () => {
+  return () => {
+    return axios.put('/api/users/me/player/pause', {})
+  }
+}
+
+export const resumePlaybackThunk = id => {
+  return () => {
+    return axios.put('/api/users/me/player/resume', { id })
+  }
+}
+
+export const nextPlaybackThunk = () => {
+  return () => {
+    return axios.put('/api/users/me/player/next', {})
+  }
+}
+
 export const playerStatusReducer = (state = '', action) => {
   switch (action.type) {
     case GET_PLAYER_STATUS:
