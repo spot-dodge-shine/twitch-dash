@@ -7,6 +7,7 @@ import { playlistsReducer, selectedPlaylistReducer } from './spotify-playlists'
 import { playerStatusReducer } from './spotify-player'
 import { tracksReducer, currentlyPlayingReducer } from './spotify-tracks'
 import { votecycleReducer } from './votecycle'
+import { modulesReducer } from './module'
 
 const reducer = combineReducers({
   user: user,
@@ -15,7 +16,8 @@ const reducer = combineReducers({
   selectedPlaylistId: selectedPlaylistReducer,
   tracks: tracksReducer,
   currentlyPlayingId: currentlyPlayingReducer,
-  votecycle: votecycleReducer
+  votecycle: votecycleReducer,
+  modules: modulesReducer
 })
 
 const middleware = composeWithDevTools(
@@ -28,3 +30,4 @@ export * from './user'
 export * from './votecycle'
 export * from './spotify-player'
 export * from './spotify-playlists'
+export * from './module'
