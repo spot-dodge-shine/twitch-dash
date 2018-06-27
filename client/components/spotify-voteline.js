@@ -61,55 +61,79 @@ class SpotifyVoteline extends Component {
                   + convertColor(colorObj.bgArr[0])
                   + convertColor(colorObj.bgArr[1])
                   + convertColor(colorObj.bgArr[2]),
-                color: luminance > 0.179 ? '#000000' : '#ffffff'
+                color: luminance > 0.179 ? '#000000' : '#ffffff',
+                padding: 0,
+                height: '100px'
               }}
               attached
             >
-            <div>
+            <div
+              style={{
+                height: '100px',
+                display: 'flex',
+                alignItems: 'center'
+              }}>
               <h1
-                style={{ marginRight: '1rem' }}
+                style={{ 
+                  margin: '.5rem'
+
+                }}
               >
                 {votechoice.votecycleEnumId}
               </h1>
             </div>
-            <div>
-              <Image
+            <div
+              style={{
+                height: '100px',
+                width: '100px'
+              }}
+            >
+              <img
+                src={votechoice.track.image}
+                height='98%'
+              />
+
+              {/* <Image
                 src={votechoice.track.image}
                 size='tiny'
                 style={{ marginRight: '1rem' }}
-              />
+              /> */}
             </div>
-              <div
-                style={{
-                  width: '100%',
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                }}
-              >
                 <div
-                  style={{ marginRight: '1rem',
-                  textAlign: 'left'
-                }}
-                >
-                  <strong>{votechoice.track.name}</strong><br />
-                  {votechoice.track.artist} - {votechoice.track.album}
-                </div>
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center'
-                  }}
-                >
-                  <Progress
-                    progress='value'
-                    value={votechoice.votes}
-                    total={totalVotes}
-                    inverted
-                    color='grey'
-                    style={{ width: '14rem', marginBottom: '0' }}
-                  />
-                </div>
-              </div>
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                    }}
+                  >
+                    <div
+                      style={{ 
+                        textAlign: 'left',
+                        textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        width: '280px',
+                        margin: '0.5rem'
+                    }}
+                    >
+                      <strong>{votechoice.track.name}</strong><br />
+                      {votechoice.track.artist}
+                    </div>
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center'
+                      }}
+                    >
+                      <Progress
+                        progress='value'
+                        value={votechoice.votes}
+                        total={totalVotes}
+                        inverted
+                        color='grey'
+                        style={{ width: '10rem', margin: '0.5rem' }}
+                      />
+                    </div>
+                  </div>
             </Segment>
           : <div />
       }
