@@ -10,6 +10,7 @@ import { allModules } from '../allModules'
 import { Image, Sidebar, Segment, Menu, Button, Icon } from 'semantic-ui-react'
 import WelcomeText from './welcome-text'
 import { toggleModuleServer, getModulesServer } from '../store'
+import PayPalDashboard from './paypal-billboard/paypal-dashboard'
 
 const ModuleWrapper = styled.div`
   display: flex;
@@ -77,6 +78,7 @@ class UserHome extends Component {
               </WelcomeTextStyle>
               <ModuleWrapper>
                 <Dashboard />
+                <PayPalDashboard />
               </ModuleWrapper>
             </Segment>
           </Sidebar.Pusher>
