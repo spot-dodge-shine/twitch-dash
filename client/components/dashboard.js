@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { allModules } from '../allModules'
 import DashModule from './dash-module'
 import {getModulesServer, toggleModuleServer} from '../store'
+import { Grid } from 'semantic-ui-react'
 
 
 class Dashboard extends Component {
@@ -14,13 +15,13 @@ class Dashboard extends Component {
 
   render () {
     return (
-      <div>
+      <Grid.Row>
         {
           this.props.modules.active.map(id => {
             return <DashModule key={id} module={allModules[id].dashboardComponent} />
           })
         }
-      </div>
+      </Grid.Row>
     )
   }
 }

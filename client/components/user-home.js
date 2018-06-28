@@ -7,7 +7,7 @@ import SidebarItem from './sidebar-item'
 import NavBar from './navbar'
 import styled from 'styled-components'
 import { allModules } from '../allModules'
-import { Image, Sidebar, Segment, Menu, Button, Icon } from 'semantic-ui-react'
+import { Image, Sidebar, Segment, Menu, Grid } from 'semantic-ui-react'
 import WelcomeText from './welcome-text'
 import { toggleModuleServer, getModulesServer } from '../store'
 import PayPalDashboard from './paypal-billboard/paypal-dashboard'
@@ -77,8 +77,12 @@ class UserHome extends Component {
                 <WelcomeText />
               </WelcomeTextStyle>
               <ModuleWrapper>
-                <Dashboard />
-                <PayPalDashboard />
+                <Grid centered columns={1}>
+                  <Dashboard />
+                  <Grid.Row>
+                    <PayPalDashboard />
+                  </Grid.Row>
+                </Grid>
               </ModuleWrapper>
             </Segment>
           </Sidebar.Pusher>
