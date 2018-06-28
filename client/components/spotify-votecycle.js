@@ -1,7 +1,6 @@
 'use strict'
 
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import { Segment } from 'semantic-ui-react'
 import SpotifyVoteline from './spotify-voteline'
 
@@ -11,7 +10,6 @@ const SpotifyVotecycle = props => {
   totalVotes = votecycle.votechoices.reduce((total, voteChoice) => {
     return total + voteChoice.votes
   }, 0)
-
 
   return (
     <div>
@@ -36,7 +34,6 @@ const SpotifyVotecycle = props => {
       }
     </div>
   )
-
 }
 
 export default SpotifyVotecycle
