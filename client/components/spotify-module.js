@@ -112,7 +112,7 @@ export class SpotifyModule extends Component {
 
     return (
       <div>
-        <Card style={{ width: '600px' }}>
+        <Card style={{ width: '420px' }}>
            <PlaylistDropdown
             trackData = {trackData}
             handleChange = {this.handleChange}

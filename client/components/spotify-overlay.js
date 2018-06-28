@@ -17,7 +17,7 @@ class SpotifyOverlay extends Component {
   componentWillUnmount() {
     clearInterval(this.timer)
   }
-  
+
   tick = async () => {
     await this.props.activeVotecycle(this.props.userId)
     return this.props.getVotes(this.props.votecycle)
@@ -30,13 +30,13 @@ class SpotifyOverlay extends Component {
         return total + voteChoice.votes
       }, 0)
     }
-  
-  
+
+
     return (
       <div
         style={{
-          width:'600px'
-        }}  
+          width:'420px'
+        }}
       >
         {this.props.votecycle && this.props.votecycle.id ?
           this.props.votecycle.votechoices
