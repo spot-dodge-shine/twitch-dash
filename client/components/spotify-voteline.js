@@ -1,11 +1,9 @@
 'use strict'
 
 import React, {Component} from 'react'
-import { Segment, Image, Progress } from 'semantic-ui-react'
+import { Segment, Image, Progress, Loader, Dimmer } from 'semantic-ui-react'
 import Vibrant from 'node-vibrant'
 import getColors from './util/getColors'
-
-
 
 class SpotifyVoteline extends Component {
   constructor(props) {
@@ -74,7 +72,7 @@ class SpotifyVoteline extends Component {
                 alignItems: 'center'
               }}>
               <h1
-                style={{ 
+                style={{
                   margin: '.5rem'
 
                 }}
@@ -103,39 +101,41 @@ class SpotifyVoteline extends Component {
                     style={{
                       display: 'flex',
                       justifyContent: 'space-between',
+                      alignItems: 'center'
                     }}
                   >
                     <div
-                      style={{ 
+                      style={{
                         textAlign: 'left',
                         textOverflow: 'ellipsis',
                         whiteSpace: 'nowrap',
                         overflow: 'hidden',
                         width: '280px',
-                        margin: '0.5rem'
+                        margin: '0.5rem',
                     }}
                     >
                       <strong>{votechoice.track.name}</strong><br />
                       {votechoice.track.artist}
-                    </div>
-                    <div
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center'
-                      }}
-                    >
                       <Progress
                         progress='value'
                         value={votechoice.votes}
                         total={totalVotes}
                         inverted
                         color='grey'
-                        style={{ width: '10rem', margin: '0.5rem' }}
+                        style={{ width: '19rem', margin: '0.5rem 0 .5rem' }}
                       />
                     </div>
                   </div>
             </Segment>
-          : <div />
+          : <Segment
+              style={{
+                height: '100px'
+              }}
+            >
+              <Dimmer active>
+                <Loader>Loading</Loader>
+              </Dimmer>
+            </Segment>
       }
       </div>
     )

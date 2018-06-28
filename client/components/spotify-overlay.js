@@ -17,25 +17,28 @@ class SpotifyOverlay extends Component {
   componentWillUnmount() {
     clearInterval(this.timer)
   }
-  
+
   tick = async () => {
     await this.props.activeVotecycle(this.props.userId)
     return this.props.getVotes(this.props.votecycle)
   }
 
   render() {
-    console.log(this.props)
     let totalVotes = 0
     if (this.props.votecycle && this.props.votecycle.id) {
       totalVotes = this.props.votecycle.votechoices.reduce((total, voteChoice) => {
         return total + voteChoice.votes
       }, 0)
     }
-  
-  
+
+
     return (
-      <div>
-        {this.props.votecycle.id ?
+      <div
+        style={{
+          width:'425px'
+        }}
+      >
+        {this.props.votecycle && this.props.votecycle.id ?
           this.props.votecycle.votechoices
             .sort((prev, next) => {
               return prev.votecycleEnumId - next.votecycleEnumId
@@ -48,11 +51,7 @@ class SpotifyOverlay extends Component {
                   totalVotes={totalVotes}
                 />)
           }) :
-          <Segment
-            attached
-          >
-            PLACEHOLDER FOR OVERLAY
-          </Segment>
+          <div />
         }
       </div>
     )

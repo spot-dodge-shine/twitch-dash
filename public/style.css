@@ -41,5 +41,9 @@ html, body, #app {
 }
 
 .ui.inverted.progress .bar>.progress {
-  color: #000000 !important;
+  color: rgba(0,0,0,.6) !important;
+}
+
+.ui.grey.inverted.progress .bar {
+  background-color: #ffffff;
 }
