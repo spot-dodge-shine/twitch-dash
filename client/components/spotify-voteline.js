@@ -122,7 +122,7 @@ class SpotifyVoteline extends Component {
                         total={totalVotes}
                         inverted
                         color='grey'
-                        style={{ width: '16rem', margin: '0.5rem 0 .5rem' }}
+                        style={{ width: '19rem', margin: '0.5rem 0 .5rem' }}
                       />
                     </div>
                   </div>
