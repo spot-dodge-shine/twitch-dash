@@ -10,7 +10,6 @@ import { allModules } from '../allModules'
 import { Image, Sidebar, Segment, Menu, Grid } from 'semantic-ui-react'
 import WelcomeText from './welcome-text'
 import { toggleModuleServer, getModulesServer } from '../store'
-import PayPalDashboard from './paypal-billboard/paypal-dashboard'
 
 const ModuleWrapper = styled.div`
   display: flex;
@@ -66,7 +65,7 @@ class UserHome extends Component {
             </Menu.Item>
           {
           Object.keys(allModules).map(id => {
-            return <SidebarItem key={id} icon="" name={allModules[id].name} value={id} onClick={this.toggleModule} />
+            return <SidebarItem key={id} name={allModules[id].name} image={allModules[id].image} value={id} onClick={this.toggleModule} />
           })
           }
           </Sidebar>
@@ -77,12 +76,7 @@ class UserHome extends Component {
                 <WelcomeText />
               </WelcomeTextStyle>
               <ModuleWrapper>
-                <Grid centered columns={1}>
-                  <Dashboard />
-                  <Grid.Row>
-                    <PayPalDashboard />
-                  </Grid.Row>
-                </Grid>
+                    <Dashboard />
               </ModuleWrapper>
             </Segment>
           </Sidebar.Pusher>

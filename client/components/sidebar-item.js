@@ -28,7 +28,7 @@ class SidebarItem extends Component {
   render(){
     return (
       <Menu.Item as='a' active={this.state.active} onClick={this.handleClick}>
-        <Icon color='blue' name='spotify' />
+        <Icon color='blue' name={this.props.image} />
           <div className="sidebar-text">
             {this.props.name}
           </div>

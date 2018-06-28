@@ -1,7 +1,12 @@
 [
   {
-    "name": "spotify-musicvote",
+    "name": "Spotify Musicpoll",
     "description": "Placeholder description about this super awesome Spotify integration that gives your viewers the chance to dictate what songs are playing on stream.",
-    "image": "placeholder text"
+    "image": "spotify"
+  },
+  {
+    "name": "PayPal Billboard",
+    "description": "Placeholder description about this super awesome Spotify integration that gives your viewers the chance to dictate what songs are playing on stream.",
+    "image": "paypal"
   }
 ]
