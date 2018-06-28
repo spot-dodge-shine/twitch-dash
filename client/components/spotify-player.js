@@ -6,14 +6,21 @@ import { connect } from 'react-redux'
 import { Segment, Header, Button, Icon } from 'semantic-ui-react'
 
 class SpotifyPlayer extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      isPlayingBool: this.props.playerStatus.isPlaying
+    }
+  }
 
   handlePause = () => {
+    this.setState({ isPlayingBool: false })
     return axios.put('/api/users/me/player/pause', {})
   }
 
   handleResume = () => {
-    const { currentlyPlaying } = this.props.playerStatus
-    return axios.put(`/api/users/me/playtrack/spotify:track:${currentlyPlaying.id}`, {})
+    this.setState({ isPlayingBool: true })
+    return axios.put(`/api/users/me/player/resume`, {})
   }
 
   handleNext = () => {
@@ -21,10 +28,7 @@ class SpotifyPlayer extends Component {
   }
 
   render () {
-    const {
-      isPlaying,
-      currentlyPlaying
-    } = this.props.playerStatus
+    const { currentlyPlaying } = this.props.playerStatus
 
     return (
       <Segment
@@ -65,7 +69,7 @@ class SpotifyPlayer extends Component {
             }}
           >
           {
-            isPlaying
+            this.state.isPlayingBool
               ? <Button
                   icon
                   onClick={this.handlePause}
