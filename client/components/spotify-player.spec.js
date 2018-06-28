@@ -22,4 +22,10 @@ describe('SpotifyPlayer', () => {
   it('renders a Header', () => {
     expect(spotifyPlayer.find('Header').length).to.be.equal(1)
   })
+  it('renders two Buttons', () => {
+    expect(spotifyPlayer.find('Button').length).to.be.equal(2)
+  })
+  it('renders two Icons', () => {
+    expect(spotifyPlayer.find('Icon').length).to.be.equal(2)
+  })
 })
