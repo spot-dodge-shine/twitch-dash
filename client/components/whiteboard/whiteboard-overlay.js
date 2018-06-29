@@ -30,7 +30,7 @@ class WhiteboardOverlay extends Component {
   }
 
   handleClear = () => {
-    this.ctx.clearRect(0, 0, 800, 500)
+    this.ctx.clearRect(0, 0, 880, 500)
   }
 
   render() {
@@ -47,7 +47,7 @@ class WhiteboardOverlay extends Component {
         <canvas
           ref={this.setRef}
           id='canvas'
-          width='800px'
+          width='880px'
           height='500px'
         />
         </div>

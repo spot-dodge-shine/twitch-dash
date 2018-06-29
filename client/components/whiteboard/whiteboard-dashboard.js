@@ -89,7 +89,7 @@ class WhiteboardDash extends Component {
   }
 
   handleClear = () => {
-    this.ctx.clearRect(0, 0, 800, 500)
+    this.ctx.clearRect(0, 0, 880, 500)
     events.emit('clear', `/overlay/${this.props.userId}/2`)
   }
 
@@ -113,7 +113,7 @@ class WhiteboardDash extends Component {
             <canvas
               ref={this.setRef}
               id='canvas'
-              width='800px'
+              width='880px'
               height='500px'
               className='canvas-display'
             />
