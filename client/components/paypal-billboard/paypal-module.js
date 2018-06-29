@@ -1,5 +1,7 @@
 import React from 'react';
-import {Editor, EditorState, RichUtils} from 'draft-js';
+import {EditorState, RichUtils} from 'draft-js';
+import Editor from 'draft-js-plugins-editor'
+import createToolbarPlugin from 'draft-js-static-toolbar-plugin';
 import {Grid, Menu} from 'semantic-ui-react'
 
 class MyEditor extends React.Component {
