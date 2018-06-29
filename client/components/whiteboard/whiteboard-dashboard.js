@@ -3,9 +3,9 @@
 import React, { Component } from 'react'
 import { Header } from 'semantic-ui-react'
 import { connect } from 'react-redux'
+import { SketchPicker } from 'react-color'
 import { EventEmitter } from 'events'
 export const events = new EventEmitter()
-
 
 class WhiteboardDash extends Component {
   constructor(props) {
@@ -17,27 +17,33 @@ class WhiteboardDash extends Component {
     }
     this.currentMousePosition = [ 0, 0 ]
     this.lastMousePosition = [ 0, 0 ]
-    this.color = 'black'
+    this.state = {
+      color: {
+        r: '0',
+        g: '0',
+        b: '0',
+        a: '1',
+      }
+    }
   }
 
   componentDidMount () {
     this.ctx = this.canvas.getContext('2d')
+
     this.canvas.addEventListener('mousedown', evt => {
       this.currentMousePosition = this.pos(evt)
     })
+
     this.canvas.addEventListener('mousemove', evt => {
       if (!evt.buttons) return
       this.lastMousePosition = this.currentMousePosition
       this.currentMousePosition = this.pos(evt)
       this.lastMousePosition && this.currentMousePosition &&
-          this.draw(this.lastMousePosition, this.currentMousePosition, this.color, true)
+          this.draw(this.lastMousePosition, this.currentMousePosition, this.state.color, true)
     })
-    console.log(this.ctx)
   }
 
   pos = evt => {
-    console.log('evt', evt.pageX)
-    console.log('offsetLeft', this.canvas.offsetLeft)
     return [
       evt.pageX - this.canvas.offsetLeft,
       evt.pageY - this.canvas.offsetTop
@@ -45,42 +51,55 @@ class WhiteboardDash extends Component {
   }
 
   draw = (start, end, strokeColor='black', shouldBroadcast=true) => {
-    // Draw the line between the start and end positions
-    // that is colored with the given color.
-    this.ctx.beginPath();
-    this.ctx.strokeStyle = strokeColor;
-    this.ctx.moveTo(...start);
-    this.ctx.lineTo(...end);
-    this.ctx.closePath();
-    this.ctx.stroke();
+    let colorStr = `rgba(${Object.values(strokeColor)})`
+    this.ctx.beginPath()
+    this.ctx.strokeStyle = colorStr
+    this.ctx.lineWidth = 3
+    this.ctx.moveTo(...start)
+    this.ctx.lineTo(...end)
+    this.ctx.closePath()
+    this.ctx.stroke()
 
     // If shouldBroadcast is truthy, we will emit a draw event to listeners
     // with the start, end and color data.
     // shouldBroadcast &&
     //     events.emit('draw', start, end, strokeColor);
-};
+  }
 
-  // componentWillUpdate (nextProps, nextState) {
-  //   console.log('current state', this.state)
-  //   console.log('next state', nextState)
-  // }
+  handleChangeComplete = (color) => {
+    this.setState({ color: color.rgb })
+  };
 
   render() {
     return (
       <div style={{ margin: '20px' }}>
-        <Header as='h3'>
-          {this.props.twitchLogin}'s Whiteboard
-          <Header.Subheader>
-            Draw something to be displayed on their stream!
-          </Header.Subheader>
-        </Header>
-        <canvas
-          ref={this.setRef}
-          id='canvas'
-          width='400px'
-          height='400px'
-          style={{ border: '1px solid black' }}
-        />
+          <Header as='h3'>
+            {this.props.twitchLogin}'s Whiteboard
+            <Header.Subheader>
+              Draw something to be displayed on stream!
+            </Header.Subheader>
+          </Header>
+          <div
+            style={{
+              display: 'flex',
+              direction: 'row',
+            }}
+          >
+            <canvas
+              ref={this.setRef}
+              id='canvas'
+              width='700px'
+              height='450px'
+              style={{
+                border: '1px solid rgba(0,0,0,.6)',
+                borderRadius: '.25rem'
+              }}
+            />
+            <SketchPicker
+              color={ this.state.color }
+              onChangeComplete={ this.handleChangeComplete }
+            />
+          </div>
       </div>
     )
   }
