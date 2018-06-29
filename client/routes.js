@@ -6,9 +6,6 @@ import { withRouter, Route, Switch } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { UserHome, TwitchLogin, Dashboard, OverlayModule } from './components'
 import { me } from './store'
-import WhiteboardDash from './components/whiteboard/whiteboard-dashboard'
-import WhiteboardOverlay from './components/whiteboard/whiteboard-overlay'
-
 
 class Routes extends Component {
   componentDidMount() {
