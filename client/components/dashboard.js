@@ -4,7 +4,6 @@ import { allModules } from '../allModules'
 import DashModule from './dash-module'
 import {getModulesServer, toggleModuleServer} from '../store'
 
-
 class Dashboard extends Component {
 
   constructor(props) {
@@ -17,7 +16,7 @@ class Dashboard extends Component {
       <div>
         {
           this.props.modules.active.map(id => {
-            return <DashModule key={id} module={allModules[id].dashboardComponent} />
+            return <DashModule key={id} module={allModules[id]} />
           })
         }
       </div>

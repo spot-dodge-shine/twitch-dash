@@ -7,7 +7,6 @@ import PropTypes from 'prop-types'
 import { UserHome, TwitchLogin, Dashboard, OverlayModule } from './components'
 import { me } from './store'
 
-
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()

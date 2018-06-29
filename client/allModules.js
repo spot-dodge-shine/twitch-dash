@@ -1,7 +1,8 @@
 import SpotifyDashboard from './components/spotify-dashboard'
 import SpotifyOverlay from './components/spotify-overlay'
+import WhiteboardDashboard from './components/whiteboard/whiteboard-dashboard'
+import WhiteboardOverlay from './components/whiteboard/whiteboard-overlay'
 import axios from 'axios'
-
 
 const allModules = {}
 
@@ -10,7 +11,10 @@ function registerModule (id, moduleSpec) {
 }
 
 // Hard-code registerModules here:
-registerModule(1, {dashboardComponent: SpotifyDashboard, overlayComponent: SpotifyOverlay })
+registerModule(1, { moduleId: 1,
+  dashboardComponent: SpotifyDashboard, overlayComponent: SpotifyOverlay })
+registerModule(2, { moduleId: 2,
+  dashboardComponent: WhiteboardDashboard, overlayComponent: WhiteboardOverlay })
 
 // TODO: get all modules and load them into allModules
 axios.get('/api/modules')
