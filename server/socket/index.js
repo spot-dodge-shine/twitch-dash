@@ -10,6 +10,10 @@ module.exports = io => {
       serverSocket.to(room).emit('draw-from-server', start, end, strokeColor, lineWidth)
     })
 
+    serverSocket.on('fill-from-client', (fillColor, room) => {
+      serverSocket.to(room).emit('fill-from-server', fillColor)
+    })
+
     serverSocket.on('clear-from-client', room => {
       serverSocket.to(room).emit('clear-from-server')
     })

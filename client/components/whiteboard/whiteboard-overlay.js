@@ -33,9 +33,18 @@ class WhiteboardOverlay extends Component {
     this.ctx.clearRect(0, 0, 880, 495)
   }
 
+  handleFill = fillColor => {
+    this.ctx.fillStyle = fillColor
+    this.ctx.fillRect(0, 0, 880, 495)
+  }
+
   render() {
     clientSocket.on('draw-from-server', (start, end, strokeColor, lineWidth) => {
       this.draw(start, end, strokeColor, lineWidth)
+    })
+
+    clientSocket.on('fill-from-server', fillColor => {
+      this.handleFill(fillColor)
     })
 
     clientSocket.on('clear-from-server', () => {

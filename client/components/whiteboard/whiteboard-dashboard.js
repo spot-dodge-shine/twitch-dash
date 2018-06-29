@@ -93,6 +93,12 @@ class WhiteboardDash extends Component {
     events.emit('clear', `/overlay/${this.props.userId}/2`)
   }
 
+  handleFill = () => {
+    this.ctx.fillStyle = this.state.color
+    this.ctx.fillRect(0, 0, 880, 495)
+    events.emit('fill', this.state.color, `/overlay/${this.props.userId}/2`)
+  }
+
   render() {
     const { lineWidth } = this.state
 
@@ -140,12 +146,21 @@ class WhiteboardDash extends Component {
                     this.setState({ lineWidth: value })
                 }
               }}/>
-              <Button
-                floated='right'
-                content='clear'
-                style={{ marginTop: '.75rem' }}
-                onClick={this.handleClear}
-              />
+              <div
+                style={{
+                  marginTop: '.75rem',
+                  float: 'right'
+                }}
+              >
+                <Button
+                  content='fill background'
+                  onClick={this.handleFill}
+                />
+                <Button
+                  content='clear'
+                  onClick={this.handleClear}
+                />
+              </div>
             </div>
           </div>
       </div>
