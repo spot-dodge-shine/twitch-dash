@@ -28,25 +28,23 @@ class MyEditor extends React.Component {
   }
   render() {
     return (
-      <Grid columns={1}>
-        <Grid.Column>
-          <Grid.Row>
-            <div>
-              <h3>Editor</h3>
-              <button onClick={this._onBoldClick.bind(this)}>Bold</button>
-              <button onClick={this._onItalicsClick.bind(this)}>Italics</button>
-              <button onClick={this._onUnderlineClick.bind(this)}>Underline</button>
-              <Editor
-              editorState={this.state.editorState}
-              handleKeyCommand={this.handleKeyCommand}
-              onChange={this.onChange} />
-            </div>
-        </Grid.Row>
-      </Grid.Column>
-    </Grid>
-
+      <div id='content'>
+        <h2>Billboard Text Editor</h2>
+        <div className='editor'>
+          <Editor
+            editorState={this.state.editorState}
+            onChange={this.onChange}
+          />
+        </div>
+      </div>
     )
   }
 }
+{/* <Grid columns={1}>
+        <Grid.Column>
+          <Grid.Row>
+          </Grid.Row>
+      </Grid.Column>
+    </Grid> */}
 
 export default MyEditor

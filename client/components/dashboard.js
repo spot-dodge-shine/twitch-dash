@@ -21,7 +21,7 @@ class Dashboard extends Component {
             return <DashModule key={id} module={allModules[id].dashboardComponent} />
           })
         }
-        {/* <MyEditor /> */}
+        <MyEditor />
       </div>
     )
   }
