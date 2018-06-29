@@ -13,6 +13,8 @@ if (!process.env.PAYPAL_CLIENT_ID || !process.env.PAYPAL_CLIENT_SECRET) {
   }
 
   const strategy = new PayPalStrategy(
-
+    payPalConfig,
   )
+
+  passport.use(strategy)
 }
