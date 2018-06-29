@@ -31,8 +31,15 @@ class WhiteboardDash extends Component {
 
   componentDidMount () {
     this.ctx = this.canvas.getContext('2d')
+    this.canvas.addEventListener('click', this.handleMouseclick)
     this.canvas.addEventListener('mousedown', this.handleMousedown)
     this.canvas.addEventListener('mousemove', this.handleMousemove)
+  }
+
+  handleMouseclick = evt => {
+    this.currentMousePosition = this.pos(evt)
+    this.lastMousePosition = [this.currentMousePosition[0]+1,this.currentMousePosition[1]]
+    this.draw(this.lastMousePosition, this.currentMousePosition, this.state.color, true)
   }
 
   handleMousedown = evt => {
@@ -130,7 +137,7 @@ class WhiteboardDash extends Component {
                 inverted={false}
                 settings={{
                   start: lineWidth,
-                  min:0,
+                  min:1,
                   max:10,
                   step:1,
                   onChange: (value) => {
