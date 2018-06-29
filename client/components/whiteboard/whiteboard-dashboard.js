@@ -62,8 +62,6 @@ class WhiteboardDash extends Component {
   }
 
   pos = evt => {
-    console.log('layerX', evt.layerX)
-    console.log('layerY', evt.layerY)
     return [
       evt.layerX,
       evt.layerY
@@ -79,8 +77,10 @@ class WhiteboardDash extends Component {
     this.ctx.closePath()
     this.ctx.stroke()
 
+    const roomName = `/overlay/${this.props.userId}/3`
+
     shouldBroadcast &&
-        events.emit('draw', start, end, strokeColor, lineWidth);
+        events.emit('draw', start, end, strokeColor, lineWidth, roomName);
   }
 
   handleColorChange = (color) => {
@@ -155,7 +155,8 @@ class WhiteboardDash extends Component {
 
 const mapStateToProps = state => {
   return {
-    twitchLogin: state.user.twitchLogin
+    twitchLogin: state.user.twitchLogin,
+    userId: state.user.id
   }
 }
 

@@ -12,9 +12,12 @@ function registerModule (id, moduleSpec) {
 }
 
 // Hard-code registerModules here:
-registerModule(1, {dashboardComponent: SpotifyDashboard, overlayComponent: SpotifyOverlay })
-registerModule(2, {dashboardComponent: PayPalDashboard, overlayComponent: SpotifyOverlay })
-registerModule(3, {dashboardComponent: WhiteboardDashboard, overlayComponent: WhiteboardOverlay })
+registerModule(1, { moduleId: 1,
+  dashboardComponent: SpotifyDashboard, overlayComponent: SpotifyOverlay })
+registerModule(2, { moduleId: 2,
+  dashboardComponent: PayPalDashboard, overlayComponent: SpotifyOverlay })
+registerModule(3, { moduleId: 3,
+  dashboardComponent: WhiteboardDashboard, overlayComponent: WhiteboardOverlay })
 
 // TODO: get all modules and load them into allModules
 axios.get('/api/modules')

@@ -4,11 +4,10 @@ module.exports = io => {
 
     serverSocket.on('join-room', room => {
       serverSocket.join(room)
-      console.log('joined room', room)
     })
 
     serverSocket.on('draw-from-client', (start, end, strokeColor, lineWidth, room) => {
-      serverSocket.broadcast.emit('draw-from-server', start, end, strokeColor, lineWidth)
+      serverSocket.to(room).emit('draw-from-server', start, end, strokeColor, lineWidth)
     })
 
     serverSocket.on('disconnect', () => {
