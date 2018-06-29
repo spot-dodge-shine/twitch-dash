@@ -31,8 +31,6 @@ class Routes extends Component {
           )}
           <Route component={TwitchLogin} />
         </Switch>
-        <Route exact path='/test' component={WhiteboardDash} />
-        <Route exact path='/test-alt' component={WhiteboardOverlay} />
       </div>
     )
   }
