@@ -77,7 +77,7 @@ class WhiteboardDash extends Component {
     this.ctx.closePath()
     this.ctx.stroke()
 
-    const roomName = `/overlay/${this.props.userId}/3`
+    const roomName = `/overlay/${this.props.userId}/2`
 
     shouldBroadcast &&
         events.emit('draw', start, end, strokeColor, lineWidth, roomName);
@@ -89,8 +89,8 @@ class WhiteboardDash extends Component {
   }
 
   handleClear = () => {
-    this.ctx.fillStyle = '#ffffff'
-    this.ctx.fillRect(0,0,750,500)
+    this.ctx.clearRect(0, 0, 800, 500)
+    events.emit('clear', `/overlay/${this.props.userId}/2`)
   }
 
   render() {
@@ -99,7 +99,7 @@ class WhiteboardDash extends Component {
     return (
       <div style={{ margin: '20px' }}>
           <Header as='h3'>
-            {this.props.twitchLogin}'s Whiteboard
+            Whiteboard
             <Header.Subheader>
               Draw something to be displayed on stream!
             </Header.Subheader>
@@ -113,7 +113,7 @@ class WhiteboardDash extends Component {
             <canvas
               ref={this.setRef}
               id='canvas'
-              width='750px'
+              width='800px'
               height='500px'
               className='canvas-display'
             />
@@ -155,7 +155,6 @@ class WhiteboardDash extends Component {
 
 const mapStateToProps = state => {
   return {
-    twitchLogin: state.user.twitchLogin,
     userId: state.user.id
   }
 }

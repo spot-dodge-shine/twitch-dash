@@ -29,35 +29,31 @@ class WhiteboardOverlay extends Component {
     this.ctx.stroke()
   }
 
+  handleClear = () => {
+    this.ctx.clearRect(0, 0, 800, 500)
+  }
+
   render() {
-        clientSocket.on('draw-from-server', (start, end, strokeColor, lineWidth) => {
-          this.draw(start, end, strokeColor, lineWidth)
-        })
+    clientSocket.on('draw-from-server', (start, end, strokeColor, lineWidth) => {
+      this.draw(start, end, strokeColor, lineWidth)
+    })
+
+    clientSocket.on('clear-from-server', () => {
+      this.handleClear()
+    })
 
     return (
       <div style={{ margin: '20px' }}>
-        <Header as='h3'>
-          {this.props.twitchLogin}'s Whiteboard
-          <Header.Subheader>
-            Draw something to be displayed on stream!
-          </Header.Subheader>
-        </Header>
         <canvas
           ref={this.setRef}
           id='canvas'
-          width='750px'
+          width='800px'
           height='500px'
-          className='canvas-display'
         />
         </div>
     )
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    twitchLogin: state.user.twitchLogin
-  }
-}
 
-export default connect(mapStateToProps)(WhiteboardOverlay)
+export default WhiteboardOverlay

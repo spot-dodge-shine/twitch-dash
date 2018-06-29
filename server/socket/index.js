@@ -10,6 +10,10 @@ module.exports = io => {
       serverSocket.to(room).emit('draw-from-server', start, end, strokeColor, lineWidth)
     })
 
+    serverSocket.on('clear-from-client', room => {
+      serverSocket.to(room).emit('clear-from-server')
+    })
+
     serverSocket.on('disconnect', () => {
       console.log(`Connection ${serverSocket.id} has left the building`)
     })
