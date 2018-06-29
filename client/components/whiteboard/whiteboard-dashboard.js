@@ -19,12 +19,7 @@ class WhiteboardDash extends Component {
     this.currentMousePosition = [ 0, 0 ]
     this.lastMousePosition = [ 0, 0 ]
     this.state = {
-      color: {
-        r: '0',
-        g: '0',
-        b: '0',
-        a: '1',
-      },
+      color: 'rgba(0,0,0,1)',
       lineWidth: 3
     }
   }
@@ -55,6 +50,7 @@ class WhiteboardDash extends Component {
   }
 
   componentWillUnmount () {
+    this.canvas.addEventListener('click', this.handleMouseclick)
     this.canvas.removeEventListener('mousedown', this.handleMousedown)
     this.canvas.removeEventListener('mousemove', this.handleMousemove)
   }
@@ -67,9 +63,8 @@ class WhiteboardDash extends Component {
   }
 
   draw = (start, end, strokeColor='black', shouldBroadcast=true) => {
-    let colorStr = `rgba(${Object.values(strokeColor)})`
     this.ctx.beginPath()
-    this.ctx.strokeStyle = colorStr
+    this.ctx.strokeStyle = strokeColor
     this.ctx.lineWidth = this.state.lineWidth
     this.ctx.moveTo(...start)
     this.ctx.lineTo(...end)
@@ -83,12 +78,13 @@ class WhiteboardDash extends Component {
   }
 
   handleColorChange = (color) => {
-    this.setState({ color: color.rgb })
+    const formattedColor = `rgba(${Object.values(color.rgb)})`
+    this.setState({ color: formattedColor })
   }
 
   handleClear = () => {
     this.ctx.fillStyle = '#ffffff'
-    this.ctx.fillRect(0,0,750,500)
+    this.ctx.fillRect(0,0,750,450)
   }
 
   render() {
