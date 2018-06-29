@@ -30,7 +30,7 @@ const { PayPal } = require('./paypal')
   Vote.belongsTo(Votechoice)
 
   User.hasOne(PayPal)
-  PayPal.belongTo(User)
+  PayPal.belongsTo(User)
 
   User.prototype.getActiveVotecycle = async function() {
     const votecycles = await this.getVotecycles()

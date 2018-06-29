@@ -55,7 +55,6 @@ class UserHome extends Component {
             as={Menu}
             animation='overlay'
             icon='labeled'
-            onHide={this.handleSidebarHide}
             vertical
             visible
             width='thin'
