@@ -46,7 +46,13 @@ class WhiteboardDash extends Component {
     this.lastMousePosition = this.currentMousePosition
     this.currentMousePosition = this.pos(evt)
     this.lastMousePosition && this.currentMousePosition &&
-        this.draw(this.lastMousePosition, this.currentMousePosition, this.state.color, true)
+        this.draw(
+          this.lastMousePosition,
+          this.currentMousePosition,
+          this.state.color,
+          this.state.lineWidth,
+          true
+        )
   }
 
   componentWillUnmount () {
@@ -62,10 +68,10 @@ class WhiteboardDash extends Component {
     ]
   }
 
-  draw = (start, end, strokeColor='black', shouldBroadcast=true) => {
+  draw = (start, end, strokeColor='black', lineWidth, shouldBroadcast=true) => {
     this.ctx.beginPath()
     this.ctx.strokeStyle = strokeColor
-    this.ctx.lineWidth = this.state.lineWidth
+    this.ctx.lineWidth = lineWidth
     this.ctx.moveTo(...start)
     this.ctx.lineTo(...end)
     this.ctx.closePath()
@@ -84,7 +90,7 @@ class WhiteboardDash extends Component {
 
   handleClear = () => {
     this.ctx.fillStyle = '#ffffff'
-    this.ctx.fillRect(0,0,750,450)
+    this.ctx.fillRect(0,0,750,500)
   }
 
   render() {
@@ -109,13 +115,7 @@ class WhiteboardDash extends Component {
               id='canvas'
               width='750px'
               height='500px'
-              style={{
-                border: 'none',
-                borderRadius: '.28571429rem',
-                marginRight: '2rem',
-                boxShadow: '0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5',
-                transition: 'box-shadow .1s ease,transform .1s ease,-webkit-box-shadow .1s ease,-webkit-transform .1s ease'
-              }}
+              className='canvas-display'
             />
             <div>
               <SketchPicker
@@ -143,8 +143,7 @@ class WhiteboardDash extends Component {
               <Button
                 floated='right'
                 content='clear'
-                color='red'
-                style={{ marginTop: '1rem' }}
+                style={{ marginTop: '.75rem' }}
                 onClick={this.handleClear}
               />
             </div>
