@@ -1,7 +1,7 @@
 import React from 'react'
 
 const DashModule = (props) => {
-  const Module = props.module
+  const Module = props.module.dashboardComponent
   return <Module />
 }
 

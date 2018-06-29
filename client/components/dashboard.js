@@ -17,7 +17,7 @@ class Dashboard extends Component {
       <div>
         {
           this.props.modules.active.map(id => {
-            return <DashModule key={id} module={allModules[id].dashboardComponent} />
+            return <DashModule key={id} module={allModules[id]} />
           })
         }
       </div>

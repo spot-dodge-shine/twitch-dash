@@ -78,7 +78,7 @@ class WhiteboardDash extends Component {
     this.ctx.stroke()
 
     shouldBroadcast &&
-        events.emit('draw', start, end, strokeColor, lineWidth);
+        events.emit('draw', start, end, strokeColor, lineWidth, this.props.twitchLogin);
   }
 
   handleColorChange = (color) => {
