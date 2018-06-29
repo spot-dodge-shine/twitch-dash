@@ -7,7 +7,7 @@ import SidebarItem from './sidebar-item'
 import NavBar from './navbar'
 import styled from 'styled-components'
 import { allModules } from '../allModules'
-import { Image, Sidebar, Segment, Menu, Button, Icon } from 'semantic-ui-react'
+import { Image, Sidebar, Segment, Menu, Grid } from 'semantic-ui-react'
 import WelcomeText from './welcome-text'
 import { toggleModuleServer, getModulesServer } from '../store'
 
@@ -55,7 +55,6 @@ class UserHome extends Component {
             as={Menu}
             animation='overlay'
             icon='labeled'
-            onHide={this.handleSidebarHide}
             vertical
             visible
             width='thin'
@@ -65,7 +64,7 @@ class UserHome extends Component {
             </Menu.Item>
           {
           Object.keys(allModules).map(id => {
-            return <SidebarItem key={id} icon="" name={allModules[id].name} value={id} onClick={this.toggleModule} />
+            return <SidebarItem key={id} name={allModules[id].name} image={allModules[id].image} value={id} onClick={this.toggleModule} />
           })
           }
           </Sidebar>
@@ -76,7 +75,7 @@ class UserHome extends Component {
                 <WelcomeText />
               </WelcomeTextStyle>
               <ModuleWrapper>
-                <Dashboard />
+                    <Dashboard />
               </ModuleWrapper>
             </Segment>
           </Sidebar.Pusher>

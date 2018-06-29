@@ -6,7 +6,7 @@ const { Votechoice } = require('./votechoice')
 const { Vote } = require('./vote')
 const { Module } = require('./module')
 const { ModuleUser } = require('./module_user')
-
+const { PayPal } = require('./paypal')
 /**
  * If we had any associations to make, this would be a great place to put them!
  * ex. if we had another model called BlogPost, we might say:
@@ -28,6 +28,9 @@ const { ModuleUser } = require('./module_user')
 
   Votechoice.hasMany(Vote)
   Vote.belongsTo(Votechoice)
+
+  User.hasOne(PayPal)
+  PayPal.belongsTo(User)
 
   User.prototype.getActiveVotecycle = async function() {
     const votecycles = await this.getVotecycles()
@@ -84,5 +87,6 @@ module.exports = {
   Vote,
   Votechoice,
   Module,
-  ModuleUser
+  ModuleUser,
+  PayPal
 }
