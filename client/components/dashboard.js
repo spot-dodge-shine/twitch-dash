@@ -3,9 +3,12 @@ import { connect } from 'react-redux'
 import { allModules } from '../allModules'
 import DashModule from './dash-module'
 import {getModulesServer, toggleModuleServer} from '../store'
+<<<<<<< HEAD
 import MyEditor from './paypal-billboard/paypal-module'
 import {Grid} from 'semantic-ui-react'
 
+=======
+>>>>>>> 5799195826504e2813a13cdd6be147a3e4bac0d3
 
 {/* <Grid columns={1}>
         <Grid.Column>
@@ -26,9 +29,10 @@ class Dashboard extends Component {
       <div>
         {
           this.props.modules.active.map(id => {
-            return <DashModule key={id} module={allModules[id].dashboardComponent} />
+            return <DashModule key={id} module={allModules[id]} />
           })
         }
+<<<<<<< HEAD
         <Grid columns={1}>
           <Grid.Column>
             <Grid.Row>
@@ -36,6 +40,8 @@ class Dashboard extends Component {
           </Grid.Row>
           </Grid.Column>
         </Grid>
+=======
+>>>>>>> 5799195826504e2813a13cdd6be147a3e4bac0d3
       </div>
     )
   }
