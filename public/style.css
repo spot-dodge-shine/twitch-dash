@@ -58,6 +58,19 @@ html, body, #app {
  }
 
  .editor {
-  border: 1px solid grey;
-  padding: 6px;
- }
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  cursor: text;
+  padding: 16px;
+  border-radius: 2px;
+  margin-bottom: 2em;
+  box-shadow: inset 0px 1px 8px -3px #ABABAB;
+  background: #fefefe;
+  min-height: 140px;
+  max-height: 140px;
+  min-width: 300px;
+}
+
+.options {
+  margin-bottom: 20px;
+}

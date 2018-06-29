@@ -1,52 +1,44 @@
-import React from 'react';
-import {EditorState, RichUtils} from 'draft-js';
-import Editor from 'draft-js-plugins-editor'
-import createToolbarPlugin from 'draft-js-static-toolbar-plugin';
+import React, {Component} from 'react'
+import {EditorState, RichUtils} from 'draft-js'
+import Editor, { createEditorStateWithText } from 'draft-js-plugins-editor'
+import createToolbarPlugin from 'draft-js-static-toolbar-plugin'
 import {Grid, Menu} from 'semantic-ui-react'
+// import editorStyles from './editorStyle.css'
+import 'draft-js-static-toolbar-plugin/lib/plugin.css'
 
-class MyEditor extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {editorState: EditorState.createEmpty()};
-    this.onChange = (editorState) => this.setState({editorState});
-    this.handleKeyCommand = this.handleKeyCommand.bind(this);
-  }
-  handleKeyCommand(command, editorState) {
-    const newState = RichUtils.handleKeyCommand(editorState, command);
-    if (newState) {
-      this.onChange(newState);
-      return 'handled';
-    }
-    return 'not-handled';
-  }
-  _onBoldClick() {
-    this.onChange(RichUtils.toggleInlineStyle(this.state.editorState, 'BOLD'));
-  }
-  _onItalicsClick() {
-    this.onChange(RichUtils.toggleInlineStyle(this.state.editorState, 'ITALIC'));
-  }
-  _onUnderlineClick() {
-    this.onChange(RichUtils.toggleInlineStyle(this.state.editorState, 'UNDERLINE'));
-  }
+const staticToolbarPlugin = createToolbarPlugin()
+const { Toolbar } = staticToolbarPlugin
+const plugins = [staticToolbarPlugin]
+const text = 'text'
+
+export default class MyEditor extends Component {
+  state = {
+    editorState: createEditorStateWithText(text),
+  };
+
+  onChange = (editorState) => {
+    this.setState({
+      editorState,
+    });
+  };
+
+  focus = () => {
+    this.editor.focus();
+  };
+
   render() {
     return (
-      <div id='content'>
-        <h2>Billboard Text Editor</h2>
-        <div className='editor'>
+      <div>
+        <div className='editor' onClick={this.focus}>
           <Editor
             editorState={this.state.editorState}
             onChange={this.onChange}
+            plugins={plugins}
+            ref={(element) => { this.editor = element; }}
           />
+          <Toolbar />
         </div>
       </div>
-    )
+    );
   }
 }
-{/* <Grid columns={1}>
-        <Grid.Column>
-          <Grid.Row>
-          </Grid.Row>
-      </Grid.Column>
-    </Grid> */}
-
-export default MyEditor

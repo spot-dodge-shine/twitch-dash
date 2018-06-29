@@ -4,7 +4,15 @@ import { allModules } from '../allModules'
 import DashModule from './dash-module'
 import {getModulesServer, toggleModuleServer} from '../store'
 import MyEditor from './paypal-billboard/paypal-module'
+import {Grid} from 'semantic-ui-react'
 
+
+{/* <Grid columns={1}>
+        <Grid.Column>
+          <Grid.Row>
+          </Grid.Row>
+      </Grid.Column>
+    </Grid> */}
 
 class Dashboard extends Component {
 
@@ -21,7 +29,13 @@ class Dashboard extends Component {
             return <DashModule key={id} module={allModules[id].dashboardComponent} />
           })
         }
-        <MyEditor />
+        <Grid columns={1}>
+          <Grid.Column>
+            <Grid.Row>
+              <MyEditor />
+          </Grid.Row>
+          </Grid.Column>
+        </Grid>
       </div>
     )
   }
