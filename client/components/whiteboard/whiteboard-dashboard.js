@@ -77,10 +77,8 @@ class WhiteboardDash extends Component {
     this.ctx.closePath()
     this.ctx.stroke()
 
-    // If shouldBroadcast is truthy, we will emit a draw event to listeners
-    // with the start, end and color data.
-    // shouldBroadcast &&
-    //     events.emit('draw', start, end, strokeColor);
+    shouldBroadcast &&
+        events.emit('draw', start, end, strokeColor, lineWidth);
   }
 
   handleColorChange = (color) => {

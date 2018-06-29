@@ -1,9 +1,13 @@
 module.exports = io => {
-  io.on('connection', socket => {
-    console.log(`A socket connection to the server has been made: ${socket.id}`)
+  io.on('connection', serverSocket => {
+    console.log(`A socket connection to the server has been made: ${serverSocket.id}`)
 
-    socket.on('disconnect', () => {
-      console.log(`Connection ${socket.id} has left the building`)
+    serverSocket.on('draw-from-client', (start, end, strokeColor, lineWidth) => {
+      serverSocket.broadcast.emit('draw-from-server', start, end, strokeColor, lineWidth)
+    })
+
+    serverSocket.on('disconnect', () => {
+      console.log(`Connection ${serverSocket.id} has left the building`)
     })
   })
 }

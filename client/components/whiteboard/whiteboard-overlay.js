@@ -3,7 +3,9 @@
 import React, { Component } from 'react'
 import { Header } from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import events from './whiteboard-dashboard'
+
+import io from 'socket.io-client'
+const overlaySocket = io(window.location.origin)
 
 class WhiteboardOverlay extends Component {
   constructor(props) {
@@ -13,6 +15,11 @@ class WhiteboardOverlay extends Component {
     this.setRef = elem => {
       this.canvas = elem
     }
+    overlaySocket.on('connect', () => {
+      overlaySocket.on('draw-from-server', (start, end, strokeColor, lineWidth) => {
+        this.draw(start, end, strokeColor, lineWidth)
+      })
+    })
   }
 
   componentDidMount () {

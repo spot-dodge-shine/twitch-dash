@@ -1,9 +1,13 @@
 import io from 'socket.io-client'
+import { events } from './components/whiteboard/whiteboard-dashboard'
 
-const socket = io(window.location.origin)
+const clientSocket = io(window.location.origin)
 
-socket.on('connect', () => {
+clientSocket.on('connect', () => {
   console.log('Connected!')
+  events.on('draw', (start, end, strokeColor, lineWidth) => {
+    clientSocket.emit('draw-from-client', start, end, strokeColor, lineWidth)
+  })
 })
 
-export default socket
+export default clientSocket
