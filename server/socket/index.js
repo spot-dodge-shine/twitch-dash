@@ -8,7 +8,7 @@ module.exports = io => {
     })
 
     serverSocket.on('draw-from-client', (start, end, strokeColor, lineWidth, room) => {
-      serverSocket.broadcast.to(room).emit('draw-from-server', start, end, strokeColor, lineWidth)
+      serverSocket.broadcast.emit('draw-from-server', start, end, strokeColor, lineWidth)
     })
 
     serverSocket.on('disconnect', () => {

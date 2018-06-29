@@ -33,12 +33,9 @@ class WhiteboardOverlay extends Component {
 
   render() {
       overlaySocket.on('connect', () => {
-        console.log(this.props)
-        overlaySocket.emit('join-room', this.props.twitchLogin)
-      })
-      overlaySocket.on('draw-from-server', (start, end, strokeColor, lineWidth) => {
-        console.log('received from server')
-        this.draw(start, end, strokeColor, lineWidth)
+        overlaySocket.on('draw-from-server', (start, end, strokeColor, lineWidth) => {
+          this.draw(start, end, strokeColor, lineWidth)
+        })
       })
 
     return (

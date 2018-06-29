@@ -62,9 +62,11 @@ class WhiteboardDash extends Component {
   }
 
   pos = evt => {
+    console.log('layerX', evt.layerX)
+    console.log('layerY', evt.layerY)
     return [
-      evt.pageX - this.canvas.offsetLeft,
-      evt.pageY - this.canvas.offsetTop
+      evt.layerX,
+      evt.layerY
     ]
   }
 
@@ -78,7 +80,7 @@ class WhiteboardDash extends Component {
     this.ctx.stroke()
 
     shouldBroadcast &&
-        events.emit('draw', start, end, strokeColor, lineWidth, this.props.twitchLogin);
+        events.emit('draw', start, end, strokeColor, lineWidth);
   }
 
   handleColorChange = (color) => {
