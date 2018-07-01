@@ -1,7 +1,7 @@
 const tmi = require('tmi.js')
 const axios = require('axios')
 
-module.exports = async () => {
+module.exports = async (io) => {
   console.log('CREATING NEW TWITCHBOT')
   // Valid commands start with:
   let commandPrefix = '!'
@@ -39,7 +39,7 @@ module.exports = async () => {
   console.log('channels', channels)
 
   // These are the commands the bot knows (defined below):
-  let knownCommands = { echo, musicvote, random }
+  let knownCommands = { echo, musicvote, random, hello }
 
   // Function called when the "echo" command is issued:
   function echo (target, context, params) {
@@ -63,6 +63,11 @@ module.exports = async () => {
     // TODO: replace socket stuff with database calls
 
     // io.emit('random')
+  }
+
+  function hello (target, context, params) {
+    console.log('target', target)
+    io.emit('hello')
   }
 
   async function musicvote (target, context, params) {

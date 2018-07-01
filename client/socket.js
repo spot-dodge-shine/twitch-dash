@@ -9,6 +9,10 @@ clientSocket.on('connect', () => {
   clientSocket.emit('join-room', roomName)
 })
 
+clientSocket.on('hello', () => {
+  console.log('hello from the frontend!')
+})
+
 events.on('draw', (start, end, strokeColor, lineWidth, room) => {
   clientSocket.emit('draw-from-client', start, end, strokeColor, lineWidth, room)
 })
