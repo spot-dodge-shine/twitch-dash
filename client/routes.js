@@ -6,6 +6,8 @@ import { withRouter, Route, Switch } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { UserHome, TwitchLogin, Dashboard, OverlayModule } from './components'
 import { me } from './store'
+import GameboyDash from './components/gameboy/gameboy-dashboard'
+import GameboyContainer from './components/gameboy/gameboy-container'
 
 class Routes extends Component {
   componentDidMount() {
@@ -28,6 +30,7 @@ class Routes extends Component {
           )}
           <Route component={TwitchLogin} />
         </Switch>
+        <Route exact path="/test" component={GameboyContainer} />
       </div>
     )
   }
