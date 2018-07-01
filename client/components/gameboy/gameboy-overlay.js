@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import GameboyContent from './gameboy-content'
 
-class GameboyContainer extends Component {
+class GameboyOverlay extends Component {
   constructor() {
     super()
     this.loadScript('https://unpkg.com/node-gameboy/dist/gameboy.min.js')
@@ -25,4 +25,4 @@ class GameboyContainer extends Component {
   }
 }
 
-export default GameboyContainer
+export default GameboyOverlay

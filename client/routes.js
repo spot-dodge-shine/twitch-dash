@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 import { UserHome, TwitchLogin, Dashboard, OverlayModule } from './components'
 import { me } from './store'
 import GameboyDash from './components/gameboy/gameboy-dashboard'
-import GameboyContainer from './components/gameboy/gameboy-container'
+import GameboyOverlay from './components/gameboy/gameboy-overlay'
 
 class Routes extends Component {
   componentDidMount() {
@@ -30,7 +30,7 @@ class Routes extends Component {
           )}
           <Route component={TwitchLogin} />
         </Switch>
-        <Route exact path="/test" component={GameboyContainer} />
+        <Route exact path="/test" component={GameboyOverlay} />
       </div>
     )
   }
