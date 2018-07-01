@@ -1,6 +1,18 @@
 // localStorage.debug = '';
 
 var gameboy = window.gameboy = new (window.Gameboy)();
+var socket = io(window.location.origin)
+var roomName = window.location.pathname
+
+socket.on('connect', () => {
+  socket.emit('join-room', roomName)
+  socket.on('hello', () => {
+    console.log('wow this is messy')
+  })
+  socket.on('test', () => {
+    console.log('success!')
+  })
+})
 
 // Render
 
@@ -44,3 +56,4 @@ $('#rendering').click(function () { $('#frame').toggleClass('pixelated') });
 
 $(document).keydown(function (e) { gameboy.joypad.keyDown(e.keyCode) });
 $(document).keyup(function (e) { gameboy.joypad.keyUp(e.keyCode) });
+

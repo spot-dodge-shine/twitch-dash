@@ -3,6 +3,7 @@ module.exports = io => {
     console.log(`A socket connection to the server has been made: ${serverSocket.id}`)
 
     serverSocket.on('join-room', room => {
+      console.log(room)
       serverSocket.join(room)
     })
 
@@ -16,6 +17,11 @@ module.exports = io => {
 
     serverSocket.on('clear-from-client', room => {
       serverSocket.to(room).emit('clear-from-server')
+    })
+
+    serverSocket.on('test-from-client', userId => {
+      console.log(userId)
+      serverSocket.to(`/overlay/${userId}/3`).emit('test')
     })
 
     serverSocket.on('disconnect', () => {

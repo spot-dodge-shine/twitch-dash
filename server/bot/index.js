@@ -67,8 +67,7 @@ module.exports = async (io) => {
 
   async function hello (target, context, params) {
     const { data } = await axios.get(`${appUrl}/api/users/twitch/${target.slice(1)}/`)
-    console.log('data', data)
-    io.emit('hello')
+    io.to(`/overlay/${data}/3`).emit('hello')
   }
 
   async function musicvote (target, context, params) {

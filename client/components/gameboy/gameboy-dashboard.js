@@ -1,34 +1,38 @@
 'use strict'
 
-import React, { Component } from 'react'
+import React from 'react'
+import { connect } from 'react-redux'
+import { Card, Button, Header } from 'semantic-ui-react'
+import { EventEmitter } from 'events'
+export const gameboyEvents = new EventEmitter()
 
-class GameboyDash extends Component {
-  constructor(props) {
-    super(props)
-    // this.loadScript('https://unpkg.com/node-gameboy/dist/gameboy.min.js')
-    // this.loadScript('/gameboy/gameboy.min.js')
-  }
+const GameboyDash = ({ userId }) => {
+  return (
+    <Card style={{ width: '425px' }}>
+      <Card.Content>
+        <Header
+          as='h3'
+        >
+          Gameboy Emulator
+        </Header>
+        <p>By using this emulator, you are acknowledging that you own a physical copy of the game cartridge.</p>
+        <Button
+          content='Open'
+          onClick={ () => window.open(`/overlay/${userId}/3`)}
+        />
+        <Button
+          content='Test'
+          onClick={ () => gameboyEvents.emit('test', userId)}
+        />
+      </Card.Content>
+    </Card>
+  )
+}
 
-  loadScript = src => {
-    var tag = document.createElement('script');
-    tag.async = false;
-    tag.src = src;
-    document.getElementsByTagName('body')[0].appendChild(tag);
-  }
-
-  componentDidMount() {
-    console.log(window)
-  }
-
-  render () {
-
-    return (
-      <div>
-        <h3>hi</h3>
-        <canvas id="frame" width="160" height="144"></canvas>
-      </div>
-    )
+const mapStateToDispatch = state => {
+  return {
+    userId: state.user.id
   }
 }
 
-export default GameboyDash
+export default connect(mapStateToDispatch)(GameboyDash)

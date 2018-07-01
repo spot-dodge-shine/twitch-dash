@@ -6,9 +6,10 @@ import GameboyContent from './gameboy-content'
 class GameboyOverlay extends Component {
   constructor() {
     super()
+    this.loadScript('https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js')
     this.loadScript('https://unpkg.com/node-gameboy/dist/gameboy.min.js')
     this.loadScript('https://code.jquery.com/jquery-3.1.1.min.js')
-    this.loadScript('/gameboy/examples/gh-pages/app.js')
+    this.loadScript('/gameboy/app.js')
   }
 
   loadScript = src => {
