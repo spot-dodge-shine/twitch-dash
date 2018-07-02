@@ -11,13 +11,6 @@ if (!process.env.PAYPAL_CLIENT_ID || !process.env.PAYPAL_CLIENT_SECRET) {
   console.log('Paypal client ID / secret not found. Skipping Paypal OAuth.')
 } else {
 
-  const paypalConfig = {
-    clientID: process.env.PAYPAL_CLIENT_ID,
-    clientSecret: process.env.PAYPAL_CLIENT_SECRET,
-    callbackURL: process.env.PAYPAL_CALLBACK_URL,
-    passReqToCallback: true
-  }
-
   router.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
@@ -39,9 +32,11 @@ if (!process.env.PAYPAL_CLIENT_ID || !process.env.PAYPAL_CLIENT_SECRET) {
         }
       }
   
-      const {data} = await axios.post('https://api.sandbox.paypal.com/v1/oauth2/token', qs.stringify({'grant_type': 'client_credentials'}), config)
+      const {data} = await axios.post('https://api.sandbox.paypal.com/v1/oauth2/token', 
+                                      qs.stringify({'grant_type': 'client_credentials'}), 
+                                      config)
+
       const paypalAccount = await Paypal.findOne({ where: { userId: req.user.id } })
-      console.log('found account>>>>', paypalAccount)
       let retPaypal
       if (paypalAccount) {
         retPaypal = paypalAccount
@@ -63,7 +58,18 @@ if (!process.env.PAYPAL_CLIENT_ID || !process.env.PAYPAL_CLIENT_SECRET) {
         req.user.paypalAccessToken = data.access_token
         retPaypal = newAccount
       }
-      console.log('rePaypal', retPaypal)
+      res.redirect(`https://www.sandbox.paypal.com/webapps/auth/protocol/openidconnect/v1/authorize?response_type=code&client_id=${process.env.PAYPAL_CLIENT_ID}&scope=openid&redirect_uri=${process.env.PAYPAL_CALLBACK_URL}`)
+    } catch (err) {
+      console.error(err)
+    }
+  })
+
+  router.get('/callback', async (req, res, next) => {
+    try {
+      const {code} = req.query
+      const paypalAcct = await Paypal.findOne({where: {userId: req.user.id }})
+      await paypalAcct.update({ paypalAuthCode: code})
+      req.user.paypalAuthcode = code
       res.redirect('/home')
     } catch (err) {
       console.error(err)

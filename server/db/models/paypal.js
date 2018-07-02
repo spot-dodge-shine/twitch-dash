@@ -13,6 +13,9 @@ const Paypal = db.define('paypalAccount', {
   },
   paypalLastRefresh: {
     type: Sequelize.DATE
+  },
+  paypalAuthCode: {
+    type: Sequelize.STRING
   }
 })
 
