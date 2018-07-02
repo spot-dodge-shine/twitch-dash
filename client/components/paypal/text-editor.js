@@ -9,7 +9,7 @@ import 'draft-js-static-toolbar-plugin/lib/plugin.css'
 const staticToolbarPlugin = createToolbarPlugin()
 const { Toolbar } = staticToolbarPlugin
 const plugins = [staticToolbarPlugin]
-const text = 'text'
+const text = 'Your Billboard Message'
 
 class TextEditor extends Component {
   state = {

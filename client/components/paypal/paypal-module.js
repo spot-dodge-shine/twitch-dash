@@ -4,6 +4,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Form, Input, Card, Button, Label, Icon} from 'semantic-ui-react'
 import styled from 'styled-components'
+import TextEditor from './text-editor';
 
 const YourPlaylistText = styled.div`
   margin-top: 5%;
@@ -18,7 +19,6 @@ const ButtonStyle = styled.div`
 
 const Wrapper = styled.div`
   display: flex;
-  align-items: center;
   justify-content: center;
 `
 
@@ -28,6 +28,7 @@ export default class PayPalModule extends Component {
     return (
       <Card style={{ width: '425px' }}>
       <Wrapper>
+        <Card.Header>
         <Form>
           <YourPlaylistText>
           <h3>Billboard</h3>
@@ -41,7 +42,9 @@ export default class PayPalModule extends Component {
             <Button>Confirm</Button>
           </ButtonStyle>
         </Form>
+        </Card.Header>
         </Wrapper>
+          <TextEditor />
         <Card.Content extra>
             <a>
               <Icon name='paypal' />
