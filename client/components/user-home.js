@@ -24,7 +24,7 @@ const ModuleWrapper = styled.div`
 const WelcomeTextStyle = styled.div`
   display: flex;
   justify-content: center;
-  aligh-items: center;
+  align-items: center;
   margin-top: 3%;
 `
 
