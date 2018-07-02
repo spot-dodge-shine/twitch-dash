@@ -3,8 +3,6 @@ import { connect } from 'react-redux'
 import { allModules } from '../allModules'
 import DashModule from './dash-module'
 import {getModulesServer, toggleModuleServer} from '../store'
-import TextEditor from './textedit/textedit-dashboard'
-import PayPalModule from './paypal/paypal-module'
 
 
 
@@ -23,8 +21,6 @@ class Dashboard extends Component {
             return <DashModule key={id} module={allModules[id]} />
           })
         }
-        {/* <TextEditor /> */}
-        <PayPalModule />
       </div>
     )
   }
