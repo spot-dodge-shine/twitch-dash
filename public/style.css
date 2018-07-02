@@ -48,7 +48,6 @@ html, body, #app {
   background-color: #ffffff;
 }
 
-<<<<<<< HEAD
 * {
   box-sizing: border-box;
  }
@@ -72,9 +71,12 @@ html, body, #app {
   min-width: 300px;
 }
 
+.editor :global(.public-DraftEditor-content) {
+  min-height: 140px;
+}
+
 .options {
   margin-bottom: 20px;
-=======
 .sketch-picker {
   height: 380px !important;
   margin-bottom: 1.5rem;
@@ -86,5 +88,4 @@ html, body, #app {
   margin-right: 2rem;
   box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
   transition: box-shadow .1s ease,transform .1s ease,-webkit-box-shadow .1s ease,-webkit-transform .1s ease;
->>>>>>> 5799195826504e2813a13cdd6be147a3e4bac0d3
 }
