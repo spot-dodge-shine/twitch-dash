@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Card, Button, Header, Input } from 'semantic-ui-react'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { EventEmitter } from 'events'
 export const gameboyEvents = new EventEmitter()
 
@@ -55,10 +56,13 @@ class GameboyDash extends Component {
           />
           <p>Select a game above</p>
           <div>
-            <Button
-              content='Open'
-              onClick={ () => window.open(`/overlay/${userId}/3`) }
-            />
+            <CopyToClipboard
+              text={`${window.location.origin}/overlay/${userId}/2`}
+            >
+              <Button
+                content='Link'
+              />
+            </CopyToClipboard>
             <Button
               content={ this.state.isPlaying ? 'Pause' : 'Play' }
               onClick={ () => this.handlePauseResume(userId) }
