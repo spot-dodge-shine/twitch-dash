@@ -23,7 +23,7 @@ class Dashboard extends Component {
             return <DashModule key={id} module={allModules[id]} />
           })
         }
-        <PayPalModule />
+        {/* <PayPalModule /> */}
       </div>
     )
   }

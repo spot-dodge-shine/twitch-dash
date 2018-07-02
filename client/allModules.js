@@ -6,7 +6,7 @@ import GameboyDashboard from './components/gameboy/gameboy-dashboard'
 import GameboyOverlay from './components/gameboy/gameboy-overlay'
 import axios from 'axios'
 
-const allModules = {}
+let allModules = {}
 
 function registerModule (id, moduleSpec) {
   allModules[id] = moduleSpec;

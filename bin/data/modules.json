@@ -5,13 +5,13 @@
     "image": "spotify"
   },
   {
-    "name": "Whiteboard",
-    "description": "Placeholder description about a whiteboard component that allows you to draw and leave notes to be rendered on screen.",
-    "image": "pencil"
-  },
-  {
     "name": "Gameboy",
     "description": "Placeholder description about a Gameboy emulator that is controlled by Twitch chat.",
     "image": "game"
+  },
+  {
+    "name": "Whiteboard",
+    "description": "Placeholder description about a whiteboard component that allows you to draw and leave notes to be rendered on screen.",
+    "image": "pencil"
   }
 ]

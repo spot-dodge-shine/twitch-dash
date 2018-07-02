@@ -19,7 +19,7 @@ margin-top: 4%;
 margin-bottom: 5%;
 `
 
-const TwitchLogin = ({ twitchLogin }) => {
+const TwitchLogin = () => {
 
   return (
     <Wrapper className='landing-image'>
