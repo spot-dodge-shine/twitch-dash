@@ -5,6 +5,7 @@ import { Header, Button } from 'semantic-ui-react'
 import { Slider } from 'react-semantic-ui-range'
 import { connect } from 'react-redux'
 import { SketchPicker } from 'react-color'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { EventEmitter } from 'events'
 export const events = new EventEmitter()
 
@@ -77,7 +78,7 @@ class WhiteboardDash extends Component {
     this.ctx.closePath()
     this.ctx.stroke()
 
-    const roomName = `/overlay/${this.props.userId}/2`
+    const roomName = `/overlay/${this.props.userId}/3`
 
     shouldBroadcast &&
         events.emit('draw', start, end, strokeColor, lineWidth, roomName);
@@ -90,26 +91,41 @@ class WhiteboardDash extends Component {
 
   handleClear = () => {
     this.ctx.clearRect(0, 0, 880, 495)
-    events.emit('clear', `/overlay/${this.props.userId}/2`)
+    events.emit('clear', `/overlay/${this.props.userId}/3`)
   }
 
   handleFill = () => {
     this.ctx.fillStyle = this.state.color
     this.ctx.fillRect(0, 0, 880, 495)
-    events.emit('fill', this.state.color, `/overlay/${this.props.userId}/2`)
+    events.emit('fill', this.state.color, `/overlay/${this.props.userId}/3`)
   }
 
   render() {
     const { lineWidth } = this.state
+    const { userId } = this.props
 
     return (
       <div style={{ margin: '20px' }}>
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}>
           <Header as='h3'>
             Whiteboard
             <Header.Subheader>
               Draw something to be displayed on stream!
             </Header.Subheader>
           </Header>
+          <CopyToClipboard
+            text={`${window.location.origin}/overlay/${userId}/3`}
+          >
+            <Button
+              content='Link'
+              style={{ margin: '1rem' }}
+            />
+          </CopyToClipboard>
+        </div>
           <div
             style={{
               display: 'flex',

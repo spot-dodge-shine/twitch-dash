@@ -19,15 +19,15 @@ module.exports = io => {
     })
 
     serverSocket.on('load-file-client', (userId, filename, binaryString) => {
-      serverSocket.to(`/overlay/${userId}/3`).emit('load-file-server', filename, binaryString)
+      serverSocket.to(`/overlay/${userId}/2`).emit('load-file-server', filename, binaryString)
     })
 
     serverSocket.on('pause-resume-client', userId => {
-      serverSocket.to(`/overlay/${userId}/3`).emit('pause-resume-server')
+      serverSocket.to(`/overlay/${userId}/2`).emit('pause-resume-server')
     })
 
     serverSocket.on('reset-client', userId => {
-      serverSocket.to(`/overlay/${userId}/3`).emit('reset-server')
+      serverSocket.to(`/overlay/${userId}/2`).emit('reset-server')
     })
 
     serverSocket.on('disconnect', () => {
