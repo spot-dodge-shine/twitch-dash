@@ -12,7 +12,7 @@ describe('TwitchLogin', () => {
   let twitchLogin
 
   beforeEach(() => {
-    twitchLogin = shallow(<TwitchLogin />)
+    twitchLogin = shallow(<TwitchLogin />).dive()
   })
 
   it('renders a single card', () => {
