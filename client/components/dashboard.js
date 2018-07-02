@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { allModules } from '../allModules'
 import DashModule from './dash-module'
 import {getModulesServer, toggleModuleServer} from '../store'
-import PayPalModule from './paypal/paypal-module'
+import PayPalDashboard from './paypal/paypal-dashboard'
 
 
 
@@ -23,7 +23,7 @@ class Dashboard extends Component {
             return <DashModule key={id} module={allModules[id]} />
           })
         }
-        <PayPalModule />
+        <PayPalDashboard />
       </div>
     )
   }

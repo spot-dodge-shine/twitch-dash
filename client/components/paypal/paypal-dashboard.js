@@ -6,10 +6,11 @@ import PayPalModule from './paypal-module'
 import PayPalLogin from './paypal-login'
 
 const PayPalDashboard = (props) => {
+  console.log(props.paypalId)
  return (
    <div>
     {
-      props.paypalId
+      props.paypalAccessToken
       ? <PayPalModule />
       : <PayPalLogin />
     }
@@ -19,7 +20,7 @@ const PayPalDashboard = (props) => {
 
 const mapState = state => {
   return {
-    paypalId: state.user.paypalId
+    paypalAccessToken: state.user.paypalAccessToken
   }
 }
 
