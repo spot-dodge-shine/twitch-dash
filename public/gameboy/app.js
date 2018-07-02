@@ -13,10 +13,9 @@ socket.on('connect', () => {
     console.log(files)
     loadFileReact(files)
   })
-  socket.on('input-from-chat', async keyCode => {
-    console.log('getting input', keyCode)
-    await gameboy.joypad.keyDown(keyCode)
-    return gameboy.joypad.keyUp(keyCode)
+  socket.on('input-from-chat', keyCode => {
+    gameboy.joypad.keyDown(keyCode)
+    setTimeout(() => gameboy.joypad.keyUp(keyCode), 10)
   })
 })
 
@@ -74,7 +73,6 @@ $('#rendering').click(function () { $('#frame').toggleClass('pixelated') });
 // Joypad
 
 $(document).keydown(function (e) {
-  console.log('keyDown', e)
   gameboy.joypad.keyDown(e.keyCode)
 });
 $(document).keyup(function (e) {
