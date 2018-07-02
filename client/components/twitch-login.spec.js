@@ -3,6 +3,7 @@ import React from 'react'
 import enzyme, {shallow} from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import TwitchLogin from './twitch-login'
+import store from '../store'
 import { Card } from 'semantic-ui-react'
 
 const adapter = new Adapter()
@@ -12,7 +13,7 @@ describe('TwitchLogin', () => {
   let twitchLogin
 
   beforeEach(() => {
-    twitchLogin = shallow(<TwitchLogin />).dive()
+    twitchLogin = shallow(<TwitchLogin store={store} />).dive()
   })
 
   it('renders a single card', () => {
