@@ -3,7 +3,6 @@ module.exports = io => {
     console.log(`A socket connection to the server has been made: ${serverSocket.id}`)
 
     serverSocket.on('join-room', room => {
-      console.log(room)
       serverSocket.join(room)
     })
 
@@ -19,14 +18,8 @@ module.exports = io => {
       serverSocket.to(room).emit('clear-from-server')
     })
 
-    serverSocket.on('test-from-client', userId => {
-      console.log(userId)
-      serverSocket.to(`/overlay/${userId}/3`).emit('test')
-    })
-
-    serverSocket.on('load-file-client', (userId, filename, array) => {
-      console.log('received binaryString on server')
-      serverSocket.to(`/overlay/${userId}/3`).emit('load-file-server', filename, array)
+    serverSocket.on('load-file-client', (userId, filename, binaryString) => {
+      serverSocket.to(`/overlay/${userId}/3`).emit('load-file-server', filename, binaryString)
     })
 
     serverSocket.on('disconnect', () => {

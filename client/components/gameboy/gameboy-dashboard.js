@@ -11,7 +11,6 @@ class GameboyDash extends Component {
     const { userId } = this.props
     const reader = new FileReader()
     reader.onload = function (evt) {
-      console.log(evt.target.result)
       const arrayBuffer = evt.target.result
       const array = new Uint8Array(arrayBuffer)
       const charArray = []

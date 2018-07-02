@@ -6,19 +6,23 @@ var roomName = window.location.pathname
 
 socket.on('connect', () => {
   socket.emit('join-room', roomName)
-  socket.on('hello', () => {
-    console.log('success!')
-  })
+
   socket.on('load-file-server', (filename, binaryString) => {
-    console.log('filename', filename)
-    console.log('binStr', binaryString.length)
-    const charArr = []
+    const charArray = []
+
     for(let char of binaryString) {
-      charArr.push(char.charCodeAt(0))
+      charArray.push(char.charCodeAt(0))
     }
-    const gameFile = new File([new Blob([new Uint8Array(charArr)], { type: 'application/octet-stream' })], filename)
+
+    const gameFile = new File([
+      new Blob([
+        new Uint8Array(charArray)
+      ], { type: 'application/octet-stream' })],
+      filename)
+
     loadFileReact(gameFile)
   })
+
   socket.on('input-from-chat', keyCode => {
     gameboy.joypad.keyDown(keyCode)
     setTimeout(() => gameboy.joypad.keyUp(keyCode), 100)
