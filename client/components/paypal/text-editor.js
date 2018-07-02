@@ -5,11 +5,16 @@ import createToolbarPlugin from 'draft-js-static-toolbar-plugin'
 import {Grid, Menu} from 'semantic-ui-react'
 // import editorStyles from './editorStyle.css'
 import 'draft-js-static-toolbar-plugin/lib/plugin.css'
+import styled from 'styled-components'
 
 const staticToolbarPlugin = createToolbarPlugin()
 const { Toolbar } = staticToolbarPlugin
 const plugins = [staticToolbarPlugin]
 const text = 'Your Billboard Message'
+
+const ToolbarStyle = styled.div`
+  display: flex;
+`
 
 class TextEditor extends Component {
   state = {
@@ -36,7 +41,9 @@ class TextEditor extends Component {
             plugins={plugins}
             ref={(element) => { this.editor = element; }}
           />
-          <Toolbar />
+          <ToolbarStyle>
+            <Toolbar />
+          </ToolbarStyle>
         </div>
       </div>
     );

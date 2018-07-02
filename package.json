@@ -19,7 +19,7 @@
     "start": "node server",
     "start-dev": "NODE_ENV='development' npm run build-client-watch & npm run start-server",
     "start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
-    "test": "NODE_ENV='test' mocha ./test-setup.js \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" --require @babel/polyfill --require @babel/register --require jsdom-global/register --exit"
+    "test": "NODE_ENV='test' mocha ./test-setup.js \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" --require @babel/polyfill --require @babel/register --require jsdom-global/register --require ignore-styles --exit"
   },
   "lint-staged": {
     "*.{js,jsx}": [
@@ -46,6 +46,7 @@
     "express-session": "^1.15.1",
     "history": "^4.6.3",
     "immutable": "^3.8.2",
+    "mock-require": "^3.0.2",
     "morgan": "^1.8.1",
     "node-vibrant": "^3.0.0",
     "passport": "^0.3.2",
@@ -93,6 +94,7 @@
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-react": "^7.7.0",
     "husky": "^0.14.3",
+    "ignore-styles": "^5.0.1",
     "jsdom": "^11.11.0",
     "jsdom-global": "^3.0.2",
     "lint-staged": "^7.1.3",
