@@ -6,10 +6,10 @@ var roomName = window.location.pathname
 
 socket.on('connect', () => {
   socket.emit('join-room', roomName)
-  socket.on('hello', () => {
-    console.log('wow this is messy')
-  })
   socket.on('test', () => {
+    console.log('success!')
+  })
+  socket.on('load-file-server', file => {
     console.log('success!')
   })
 })
