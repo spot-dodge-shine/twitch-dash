@@ -1,6 +1,6 @@
 [
   {
-    "name": "Spotify Musicpoll",
+    "name": "Spotify",
     "description": "Placeholder description about this super awesome Spotify integration that gives your viewers the chance to dictate what songs are playing on stream.",
     "image": "spotify"
   },
@@ -10,8 +10,8 @@
     "image": "pencil"
   },
   {
-    "name": "Text Box",
-    "description": "Placeholder description about a text box component that allows you to type in text to be rendered onto the screen",
-    "image": "text height"
+    "name": "Gameboy",
+    "description": "Placeholder description about a Gameboy emulator that is controlled by Twitch chat.",
+    "image": "game"
   }
 ]
