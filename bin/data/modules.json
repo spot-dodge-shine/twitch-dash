@@ -8,5 +8,10 @@
     "name": "Whiteboard",
     "description": "Placeholder description about a whiteboard component that allows you to draw and leave notes to be rendered on screen.",
     "image": "pencil"
+  },
+  {
+    "name": "Text Box",
+    "description": "Placeholder description about a text box component that allows you to type in text to be rendered onto the screen",
+    "image": "text height"
   }
 ]

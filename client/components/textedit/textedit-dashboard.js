@@ -11,7 +11,7 @@ const { Toolbar } = staticToolbarPlugin
 const plugins = [staticToolbarPlugin]
 const text = 'text'
 
-export default class MyEditor extends Component {
+class TextEditor extends Component {
   state = {
     editorState: createEditorStateWithText(text),
   };
@@ -42,3 +42,5 @@ export default class MyEditor extends Component {
     );
   }
 }
+
+export default TextEditor
