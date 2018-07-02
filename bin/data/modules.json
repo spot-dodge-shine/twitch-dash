@@ -1,6 +1,6 @@
 [
   {
-    "name": "Spotify Musicpoll",
+    "name": "Spotify",
     "description": "Placeholder description about this super awesome Spotify integration that gives your viewers the chance to dictate what songs are playing on stream.",
     "image": "spotify"
   },
@@ -8,5 +8,10 @@
     "name": "Whiteboard",
     "description": "Placeholder description about a whiteboard component that allows you to draw and leave notes to be rendered on screen.",
     "image": "pencil"
+  },
+  {
+    "name": "Gameboy",
+    "description": "Placeholder description about a Gameboy emulator that is controlled by Twitch chat.",
+    "image": "game"
   }
 ]

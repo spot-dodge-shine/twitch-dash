@@ -97,7 +97,7 @@ const startListening = () => {
 
   // set up our socket control center
   const io = socketio(server)
-  // twitchBot(io)
+  twitchBot(io)
   require('./socket')(io)
 }
 

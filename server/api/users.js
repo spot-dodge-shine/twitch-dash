@@ -162,6 +162,19 @@ router.get('/active', async (req, res, next) => {
   }
 })
 
+router.get('/twitch/:twitchId', async (req, res, next) => {
+  try {
+    const user = await User.findOne({
+      where: {
+        twitchLogin: req.params.twitchId
+      }
+    })
+    res.json(user.id)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.get('/username/:username/:enum', async (req, res, next) => {
   try {
     const user = await User.findOne({

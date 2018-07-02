@@ -1,7 +1,7 @@
 const tmi = require('tmi.js')
 const axios = require('axios')
 
-module.exports = async () => {
+module.exports = async (io) => {
   console.log('CREATING NEW TWITCHBOT')
   // Valid commands start with:
   let commandPrefix = '!'
@@ -24,22 +24,11 @@ module.exports = async () => {
     channels
   }
 
-    // .then((res) => {
-    //   return res.data.map((user) => {
-    //     return user.twitchLogin
-    //   })
-    // })
-    // .then((myChannels) => {
-    // })
-    // .catch((err) => {
-    //   console.log(err)
-    // })
-
   // Define configuration options:
   console.log('channels', channels)
 
   // These are the commands the bot knows (defined below):
-  let knownCommands = { echo, musicvote, random }
+  let knownCommands = { echo, musicvote, random, gameboy, help }
 
   // Function called when the "echo" command is issued:
   function echo (target, context, params) {
@@ -56,6 +45,11 @@ module.exports = async () => {
     }
   }
 
+  function help (target, context, params) {
+    const helpMessage = 'Hello! This channel uses Twitch Dash to add a few features to the stream. There are two modules currently available to viewers: Spotify music voting and the Gameboy emulator. For more information, please access the help commands dedicated to these modules through `!musicvote help` and `!gameboy help`!'
+    client.whisper(context.username, helpMessage)
+  }
+
   function random (target, context, params) {
     console.log('target', target)
     console.log('context', context)
@@ -65,9 +59,52 @@ module.exports = async () => {
     // io.emit('random')
   }
 
-  async function musicvote (target, context, params) {
+  async function gameboy (target, context, params) {
+    const { data } = await axios.get(`${appUrl}/api/users/twitch/${target.slice(1)}/`)
+    const emitKey = keyCode => io.to(`/overlay/${data}/3`).emit('input-from-chat', keyCode)
+    const gameboyHelp = 'Use the `!gameboy` command followed by a valid button input - for example, `!gameboy a` for pressing the a button. Valid button inputs are: a, b, up, down, left, right, start, and select. Please be sure to include a space and only use lowercase letters. Enjoy playing the game!'
     if (params.length) {
-      if (parseInt(params[0])) {
+      switch (params[0]) {
+        case 'help':
+          client.whisper(context.username, gameboyHelp)
+          break
+        case 'up':
+          emitKey('38')
+          break
+        case 'down':
+          emitKey('40')
+          break
+        case 'left':
+          emitKey('37')
+          break
+        case 'right':
+          emitKey('39')
+          break
+        case 'a':
+          emitKey('88')
+          break
+        case 'b':
+          emitKey('90')
+          break
+        case 'start':
+          emitKey('13')
+          break
+        case 'select':
+          emitKey('16')
+          break
+        default:
+          return
+      }
+    }
+  }
+
+  async function musicvote (target, context, params) {
+    const musicvoteHelp = 'Use the `!musicvote` command follow by a number between 1 and 3 to vote for the corresponding song choice displayed on stream. At the end of the current song, the song with the most number of votes will automatically play next!'
+    if (params.length) {
+      if (params[0] === 'help') {
+        client.whisper(context.username, musicvoteHelp)
+      }
+      else if (parseInt(params[0])) {
         // TODO: change link
         const {data} = await axios.get(`${appUrl}/api/users/username/${target.slice(1)}/${params[0]}`)
         await axios.post(`${appUrl}/api/votes`, {votechoiceId: data.id})
