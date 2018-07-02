@@ -23,29 +23,26 @@ const TwitchLogin = ({ twitchLogin }) => {
 
   return (
     <Wrapper className='landing-image'>
-      {twitchLogin
-        ? <Redirect to='/home' />
-        : <Card>
-            <Card.Content>
-              <Card.Header>
-              <TwitchDashLogo>
-                <Image src='/images/navbarlogo.png' />
-              </TwitchDashLogo>
-                {/* Welcome to twitch dash */}
-              </Card.Header>
-              <Card.Description>
-                <a href="/auth/twitch">
-                  <Button primary animated>
-                  <Button.Content visible>Login with twitch</Button.Content>
-                  <Button.Content hidden>
-                    <Icon name='twitch' />
-                  </Button.Content>
-                  </Button>
-                </a>
-              </Card.Description>
-            </Card.Content>
-          </Card>
-      }
+      <Card>
+        <Card.Content>
+          <Card.Header>
+          <TwitchDashLogo>
+            <Image src='/images/navbarlogo.png' />
+          </TwitchDashLogo>
+            {/* Welcome to twitch dash */}
+          </Card.Header>
+          <Card.Description>
+            <a href="/auth/twitch">
+              <Button primary animated>
+              <Button.Content visible>Login with twitch</Button.Content>
+              <Button.Content hidden>
+                <Icon name='twitch' />
+              </Button.Content>
+              </Button>
+            </a>
+          </Card.Description>
+        </Card.Content>
+      </Card>
     </Wrapper>
   )
 }
