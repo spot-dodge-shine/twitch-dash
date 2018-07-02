@@ -11,6 +11,9 @@ const Paypal = db.define('paypalAccount', {
   expiresIn: {
     type: Sequelize.INTEGER
   },
+  paypalRefreshToken: {
+    type: Sequelize.STRING,
+  },
   paypalLastRefresh: {
     type: Sequelize.DATE
   },

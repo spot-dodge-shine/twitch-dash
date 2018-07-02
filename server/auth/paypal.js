@@ -20,44 +20,6 @@ if (!process.env.PAYPAL_CLIENT_ID || !process.env.PAYPAL_CLIENT_SECRET) {
 
   router.get('/', async (req, res, next) => {
     try {
-      const config = {
-        auth: {
-          username: process.env.PAYPAL_CLIENT_ID,
-          password: process.env.PAYPAL_CLIENT_SECRET
-        },
-        headers: {
-          'Accept': 'application/json',
-          'Accept-Language': 'en_US',
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }
-      }
-  
-      const {data} = await axios.post('https://api.sandbox.paypal.com/v1/oauth2/token', 
-                                      qs.stringify({'grant_type': 'client_credentials'}), 
-                                      config)
-
-      const paypalAccount = await Paypal.findOne({ where: { userId: req.user.id } })
-      let retPaypal
-      if (paypalAccount) {
-        retPaypal = paypalAccount
-        req.user.paypalAccessToken = data.access_token
-      } else {
-        const userInfo = await axios.get('https://api.sandbox.paypal.com/v1/oauth2/token/userinfo?schema=openid', {
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + data.access_token
-          }
-        })
-        const newAccount = await Paypal.create({
-          paypalId: userInfo.data.user_id,
-          paypalAccessToken: data.access_token,
-          expiresIn: data.expires_in,
-          paypalLastRefresh: Date.now(),
-          userId: req.user.id
-        })
-        req.user.paypalAccessToken = data.access_token
-        retPaypal = newAccount
-      }
       res.redirect(`https://www.sandbox.paypal.com/webapps/auth/protocol/openidconnect/v1/authorize?response_type=code&client_id=${process.env.PAYPAL_CLIENT_ID}&scope=openid&redirect_uri=${process.env.PAYPAL_CALLBACK_URL}`)
     } catch (err) {
       console.error(err)
@@ -67,8 +29,31 @@ if (!process.env.PAYPAL_CLIENT_ID || !process.env.PAYPAL_CLIENT_SECRET) {
   router.get('/callback', async (req, res, next) => {
     try {
       const {code} = req.query
-      const paypalAcct = await Paypal.findOne({where: {userId: req.user.id }})
-      await paypalAcct.update({ paypalAuthCode: code})
+      const {data} = await axios.post('https://api.sandbox.paypal.com/v1/identity/openidconnect/tokenservice', 
+                                qs.stringify({'grant_type': 'authorization_code', 'code': code}),
+                                {auth: {username: process.env.PAYPAL_CLIENT_ID, password: process.env.PAYPAL_CLIENT_SECRET}})
+      
+      let paypalAccount = await Paypal.findOne({ where: { userId: req.user.id } })
+      if (paypalAccount) {
+        req.user.paypalAccessToken = data.access_token
+      } else {
+        const userInfo = await axios.get('https://api.sandbox.paypal.com/v1/oauth2/token/userinfo?schema=openid', {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + data.access_token
+          }
+        })
+        paypalAccount = await Paypal.create({
+          paypalId: userInfo.data.user_id,
+          paypalAccessToken: data.access_token,
+          expiresIn: data.expires_in,
+          paypalRefreshToken: data.refresh_token,
+          paypalLastRefresh: Date.now(),
+          userId: req.user.id
+        })
+        req.user.paypalAccessToken = data.access_token
+      }
+      await paypalAccount.update({ paypalAuthCode: code})
       req.user.paypalAuthcode = code
       res.redirect('/home')
     } catch (err) {
