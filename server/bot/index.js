@@ -39,7 +39,7 @@ module.exports = async (io) => {
   console.log('channels', channels)
 
   // These are the commands the bot knows (defined below):
-  let knownCommands = { echo, musicvote, random, hello }
+  let knownCommands = { echo, musicvote, random, gameboy }
 
   // Function called when the "echo" command is issued:
   function echo (target, context, params) {
@@ -65,9 +65,39 @@ module.exports = async (io) => {
     // io.emit('random')
   }
 
-  async function hello (target, context, params) {
+  async function gameboy (target, context, params) {
     const { data } = await axios.get(`${appUrl}/api/users/twitch/${target.slice(1)}/`)
-    io.to(`/overlay/${data}/3`).emit('hello')
+    const emitKey = keyCode => io.to(`/overlay/${data}/3`).emit('input-from-chat', keyCode)
+    if (params.length) {
+      switch (params[0]) {
+        case 'up':
+          emitKey('38')
+          break
+        case 'down':
+          emitKey('40')
+          break
+        case 'left':
+          emitKey('37')
+          break
+        case 'right':
+          emitKey('39')
+          break
+        case 'a':
+          emitKey('88')
+          break
+        case 'b':
+          emitKey('90')
+          break
+        case 'start':
+          emitKey('13')
+          break
+        case 'select':
+          emitKey('16')
+          break
+        default:
+          return
+      }
+    }
   }
 
   async function musicvote (target, context, params) {

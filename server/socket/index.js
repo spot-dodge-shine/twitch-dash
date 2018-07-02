@@ -24,9 +24,9 @@ module.exports = io => {
       serverSocket.to(`/overlay/${userId}/3`).emit('test')
     })
 
-    serverSocket.on('load-file-client', (userId, file) => {
-      console.log('got to server')
-      serverSocket.to(`/overlay/${userId}/3`).emit('load-file-server', file)
+    serverSocket.on('load-file-client', (userId, files) => {
+      console.log(files)
+      serverSocket.to(`/overlay/${userId}/3`).emit('load-file-server', files)
     })
 
     serverSocket.on('disconnect', () => {

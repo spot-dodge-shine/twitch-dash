@@ -7,8 +7,8 @@ import { EventEmitter } from 'events'
 export const gameboyEvents = new EventEmitter()
 
 class GameboyDash extends Component {
-  handleFile = file => {
-    gameboyEvents.emit('load-file', this.props.userId, file)
+  handleFile = files => {
+    gameboyEvents.emit('load-file', this.props.userId, files)
   }
 
   render () {

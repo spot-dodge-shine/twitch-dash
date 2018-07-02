@@ -6,11 +6,17 @@ var roomName = window.location.pathname
 
 socket.on('connect', () => {
   socket.emit('join-room', roomName)
-  socket.on('test', () => {
+  socket.on('hello', () => {
     console.log('success!')
   })
-  socket.on('load-file-server', file => {
-    console.log('success!')
+  socket.on('load-file-server', files => {
+    console.log(files)
+    loadFileReact(files)
+  })
+  socket.on('input-from-chat', async keyCode => {
+    console.log('getting input', keyCode)
+    await gameboy.joypad.keyDown(keyCode)
+    return gameboy.joypad.keyUp(keyCode)
   })
 })
 
@@ -25,6 +31,18 @@ gameboy.gpu.on('frame', function (offcanvas) {
 
 // Buttons
 
+function loadFileReact (files) {
+  if (!files.length) return;
+
+  var reader = new FileReader();
+  reader.onloadend = function () {
+      gameboy.loadCart(reader.result);
+      gameboy.start();
+  };
+  console.log(files[0])
+  reader.readAsArrayBuffer(files[0]);
+}
+
 function loadFile () {
     if (!this.files.length) return;
 
@@ -33,6 +51,7 @@ function loadFile () {
         gameboy.loadCart(reader.result);
         gameboy.start();
     };
+    console.log(this.files[0])
     reader.readAsArrayBuffer(this.files[0]);
 }
 
@@ -54,6 +73,11 @@ $('#rendering').click(function () { $('#frame').toggleClass('pixelated') });
 
 // Joypad
 
-$(document).keydown(function (e) { gameboy.joypad.keyDown(e.keyCode) });
-$(document).keyup(function (e) { gameboy.joypad.keyUp(e.keyCode) });
+$(document).keydown(function (e) {
+  console.log('keyDown', e)
+  gameboy.joypad.keyDown(e.keyCode)
+});
+$(document).keyup(function (e) {
+  gameboy.joypad.keyUp(e.keyCode)
+});
 

@@ -26,9 +26,9 @@ gameboyEvents.on('test', userId => {
   clientSocket.emit('test-from-client', userId)
 })
 
-gameboyEvents.on('load-file', (userId, file) => {
-  console.log('getting to frontend')
-  clientSocket.emit('load-file-client', userId, file)
+gameboyEvents.on('load-file', (userId, files) => {
+  console.log(files)
+  clientSocket.emit('load-file-client', userId, files)
 })
 
 export default clientSocket
