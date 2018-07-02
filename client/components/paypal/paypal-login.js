@@ -1,3 +1,5 @@
+'use strict'
+
 import React from 'react'
 import {Button, Icon, Image, Menu} from 'semantic-ui-react'
 import styled from 'styled-components'
