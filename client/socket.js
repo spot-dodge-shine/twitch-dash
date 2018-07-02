@@ -26,4 +26,12 @@ gameboyEvents.on('load-file', (userId, filename, binaryString) => {
   clientSocket.emit('load-file-client', userId, filename, binaryString)
 })
 
+gameboyEvents.on('pause-resume', userId => {
+  clientSocket.emit('pause-resume-client', userId)
+})
+
+gameboyEvents.on('reset', userId => {
+  clientSocket.emit('reset-client', userId)
+})
+
 export default clientSocket

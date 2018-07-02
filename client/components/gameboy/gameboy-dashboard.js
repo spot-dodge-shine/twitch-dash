@@ -2,11 +2,18 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Card, Button, Header, Input } from 'semantic-ui-react'
+import { Card, Button, Header, Input, Icon } from 'semantic-ui-react'
 import { EventEmitter } from 'events'
 export const gameboyEvents = new EventEmitter()
 
 class GameboyDash extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      isPlaying: false
+    }
+  }
+
   handleFile = files => {
     const { userId } = this.props
     const reader = new FileReader()
@@ -21,6 +28,12 @@ class GameboyDash extends Component {
       gameboyEvents.emit('load-file', userId, files[0].name, binaryString)
     }
     reader.readAsArrayBuffer(files[0])
+    this.setState({ isPlaying: true })
+  }
+
+  handlePauseResume = userId => {
+    gameboyEvents.emit('pause-resume', userId)
+    this.setState(prevState => ({ isPlaying: !prevState.isPlaying }))
   }
 
   render () {
@@ -38,17 +51,21 @@ class GameboyDash extends Component {
           <Input
             type='file'
             accept='.gb'
-            content='Select game'
             onChange={ evt => this.handleFile(evt.target.files) }
           />
+          <p>Select a game above</p>
           <div>
             <Button
               content='Open'
               onClick={ () => window.open(`/overlay/${userId}/3`) }
             />
             <Button
-              content='Test'
-              onClick={ () => gameboyEvents.emit('test', userId) }
+              content={ this.state.isPlaying ? 'Pause' : 'Play' }
+              onClick={ () => this.handlePauseResume(userId) }
+            />
+            <Button
+              content='Reset'
+              onClick={ () => gameboyEvents.emit('reset', userId) }
             />
           </div>
         </Card.Content>

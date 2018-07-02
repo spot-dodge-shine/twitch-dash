@@ -23,6 +23,14 @@ socket.on('connect', () => {
     loadFileReact(gameFile)
   })
 
+  socket.on('pause-resume-server', () => {
+    gameboy.pauseResume()
+  })
+
+  socket.on('reset-server', () => {
+    gameboy.reset()
+  })
+
   socket.on('input-from-chat', keyCode => {
     gameboy.joypad.keyDown(keyCode)
     setTimeout(() => gameboy.joypad.keyUp(keyCode), 100)
@@ -41,7 +49,6 @@ gameboy.gpu.on('frame', function (offcanvas) {
 // Buttons
 
 function loadFileReact (file) {
-  console.log('in loadFileReact', file)
   if (!file) return;
 
   var reader = new FileReader();
@@ -49,7 +56,6 @@ function loadFileReact (file) {
       gameboy.loadCart(reader.result);
       gameboy.start();
   };
-  console.log(file)
   reader.readAsArrayBuffer(file);
 }
 
@@ -61,7 +67,6 @@ function loadFile () {
         gameboy.loadCart(reader.result);
         gameboy.start();
     };
-    console.log(this.files[0])
     reader.readAsArrayBuffer(this.files[0]);
 }
 
@@ -75,18 +80,18 @@ function fullscreen () {
     .call(canvas);
 }
 
-$('#input').change(loadFile);
-$('#fullscreen').click(fullscreen);
-$('#pause').click(function () { gameboy.pauseResume() });
-$('#reset').click(function () { gameboy.reset() });
-$('#rendering').click(function () { $('#frame').toggleClass('pixelated') });
+// $('#input').change(loadFile);
+// $('#fullscreen').click(fullscreen);
+// $('#pause').click(function () { gameboy.pauseResume() });
+// $('#reset').click(function () { gameboy.reset() });
+// $('#rendering').click(function () { $('#frame').toggleClass('pixelated') });
 
-// Joypad
+// // Joypad
 
-$(document).keydown(function (e) {
-  gameboy.joypad.keyDown(e.keyCode)
-});
-$(document).keyup(function (e) {
-  gameboy.joypad.keyUp(e.keyCode)
-});
+// $(document).keydown(function (e) {
+//   gameboy.joypad.keyDown(e.keyCode)
+// });
+// $(document).keyup(function (e) {
+//   gameboy.joypad.keyUp(e.keyCode)
+// });
 
