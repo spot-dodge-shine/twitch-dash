@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { Card, Dropdown, Button } from 'semantic-ui-react'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 import styled from 'styled-components'
 
 const YourPlaylistText = styled.div`
@@ -20,7 +21,7 @@ const ButtonStyle = styled.div`
 `
 
 const PlaylistDropdown = props => {
-  const { trackData, handleChange, handlePlay, selectedPlaylistName } = props
+  const { trackData, handleChange, handlePlay, selectedPlaylistName, userId } = props
 
   return (
     <Card.Header>
@@ -42,6 +43,13 @@ const PlaylistDropdown = props => {
         <Button onClick={handlePlay}>
           Play Song and Start Poll
         </Button>
+        <CopyToClipboard
+          text={`${window.location.origin}/overlay/${userId}/1`}
+        >
+          <Button>
+            Link
+          </Button>
+        </CopyToClipboard>
       </ButtonStyle>
     </Card.Header>
   )
