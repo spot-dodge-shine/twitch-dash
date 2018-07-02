@@ -6,8 +6,6 @@ import {getModulesServer, toggleModuleServer} from '../store'
 import PayPalModule from './paypal/paypal-module'
 
 
-
-
 class Dashboard extends Component {
 
   constructor(props) {

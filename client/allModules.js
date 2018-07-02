@@ -4,6 +4,7 @@ import WhiteboardDashboard from './components/whiteboard/whiteboard-dashboard'
 import WhiteboardOverlay from './components/whiteboard/whiteboard-overlay'
 import GameboyDashboard from './components/gameboy/gameboy-dashboard'
 import GameboyOverlay from './components/gameboy/gameboy-overlay'
+import PaypalDashboard from './components/paypal/paypal-dashboard'
 import axios from 'axios'
 
 let allModules = {}
@@ -18,6 +19,8 @@ registerModule(1, { moduleId: 1,
 registerModule(2, { moduleId: 2,
   dashboardComponent: GameboyDashboard, overlayComponent: GameboyOverlay })
 registerModule(3, { moduleId: 3,
+  dashboardComponent: PaypalDashboard, overlayComponent: PaypalDashboard })
+registerModule(4, { moduleId: 4,
   dashboardComponent: WhiteboardDashboard, overlayComponent: WhiteboardOverlay })
 
 
