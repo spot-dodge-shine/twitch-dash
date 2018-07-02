@@ -77,6 +77,8 @@ html, body, #app {
 
 .options {
   margin-bottom: 20px;
+}
+
 .sketch-picker {
   height: 380px !important;
   margin-bottom: 1.5rem;
