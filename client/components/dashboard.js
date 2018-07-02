@@ -22,7 +22,7 @@ class Dashboard extends Component {
             return <DashModule key={id} module={allModules[id]} />
           })
         }
-        <TextEditor />
+        {/* <TextEditor /> */}
       </div>
     )
   }
