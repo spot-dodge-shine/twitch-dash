@@ -117,6 +117,7 @@ export class SpotifyModule extends Component {
             handleChange = {this.handleChange}
             handlePlay = {this.handlePlay}
             selectedPlaylistName = {playlistName}
+            userId = {this.props.user.id}
           />
           <SpotifyPlayer />
           {
