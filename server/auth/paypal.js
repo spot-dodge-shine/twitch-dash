@@ -1,10 +1,9 @@
 'use strict'
 
-const passport = require('passport')
 const router = require('express').Router()
-const PaypalStrategy = require('passport-paypal-token')
 const axios = require('axios')
 const qs = require('qs')
+const { Paypal } = require('../db/models')
 
 module.exports = router
 
@@ -18,39 +17,6 @@ if (!process.env.PAYPAL_CLIENT_ID || !process.env.PAYPAL_CLIENT_SECRET) {
     callbackURL: process.env.PAYPAL_CALLBACK_URL,
     passReqToCallback: true
   }
-
-  // const strategy = new PaypalStrategy(paypalConfig,
-  //   async (req, accessToken, refreshToken, profile, done) => {
-  //     try {
-  //       console.log('profile>>>>>>>>>>>>>>>', profile)
-  //       // const spotifyAcct = await Spotify.findOne({ where: { userId: req.user.id } })
-  //       // if (spotifyAcct) {
-  //       //   req.user.spotifyId = profile.id
-  //       //   req.user.spotifyAccessToken = accessToken
-  //       //   done(null, req.user)
-  //       // } else {
-  //       //   await Spotify.create({
-  //       //     spotifyEmail: profile._json.email,
-  //       //     spotifyHref: profile.href,
-  //       //     spotifyId: profile.id,
-  //       //     spotifyImg: profile.photos[0],
-  //       //     spotifyPremium: (profile.product === 'premium'),
-  //       //     spotifyAccessToken: accessToken,
-  //       //     spotifyRefreshToken: refreshToken,
-  //       //     userId: req.user.id
-  //       //   })
-  //       //   req.user.spotifyId = profile.id
-  //       //   req.user.spotifyAccessToken = accessToken
-  //       //   done(null, req.user)
-  //       // }
-  //       done(null, req.user)
-  //     } catch (err) {
-  //       console.log('hebroke')
-  //       console.error(err)
-  //     }
-  // })
-
-  // passport.use(strategy)
 
   router.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
@@ -73,24 +39,48 @@ if (!process.env.PAYPAL_CLIENT_ID || !process.env.PAYPAL_CLIENT_SECRET) {
         }
       }
   
-      const myRes = await axios.post('https://api.sandbox.paypal.com/v1/oauth2/token', qs.stringify({'grant_type': 'client_credentials'}), config)
-      res.json(myRes.data)
-    }catch (err) {
+      const {data} = await axios.post('https://api.sandbox.paypal.com/v1/oauth2/token', qs.stringify({'grant_type': 'client_credentials'}), config)
+      const paypalAccount = await Paypal.findOne({ where: { userId: req.user.id } })
+      console.log('found account>>>>', paypalAccount)
+      let retPaypal
+      if (paypalAccount) {
+        retPaypal = paypalAccount
+        req.user.paypalAccessToken = data.access_token
+      } else {
+        const userInfo = await axios.get('https://api.sandbox.paypal.com/v1/oauth2/token/userinfo?schema=openid', {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + data.access_token
+          }
+        })
+        const newAccount = await Paypal.create({
+          paypalId: userInfo.data.user_id,
+          paypalAccessToken: data.access_token,
+          expiresIn: data.expires_in,
+          paypalLastRefresh: Date.now(),
+          userId: req.user.id
+        })
+        req.user.paypalAccessToken = data.access_token
+        retPaypal = newAccount
+      }
+      console.log('rePaypal', retPaypal)
+      res.redirect('/home')
+    } catch (err) {
       console.error(err)
     }
   })
 
-  router.get('/callback', passport.authenticate('paypal-token', { failureRedirect: '/' }),
-    async (req, res, next) => {
-      try {
-        console.log('req.query>>>>>>>>>>>>>>', req.query)
-        const { code, state } = req.query
-        // const spotifyAcct = await Spotify.findOne({ where: { userId: req.user.id }})
-        // await spotifyAcct.update({ spotifyAuthCode: code, spotifyState: state })
-        res.redirect('/home')
-      } catch (err) {
-        next(err)
-      }
-    }
-  )
+  // router.get('/callback', passport.authenticate('paypal-token', { failureRedirect: '/' }),
+  //   async (req, res, next) => {
+  //     try {
+  //       console.log('req.query>>>>>>>>>>>>>>', req.query)
+  //       const { code, state } = req.query
+  //       // const spotifyAcct = await Spotify.findOne({ where: { userId: req.user.id }})
+  //       // await spotifyAcct.update({ spotifyAuthCode: code, spotifyState: state })
+  //       res.redirect('/home')
+  //     } catch (err) {
+  //       next(err)
+  //     }
+  //   }
+  // )
 }
