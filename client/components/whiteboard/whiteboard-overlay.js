@@ -1,8 +1,6 @@
 'use strict'
 
 import React, { Component } from 'react'
-import { Header } from 'semantic-ui-react'
-import { connect } from 'react-redux'
 import clientSocket from '../../socket'
 
 class WhiteboardOverlay extends Component {
