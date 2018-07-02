@@ -63,10 +63,11 @@ class UserHome extends Component {
            <Menu.Item as='a'>
               <Image src='/images/navbarlogo.png' />
             </Menu.Item>
-          {
-          Object.keys(allModules).map(id => {
-            return <SidebarItem key={id} name={allModules[id].name} image={allModules[id].image} value={id} onClick={this.toggleModule} />
-          })
+          { (this.props.modules.active.length || this.props.modules.deactivated.length) ?
+              Object.keys(allModules).map(id => {
+                return <SidebarItem key={id} name={allModules[id].name} image={allModules[id].image} value={id} onClick={this.toggleModule} />
+              }) :
+              <div/>
           }
           </Sidebar>
 
@@ -92,13 +93,14 @@ const mapState = state => {
     user: state.user,
     spotifyId: state.user.spotifyId,
     twitchLogin: state.user.twitchLogin,
+    modules: state.modules
   }
 }
 
 const mapDispatch = dispatch => {
   return {
     toggleModuleServerProps: moduleId => dispatch(toggleModuleServer(moduleId)),
-    getModulesServerProps: () => dispatch(getModulesServer())
+    getModulesServerProps: () => dispatch(getModulesServer()),
   }
 }
 
