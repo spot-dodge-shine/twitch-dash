@@ -33,15 +33,11 @@ const BodyWrapper = styled.div`
   height: 100%;
 `
 
-const MenuHeight = styled.div`
-  height: 100%;
-`
-
 class UserHome extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      visibility: true
+      visibility: false
     }
   }
 
