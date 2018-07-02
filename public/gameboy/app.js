@@ -9,13 +9,19 @@ socket.on('connect', () => {
   socket.on('hello', () => {
     console.log('success!')
   })
-  socket.on('load-file-server', files => {
-    console.log(files)
-    loadFileReact(files)
+  socket.on('load-file-server', (filename, binaryString) => {
+    console.log('filename', filename)
+    console.log('binStr', binaryString.length)
+    const charArr = []
+    for(let char of binaryString) {
+      charArr.push(char.charCodeAt(0))
+    }
+    const gameFile = new File([new Blob([new Uint8Array(charArr)], { type: 'application/octet-stream' })], filename)
+    loadFileReact(gameFile)
   })
   socket.on('input-from-chat', keyCode => {
     gameboy.joypad.keyDown(keyCode)
-    setTimeout(() => gameboy.joypad.keyUp(keyCode), 10)
+    setTimeout(() => gameboy.joypad.keyUp(keyCode), 100)
   })
 })
 
@@ -30,16 +36,17 @@ gameboy.gpu.on('frame', function (offcanvas) {
 
 // Buttons
 
-function loadFileReact (files) {
-  if (!files.length) return;
+function loadFileReact (file) {
+  console.log('in loadFileReact', file)
+  if (!file) return;
 
   var reader = new FileReader();
   reader.onloadend = function () {
       gameboy.loadCart(reader.result);
       gameboy.start();
   };
-  console.log(files[0])
-  reader.readAsArrayBuffer(files[0]);
+  console.log(file)
+  reader.readAsArrayBuffer(file);
 }
 
 function loadFile () {

@@ -26,9 +26,9 @@ gameboyEvents.on('test', userId => {
   clientSocket.emit('test-from-client', userId)
 })
 
-gameboyEvents.on('load-file', (userId, files) => {
-  console.log(files)
-  clientSocket.emit('load-file-client', userId, files)
+gameboyEvents.on('load-file', (userId, filename, array) => {
+  console.log('received binaryString on client')
+  clientSocket.emit('load-file-client', userId, filename, array)
 })
 
 export default clientSocket

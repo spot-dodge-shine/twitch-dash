@@ -8,7 +8,20 @@ export const gameboyEvents = new EventEmitter()
 
 class GameboyDash extends Component {
   handleFile = files => {
-    gameboyEvents.emit('load-file', this.props.userId, files)
+    const { userId } = this.props
+    const reader = new FileReader()
+    reader.onload = function (evt) {
+      console.log(evt.target.result)
+      const arrayBuffer = evt.target.result
+      const array = new Uint8Array(arrayBuffer)
+      const charArray = []
+      array.forEach(elem => {
+        charArray.push(String.fromCharCode(elem))
+      })
+      const binaryString = charArray.join('')
+      gameboyEvents.emit('load-file', userId, files[0].name, binaryString)
+    }
+    reader.readAsArrayBuffer(files[0])
   }
 
   render () {

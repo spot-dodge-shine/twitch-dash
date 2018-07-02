@@ -24,9 +24,9 @@ module.exports = io => {
       serverSocket.to(`/overlay/${userId}/3`).emit('test')
     })
 
-    serverSocket.on('load-file-client', (userId, files) => {
-      console.log(files)
-      serverSocket.to(`/overlay/${userId}/3`).emit('load-file-server', files)
+    serverSocket.on('load-file-client', (userId, filename, array) => {
+      console.log('received binaryString on server')
+      serverSocket.to(`/overlay/${userId}/3`).emit('load-file-server', filename, array)
     })
 
     serverSocket.on('disconnect', () => {
