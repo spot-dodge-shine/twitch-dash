@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Card, Button, Header, Input, Icon } from 'semantic-ui-react'
+import { Card, Button, Header, Input } from 'semantic-ui-react'
 import { EventEmitter } from 'events'
 export const gameboyEvents = new EventEmitter()
 
