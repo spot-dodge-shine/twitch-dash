@@ -33,13 +33,16 @@ const BodyWrapper = styled.div`
   height: 100%;
 `
 
-const MenuHeight = styled.div`
-  height: 100%;
-`
-
 class UserHome extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      visibility: false
+    }
+  }
+
+  handleSidebarToggle = () => {
+    this.setState(prevState => ({ visibility: !prevState.visibility }))
   }
 
   toggleModule = (event) => {
@@ -49,20 +52,19 @@ class UserHome extends Component {
   render() {
     return (
       <BodyWrapper>
-        <MenuHeight>
-        <Sidebar.Pushable as={Segment}>
-        <NavBar />
+        <NavBar handleSidebarToggle={this.handleSidebarToggle} />
+        <Sidebar.Pushable
+          as={Segment}
+          attached='bottom'
+        >
           <Sidebar
             as={Menu}
             animation='overlay'
             icon='labeled'
             vertical
-            visible
+            visible={this.state.visibility}
             width='thin'
           >
-           <Menu.Item as='a'>
-              <Image src='/images/navbarlogo.png' />
-            </Menu.Item>
           {
           Object.keys(allModules).map(id => {
             return <SidebarItem key={id} name={allModules[id].name} image={allModules[id].image} value={id} onClick={this.toggleModule} />
@@ -71,17 +73,14 @@ class UserHome extends Component {
           </Sidebar>
 
           <Sidebar.Pusher>
-            <Segment basic>
-              <WelcomeTextStyle>
-                <WelcomeText />
-              </WelcomeTextStyle>
-              <ModuleWrapper>
-                    <Dashboard />
-              </ModuleWrapper>
-            </Segment>
+            <WelcomeTextStyle>
+              <WelcomeText />
+            </WelcomeTextStyle>
+            <ModuleWrapper>
+              <Dashboard />
+            </ModuleWrapper>
           </Sidebar.Pusher>
         </Sidebar.Pushable>
-        </MenuHeight>
       </BodyWrapper>
     )
   }
