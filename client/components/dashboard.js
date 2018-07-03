@@ -4,8 +4,6 @@ import { Grid, Card } from 'semantic-ui-react'
 import { allModules } from '../allModules'
 import DashModule from './dash-module'
 import {getModulesServer, toggleModuleServer} from '../store'
-import PayPalModule from './paypal/paypal-module'
-
 
 class Dashboard extends Component {
 
@@ -19,7 +17,7 @@ class Dashboard extends Component {
 
     return (
       <div>
-      <Grid columns={3}>
+      <Grid columns={2}>
         <Grid.Row>
           <Grid.Column>
             {
@@ -35,21 +33,13 @@ class Dashboard extends Component {
                 : <Card style={{ width: '425px', visibility: 'hidden' }} />
             }
           </Grid.Column>
-          <Grid.Column>
-            {
-              active.indexOf(3) > -1
-                ? <DashModule module={allModules[3]} />
-                : <Card style={{ width: '425px', visibility: 'hidden' }} />
-            }
-          </Grid.Column>
         </Grid.Row>
       </Grid>
         {
-          active.indexOf(4) > -1
-            ? <DashModule module={allModules[4]} />
+          active.indexOf(3) > -1
+            ? <DashModule module={allModules[3]} />
             : null
         }
-        {/* <PayPalModule /> */}
       </div>
     )
   }
