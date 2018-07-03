@@ -8,9 +8,6 @@ const Paypal = db.define('paypalAccount', {
   paypalAccessToken: {
     type: Sequelize.STRING
   },
-  expiresIn: {
-    type: Sequelize.INTEGER
-  },
   paypalRefreshToken: {
     type: Sequelize.STRING,
   },

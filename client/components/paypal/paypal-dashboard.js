@@ -6,7 +6,6 @@ import PayPalModule from './paypal-module'
 import PayPalLogin from './paypal-login'
 
 const PayPalDashboard = (props) => {
-  console.log(props.paypalId)
  return (
    <div>
     {

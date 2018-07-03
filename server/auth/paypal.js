@@ -20,7 +20,21 @@ if (!process.env.PAYPAL_CLIENT_ID || !process.env.PAYPAL_CLIENT_SECRET) {
 
   router.get('/', async (req, res, next) => {
     try {
-      res.redirect(`https://www.sandbox.paypal.com/webapps/auth/protocol/openidconnect/v1/authorize?response_type=code&client_id=${process.env.PAYPAL_CLIENT_ID}&scope=openid&redirect_uri=${process.env.PAYPAL_CALLBACK_URL}`)
+      const {data} = await axios.post('https://api.sandbox.paypal.com/v1/oauth2/token',
+                  qs.stringify({'grant_type': 'client_credentials'}),
+                  {
+                    headers: {
+                      Accept: 'application/json',
+                      'Accept-Language': 'en_US'
+                    },
+                    auth: {
+                      username: process.env.PAYPAL_CLIENT_ID,
+                      password: process.env.PAYPAL_CLIENT_SECRET
+                    }
+                  })
+      req.user.paypalAccessToken = data.access_token
+      req.user.paypalExpires = Date.now() + (1000 * data.expires_in)
+      res.redirect(`https://www.sandbox.paypal.com/webapps/auth/protocol/openidconnect/v1/authorize?response_type=code&client_id=${process.env.PAYPAL_CLIENT_ID}&scope=openid+https://uri.paypal.com/services/invoicing&redirect_uri=${process.env.PAYPAL_CALLBACK_URL}`)
     } catch (err) {
       console.error(err)
     }
@@ -35,7 +49,8 @@ if (!process.env.PAYPAL_CLIENT_ID || !process.env.PAYPAL_CLIENT_SECRET) {
       
       let paypalAccount = await Paypal.findOne({ where: { userId: req.user.id } })
       if (paypalAccount) {
-        req.user.paypalAccessToken = data.access_token
+        await paypalAccount.update({expiresIn: data.expires_in})
+        req.user.paypalUserAccessToken = data.access_token
       } else {
         const userInfo = await axios.get('https://api.sandbox.paypal.com/v1/oauth2/token/userinfo?schema=openid', {
           headers: {
@@ -45,33 +60,18 @@ if (!process.env.PAYPAL_CLIENT_ID || !process.env.PAYPAL_CLIENT_SECRET) {
         })
         paypalAccount = await Paypal.create({
           paypalId: userInfo.data.user_id,
-          paypalAccessToken: data.access_token,
-          expiresIn: data.expires_in,
+          paypalAccessToken: req.user.paypalAccessToken,
           paypalRefreshToken: data.refresh_token,
           paypalLastRefresh: Date.now(),
           userId: req.user.id
         })
-        req.user.paypalAccessToken = data.access_token
+        req.user.paypalUserAccessToken = data.access_token
       }
       await paypalAccount.update({ paypalAuthCode: code})
       req.user.paypalAuthcode = code
       res.redirect('/home')
     } catch (err) {
-      console.error(err)
+      next(err)
     }
   })
-
-  // router.get('/callback', passport.authenticate('paypal-token', { failureRedirect: '/' }),
-  //   async (req, res, next) => {
-  //     try {
-  //       console.log('req.query>>>>>>>>>>>>>>', req.query)
-  //       const { code, state } = req.query
-  //       // const spotifyAcct = await Spotify.findOne({ where: { userId: req.user.id }})
-  //       // await spotifyAcct.update({ spotifyAuthCode: code, spotifyState: state })
-  //       res.redirect('/home')
-  //     } catch (err) {
-  //       next(err)
-  //     }
-  //   }
-  // )
 }

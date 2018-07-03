@@ -1,9 +1,11 @@
+// TODO: Finish refresh token stuff
+
 // 'use strict'
 
 // const { Paypal } = require('../db/models')
 
-// const refreshSpotifyAccessToken = (req, res, next, spotifyAcct) => {
-//   let spotifyAccessToken
+// const refreshPaypalAccessToken = (req, res, next, spotifyAcct) => {
+//   let paypalAccessToken
 //   refresh(spotifyAcct.spotifyRefreshToken,
 //     process.env.SPOTIFY_CLIENT_ID,
 //     process.env.SPOTIFY_CLIENT_SECRET,
