@@ -3,33 +3,16 @@
 import React, {Component} from 'react'
 import { Menu, Icon, Sidebar } from 'semantic-ui-react'
 import {connect} from 'react-redux'
-import {getModulesServer, toggleModuleServer} from '../store'
 
 class SidebarItem extends Component {
-  constructor (props){
-
-    super(props)
-    this.state = {
-      active: (this.props.modules.active.includes(Number(this.props.value)))
-    }
-  }
 
   handleClick = () => {
     this.props.onClick(this.props.value)
-    if (this.state.active) {
-      this.setState({
-        active: false
-      })
-    } else {
-      this.setState({
-        active: true
-      })
-    }
   }
 
-  render(){
+  render() {
     return (
-      <Menu.Item as='a' active={this.state.active} onClick={this.handleClick}>
+      <Menu.Item as='a' active={(this.props.active.includes(Number(this.props.value)))} onClick={this.handleClick}>
         <Icon color='blue' name={this.props.image} />
           <div className="sidebar-text">
             {this.props.name}
@@ -39,18 +22,11 @@ class SidebarItem extends Component {
   }
 }
 
-
 const mapState = (state) => {
   return {
-    modules: state.modules
+    active: state.modules.active,
+    deactivated: state.modules.deactivated
   }
 }
 
-const mapDispatch = (dispatch) => {
-  return {
-    getModules: () => dispatch(getModulesServer()),
-    toggleModule: (moduleId) => dispatch(toggleModuleServer(moduleId))
-  }
-}
-
-export default connect(mapState, mapDispatch)(SidebarItem)
+export default connect(mapState)(SidebarItem)
