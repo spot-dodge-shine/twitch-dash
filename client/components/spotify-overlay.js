@@ -27,16 +27,12 @@ class SpotifyOverlay extends Component {
   render() {
     let totalVotes = 0
     if (this.props.votecycle && this.props.votecycle.id) {
-      console.log('votecycle', this.props.votecycle)
       totalVotes = this.props.votecycle.votechoices.reduce((total, voteChoice) => {
-        console.log('anutha', voteChoice)
         return total + voteChoice.votes
       }, 0)
     }
 
     const { currentlyPlaying } = this.props.playerStatus
-
-    console.log('votes: ', totalVotes)
 
     return (
       <div

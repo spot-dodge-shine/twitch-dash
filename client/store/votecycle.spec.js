@@ -40,6 +40,7 @@ describe('thunk creators - votecycles', () => {
     }
 
     const fakeVotecycle = {
+      id: 1,
       userId: 1,
       active: true,
       playlistId: 'fakeId333',
@@ -53,6 +54,7 @@ describe('thunk creators - votecycles', () => {
     beforeEach(() => {
       mockAxios.onGet('/api/votecycles/active/1').replyOnce(200, fakeVotecycle)
       mockAxios.onGet('/api/votechoices/fakeIdTrk/1').replyOnce(200, fakeTrack)
+      mockAxios.onGet('/api/votecycles/1/votes').replyOnce(200, 'stuff')
     })
 
     it('eventually dispatches the GET_ACTIVE_VOTECYCLE action', async () => {
@@ -64,7 +66,6 @@ describe('thunk creators - votecycles', () => {
           expect(actions[0].votecycle.votechoices.length).to.be.equal(1)
           expect(actions[0].votecycle.votechoices[0].trackId).to.be.equal('fakeIdTrk')
           expect(actions[0].votecycle.votechoices[0].track).to.be.deep.equal(fakeTrack)
-
         })
     })
   })
