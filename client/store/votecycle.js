@@ -34,6 +34,11 @@ export const getActiveVotecycleServer = (userId) => {
       for (var i = 0; i < data.votechoices.length; i++) {
         data.votechoices[i].track = trackArr[i].data
       }
+      // TODO: SUPER JANKY -> change to model method later
+      const myRes = await axios.get(`/api/votecycles/${data.id}/votes`)
+      data.votechoices = data.votechoices.map(votechoice => {
+        return {...votechoice, votes: myRes.data[votechoice.id]}
+      })
     }
     dispatch(getActiveVotecycle(data))
   }
