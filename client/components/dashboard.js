@@ -4,7 +4,7 @@ import { Grid, Card } from 'semantic-ui-react'
 import { allModules } from '../allModules'
 import DashModule from './dash-module'
 import {getModulesServer, toggleModuleServer} from '../store'
-import PayPalModule from './paypal/paypal-module'
+import PayPalDashboard from './paypal/paypal-dashboard'
 
 
 class Dashboard extends Component {
@@ -49,7 +49,6 @@ class Dashboard extends Component {
             ? <DashModule module={allModules[4]} />
             : null
         }
-        {/* <PayPalModule /> */}
       </div>
     )
   }

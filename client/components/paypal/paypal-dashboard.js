@@ -9,7 +9,7 @@ const PayPalDashboard = (props) => {
  return (
    <div>
     {
-      props.paypalId
+      props.paypalAccessToken
       ? <PayPalModule />
       : <PayPalLogin />
     }
@@ -19,7 +19,7 @@ const PayPalDashboard = (props) => {
 
 const mapState = state => {
   return {
-    paypalId: state.user.paypalId
+    paypalAccessToken: state.user.paypalAccessToken
   }
 }
 
