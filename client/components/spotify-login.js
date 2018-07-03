@@ -5,7 +5,11 @@ import { Card, Button, Icon } from 'semantic-ui-react'
 
 const SpotifyLogin = () => {
   return (
-    <Card style={{ width: '425px' }}>
+    <Card style={{
+      width: '425px',
+      marginTop: '1rem',
+      marginBottom: '1rem'
+    }}>
       <div
         style={{
           display: 'flex',
