@@ -2,7 +2,6 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Segment, Header } from 'semantic-ui-react'
 import SpotifyVoteline from './spotify-voteline'
 import { getActiveVotecycleServer, getVotesServer, getPlayerStatusThunk } from '../store'
 
@@ -19,7 +18,6 @@ class SpotifyOverlay extends Component {
   }
 
   tick = async () => {
-    await this.props.getPlayerStatus()
     await this.props.activeVotecycle(this.props.userId)
     return this.props.getVotes(this.props.votecycle)
   }
@@ -32,29 +30,12 @@ class SpotifyOverlay extends Component {
       }, 0)
     }
 
-    const { currentlyPlaying } = this.props.playerStatus
-
     return (
       <div
         style={{
           width:'425px'
         }}
       >
-        <Segment
-          attached
-        >
-          <Header as='h3'>
-            <Header.Content>
-              Currently Playing:
-              <Header.Subheader>
-                {currentlyPlaying
-                  ? `${currentlyPlaying.name} - ${currentlyPlaying.artist}`
-                  : 'None'
-                }
-              </Header.Subheader>
-            </Header.Content>
-          </Header>
-        </Segment>
         {this.props.votecycle && this.props.votecycle.id ?
           this.props.votecycle.votechoices
             .sort((prev, next) => {
@@ -79,7 +60,6 @@ class SpotifyOverlay extends Component {
 const mapState = (state) => {
   return {
     votecycle: state.votecycle,
-    playerStatus: state.playerStatus
   }
 }
 
@@ -87,7 +67,6 @@ const mapDispatch = (dispatch) => {
   return {
     activeVotecycle: (userId) => dispatch(getActiveVotecycleServer(userId)),
     getVotes: (votecycle) => dispatch(getVotesServer(votecycle)),
-    getPlayerStatus: () => dispatch(getPlayerStatusThunk())
   }
 }
 
