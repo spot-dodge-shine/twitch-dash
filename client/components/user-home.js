@@ -65,7 +65,8 @@ class UserHome extends Component {
             visible={this.state.visibility}
             width='thin'
           >
-          { (this.props.modules.active.length || this.props.modules.deactivated.length) ?
+          {
+            (this.props.modules.active.length || this.props.modules.deactivated.length) ?
               Object.keys(allModules).map(id => {
                 return <SidebarItem key={id} name={allModules[id].name} image={allModules[id].image} value={id} onClick={this.toggleModule} />
               }) :
