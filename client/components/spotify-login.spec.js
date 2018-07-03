@@ -15,6 +15,6 @@ describe('SpotifyLogin', () => {
   })
 
   it('renders a single menu', () => {
-    expect(spotifyLogin.find('Menu').length).to.equal(1)
+    expect(spotifyLogin.find('Card').length).to.equal(1)
   })
 })
