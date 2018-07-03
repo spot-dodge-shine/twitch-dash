@@ -110,29 +110,27 @@ export class SpotifyModule extends Component {
     }
 
     return (
-      <div>
-        <Card style={{ width: '425px' }}>
-           <PlaylistDropdown
-            trackData = {trackData}
-            handleChange = {this.handleChange}
-            handlePlay = {this.handlePlay}
-            selectedPlaylistName = {playlistName}
-            userId = {this.props.user.id}
-          />
-          <SpotifyPlayer />
-          {
-            (this.props.votecycle && this.props.votecycle.id && this.props.votecycle.active)
-              ? <SpotifyVoteCycle votecycle={this.props.votecycle} />
-              : <div />
-          }
-          <Card.Content extra>
-            <a>
-              <Icon name='spotify' />
-              {trackData.length} Playlists
-            </a>
-          </Card.Content>
-        </Card>
-      </div>
+      <Card style={{ width: '425px' }}>
+          <PlaylistDropdown
+          trackData = {trackData}
+          handleChange = {this.handleChange}
+          handlePlay = {this.handlePlay}
+          selectedPlaylistName = {playlistName}
+          userId = {this.props.user.id}
+        />
+        <SpotifyPlayer />
+        {
+          (this.props.votecycle && this.props.votecycle.id && this.props.votecycle.active)
+            ? <SpotifyVoteCycle votecycle={this.props.votecycle} />
+            : <div />
+        }
+        <Card.Content extra>
+          <a>
+            <Icon name='spotify' />
+            {trackData.length} Playlists
+          </a>
+        </Card.Content>
+      </Card>
     )
   }
 }

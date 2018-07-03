@@ -39,6 +39,7 @@ class UserHome extends Component {
     this.state = {
       visibility: false
     }
+    // this.props.getModulesServerProps()
   }
 
   handleSidebarToggle = () => {
@@ -47,6 +48,10 @@ class UserHome extends Component {
 
   toggleModule = (event) => {
     this.props.toggleModuleServerProps(event)
+  }
+
+  componentDidMount () {
+    this.props.getModulesServerProps()
   }
 
   render() {
@@ -66,11 +71,9 @@ class UserHome extends Component {
             width='thin'
           >
           {
-            (this.props.modules.active.length || this.props.modules.deactivated.length) ?
-              Object.keys(allModules).map(id => {
-                return <SidebarItem key={id} name={allModules[id].name} image={allModules[id].image} value={id} onClick={this.toggleModule} />
-              }) :
-              <div/>
+            Object.keys(allModules).map(id => {
+              return <SidebarItem key={id} name={allModules[id].name} image={allModules[id].image} value={id} onClick={this.toggleModule} />
+            })
           }
           </Sidebar>
 

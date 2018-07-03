@@ -25,6 +25,21 @@ html, body, #app {
   width: 100%;
 }
 
+.app {
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.module-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 1rem;
+}
+
 .landing-image {
   height: 100%;
   width: 100%;
@@ -52,12 +67,12 @@ html, body, #app {
   box-sizing: border-box;
  }
 
- #content {
+#content {
   width: 480px;
   margin: 0 auto;
- }
+}
 
- .editor {
+.editor {
   box-sizing: border-box;
   border: 1px solid #ddd;
   cursor: text;
