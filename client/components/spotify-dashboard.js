@@ -6,15 +6,11 @@ import SpotifyModule from './spotify-module'
 import SpotifyLogin from './spotify-login'
 
 const SpotifyDashboard = (props) => {
- return (
-   <div>
-    {
-      props.spotifyId
-      ? <SpotifyModule />
-      : <SpotifyLogin />
-    }
-   </div>
- )
+  if (props.spotifyId) {
+    return <SpotifyModule />
+  } else {
+    return <SpotifyLogin />
+  }
 }
 
 const mapState = state => {
