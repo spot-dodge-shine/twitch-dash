@@ -236,3 +236,18 @@ router.put('/me/modules', async (req, res, next) => {
     next(err)
   }
 })
+
+router.get('/me/payments', async (req, res, next) => {
+  try {
+    const {data} = await axios.get(`https://api.sandbox.paypal.com/v1/payments/payment/`, 
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + req.user.paypalAccessToken
+        }
+      })
+    console.log('myOrders>>>>>>>>>>>>>>', data)
+  } catch (err) {
+    next(err)
+  }
+})
