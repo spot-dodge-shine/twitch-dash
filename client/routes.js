@@ -16,19 +16,17 @@ class Routes extends Component {
     const {isLoggedIn} = this.props
 
     return (
-      <div className='routes-height'>
-        <Switch>
-          <Route exact path="/" component={TwitchLogin} />
-          <Route exact path="/overlay/:userId/:moduleId" component={OverlayModule} />
-          {isLoggedIn && (
-            <Switch>
-              <Route path="/dashboard" component={Dashboard} />
-              <Route path="/home" component={UserHome} />
-            </Switch>
-          )}
-          <Route component={TwitchLogin} />
-        </Switch>
-      </div>
+      <Switch>
+        <Route exact path="/" component={TwitchLogin} />
+        <Route exact path="/overlay/:userId/:moduleId" component={OverlayModule} />
+        {isLoggedIn && (
+          <Switch>
+            <Route path="/dashboard" component={Dashboard} />
+            <Route path="/home" component={UserHome} />
+          </Switch>
+        )}
+        <Route component={TwitchLogin} />
+      </Switch>
     )
   }
 }

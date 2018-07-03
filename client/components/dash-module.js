@@ -4,7 +4,9 @@ const DashModule = (props) => {
   const Module = props.module.dashboardComponent
   const { moduleId } = props.module
   return (
-    <Module moduleId={moduleId} />
+    <div className='module-container'>
+      <Module moduleId={moduleId} />
+    </div>
   )
 }
 
