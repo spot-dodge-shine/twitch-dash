@@ -1,7 +1,7 @@
 'use strict'
 
 import React from 'react'
-import {Button, Icon, Image, Menu} from 'semantic-ui-react'
+import { Card, Button, Icon, Image, Menu } from 'semantic-ui-react'
 import styled from 'styled-components'
 
 const PayPalLogo = styled.div`
@@ -20,32 +20,34 @@ const PayPalButton = styled.div`
 
 const PayPalLogin = () => {
   return (
-    <div>
-      <Menu>
-        {/* PayPal image */}
-        <Menu.Menu>
-        <PayPalLogo>
-          <Image src='/images/paypal.png' />
-        </PayPalLogo>
-      </Menu.Menu>
-
-      {/* Login to PayPal button */}
-      <Menu.Menu position='right'>
-        <PayPalButton>
+    <Card style={{
+      width: '425px',
+      marginTop: '1rem',
+      marginBottom: '1rem'
+    }}>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginTop: '1.5rem',
+          marginBottom: '1.5rem'
+        }}
+      >
+        <Icon
+          name='paypal'
+          color='blue'
+          size='huge'
+        />
         <a href="/auth/paypal">
-          <Button primary animated floated='right'>
-            <Button.Content visible>
-              Connect to PayPal
-            </Button.Content>
-            <Button.Content hidden>
-              <Icon name='paypal' />
+          <Button primary floated='right'>
+            <Button.Content>
+              Connect to Paypal
             </Button.Content>
           </Button>
-          </a>
-        </PayPalButton>
-      </Menu.Menu>
-    </Menu>
-   </div>
+        </a>
+      </div>
+    </Card>
   )
 }
 

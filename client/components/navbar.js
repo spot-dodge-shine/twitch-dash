@@ -1,12 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
-import {logout} from '../store'
-import {Image, Divider, Button, Icon, Menu} from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { logout } from '../store'
+import { Image, Button, Icon, Menu } from 'semantic-ui-react'
 import styled from 'styled-components'
 
 const LogoStyle = styled.div`
-  max-width: 250px;
+  max-width: 150px;
   margin-right: 10px;
   margin-bottom: 1px;
 `
@@ -15,30 +16,46 @@ const NavbarBottomMargin = styled.div`
   margin-bottom: 0;
 `
 
+const Navbar = (props) => {
+  const { handleLogout, handleSidebarToggle } = props
 
-
-const Navbar = ({handleClick}) => (
-  <NavbarBottomMargin>
-    <Menu borderless>
-      {/* <Menu.Menu>
-        <LogoStyle>
-          <Link to="/home"><Image src='/images/navbarlogo.png' /></Link>
-        </LogoStyle>
-      </Menu.Menu> */}
+  return (
+    <NavbarBottomMargin>
+      <Menu
+        borderless
+        attached='top'
+      >
+        <Menu.Item>
+          <Button
+            icon
+            color='blue'
+            onClick={handleSidebarToggle}
+          >
+            <Icon
+              name='bars'
+              size='large'
+            />
+          </Button>
+        </Menu.Item>
         <Menu.Menu position='right'>
           <Menu.Item>
-              <Button color='blue' animated onClick={handleClick}>
-                  <Button.Content hidden>Logout</Button.Content>
-                  <Button.Content visible>
-                    <Icon name='log out' />
-                  </Button.Content>
-              </Button>
+            <LogoStyle>
+              <Link to="/home"><Image src='/images/navbarlogo.png' /></Link>
+            </LogoStyle>
+          </Menu.Item>
+          <Menu.Item>
+            <Button color='blue' animated onClick={handleLogout}>
+              <Button.Content hidden>Logout</Button.Content>
+              <Button.Content visible>
+                <Icon name='log out' />
+              </Button.Content>
+            </Button>
           </Menu.Item>
         </Menu.Menu>
-      <Divider />
-    </Menu>
-  </NavbarBottomMargin>
-)
+      </Menu>
+    </NavbarBottomMargin>
+  )
+}
 
 /**
  * CONTAINER
@@ -51,7 +68,7 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    handleClick() {
+    handleLogout() {
       dispatch(logout())
     }
   }
