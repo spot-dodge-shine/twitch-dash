@@ -93,7 +93,7 @@ module.exports = async (io) => {
           emitKey('16')
           break
         default:
-          
+          return
       }
     }
   }
