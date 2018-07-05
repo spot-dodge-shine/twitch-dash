@@ -33,7 +33,7 @@ socket.on('connect', () => {
 
   socket.on('input-from-chat', keyCode => {
     gameboy.joypad.keyDown(keyCode)
-    setTimeout(() => gameboy.joypad.keyUp(keyCode), 100)
+    setTimeout(() => gameboy.joypad.keyUp(keyCode), 250)
   })
 })
 
