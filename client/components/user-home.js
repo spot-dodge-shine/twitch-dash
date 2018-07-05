@@ -7,7 +7,7 @@ import SidebarItem from './sidebar-item'
 import NavBar from './navbar'
 import styled from 'styled-components'
 import { allModules } from '../allModules'
-import { Image, Sidebar, Segment, Menu, Grid } from 'semantic-ui-react'
+import { Sidebar, Segment, Menu } from 'semantic-ui-react'
 import WelcomeText from './welcome-text'
 import { toggleModuleServer, getModulesServer } from '../store'
 import '../socket'
@@ -70,10 +70,10 @@ class UserHome extends Component {
             visible={this.state.visibility}
             width='thin'
           >
-          { 
+          {
             Object.keys(allModules).map(id => {
               return <SidebarItem key={id} name={allModules[id].name} image={allModules[id].image} value={id} onClick={this.toggleModule} />
-            }) 
+            })
           }
           </Sidebar>
 

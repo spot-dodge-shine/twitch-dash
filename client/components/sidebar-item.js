@@ -1,7 +1,7 @@
 'use strict'
 
 import React, {Component} from 'react'
-import { Menu, Icon, Sidebar } from 'semantic-ui-react'
+import { Menu, Icon } from 'semantic-ui-react'
 import {connect} from 'react-redux'
 
 class SidebarItem extends Component {
