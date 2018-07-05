@@ -61,7 +61,7 @@ module.exports = async (io) => {
 
   async function gameboy (target, context, params) {
     const { data } = await axios.get(`${appUrl}/api/users/twitch/${target.slice(1)}/`)
-    const emitKey = keyCode => io.to(`/overlay/${data}/3`).emit('input-from-chat', keyCode)
+    const emitKey = keyCode => io.to(`/overlay/${data}/2`).emit('input-from-chat', keyCode)
     const gameboyHelp = 'Use the `!gameboy` command followed by a valid button input - for example, `!gameboy a` for pressing the a button. Valid button inputs are: a, b, up, down, left, right, start, and select. Please be sure to include a space and only use lowercase letters. Enjoy playing the game!'
     if (params.length) {
       switch (params[0]) {
