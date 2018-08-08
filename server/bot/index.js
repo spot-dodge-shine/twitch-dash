@@ -137,7 +137,7 @@ module.exports = async (io) => {
     channels.forEach(channel => {
       client.say(channel, 'This channel uses Twitch Dash! Use command !help to learn more.')
     })
-  }, 90000)
+  }, 180000)
 
   // Called every time a message comes in:
   function onMessageHandler (target, context, msg, self) {
