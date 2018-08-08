@@ -43,7 +43,7 @@ const { Paypal } = require('./paypal')
     const modules = await this.getModules()
     const statusLoaded = await Promise.all(
       modules.map(module => ModuleUser.findOne({
-        where: { moduleId: module.id }
+        where: { moduleId: module.id, userId: this.id }
       })))
     const resultObj = statusLoaded.reduce((obj, module) => {
       if (module.enabled === true) {
@@ -58,27 +58,6 @@ const { Paypal } = require('./paypal')
     })
     return resultObj
   }
-
-  // Votechoice.findByUsername = async function(username, votecycleEnumId) {
-  //   const ret = await this.findOne({
-  //     where: {
-  //       votecycleEnumId: votecycleEnumId
-  //     },
-  //     include: [{
-  //       model: 'votecycle',
-  //       where: {
-  //         active: true
-  //       },
-  //       include: [{
-  //         model: 'user',
-  //         where: {
-  //           twitchLogin: username
-  //         }
-  //       }]
-  //     }]
-  //   })
-  //   return ret
-  // }
 
 module.exports = {
   User,
