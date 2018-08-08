@@ -206,7 +206,7 @@ router.get('/me/modules', async (req, res, next) => {
 router.post('/me/modules', async (req, res, next) => {
   const { moduleId } = req.body
   try {
-    const user = await User.findOne({ where: { twitchId: req.user.twitchId } })
+    const user = await User.findOne({ where: { id: req.user.id } })
     await ModuleUser.create({
       moduleId: moduleId,
       userId: user.id,
