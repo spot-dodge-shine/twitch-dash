@@ -93,7 +93,7 @@ module.exports = async (io) => {
           emitKey('16')
           break
         default:
-          return
+          
       }
     }
   }
@@ -134,7 +134,6 @@ module.exports = async (io) => {
 
   // Send help message
   setInterval(() => {
-    console.log('interval')
     channels.forEach(channel => {
       client.say(channel, 'This channel uses Twitch Dash! Use command !help to learn more.')
     })

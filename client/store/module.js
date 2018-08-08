@@ -25,6 +25,7 @@ export const toggleModuleServer = (moduleId) => {
     } else {
       changedRes = await axios.post('/api/users/me/modules', { moduleId: numberModuleId })
     }
+    console.log('changedRes.data', changedRes.data)
     dispatch(toggleModule(changedRes.data))
   }
 }
