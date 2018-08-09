@@ -14,6 +14,7 @@ const LogoStyle = styled.div`
 
 const NavbarBottomMargin = styled.div`
   margin-bottom: 0;
+  height: 5%;
 `
 
 const Navbar = (props) => {
