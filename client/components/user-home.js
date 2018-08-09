@@ -30,7 +30,7 @@ const WelcomeTextStyle = styled.div`
 
 const BodyWrapper = styled.div`
   margin-top: 0%;
-  height: 100%;
+  height: 95%;
 `
 
 class UserHome extends Component {
