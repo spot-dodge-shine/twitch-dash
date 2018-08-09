@@ -3,7 +3,7 @@
 import React, {Component} from 'react'
 import { Segment, Image, Progress, Loader, Dimmer } from 'semantic-ui-react'
 import Vibrant from 'node-vibrant'
-import getColors from './util/getColors'
+import getColors from '../../util/getColors'
 
 class SpotifyVoteline extends Component {
   constructor(props) {

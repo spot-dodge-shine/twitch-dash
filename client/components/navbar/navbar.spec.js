@@ -4,7 +4,7 @@ import enzyme, {shallow} from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import Navbar from './navbar'
 import {Menu} from 'semantic-ui-react'
-import store from '../store'
+import store from '../../store'
 
 const adapter = new Adapter()
 enzyme.configure({adapter})

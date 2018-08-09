@@ -1,6 +1,6 @@
 import io from 'socket.io-client'
-import { events } from './components/whiteboard/whiteboard-dashboard'
-import { gameboyEvents } from './components/gameboy/gameboy-dashboard'
+import { whiteboardEvents } from './components/widgets/whiteboard'
+import { gameboyEvents } from './components/widgets/gameboy'
 
 const clientSocket = io(window.location.origin)
 const roomName = window.location.pathname
@@ -10,15 +10,15 @@ clientSocket.on('connect', () => {
   clientSocket.emit('join-room', roomName)
 })
 
-events.on('draw', (start, end, strokeColor, lineWidth, room) => {
+whiteboardEvents.on('draw', (start, end, strokeColor, lineWidth, room) => {
   clientSocket.emit('draw-from-client', start, end, strokeColor, lineWidth, room)
 })
 
-events.on('fill', (fillColor, room) => {
+whiteboardEvents.on('fill', (fillColor, room) => {
   clientSocket.emit('fill-from-client', fillColor, room)
 })
 
-events.on('clear', room => {
+whiteboardEvents.on('clear', room => {
   clientSocket.emit('clear-from-client', room)
 })
 

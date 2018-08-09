@@ -1,7 +1,7 @@
 'use strict'
 
 import React, { Component } from 'react'
-import clientSocket from '../../socket'
+import clientSocket from '../../../socket'
 
 class WhiteboardOverlay extends Component {
   constructor(props) {

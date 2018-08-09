@@ -4,7 +4,7 @@ import { expect } from 'chai'
 import React from 'react'
 import { shallow } from 'enzyme'
 import SpotifyVotecycle from './spotify-votecycle'
-import store from '../store'
+import store from '../../../store'
 
 describe('SpotifyVotecycle', () => {
   let spotifyVotecycle

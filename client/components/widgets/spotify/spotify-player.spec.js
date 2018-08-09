@@ -4,7 +4,7 @@ import { expect } from 'chai'
 import React from 'react'
 import { shallow } from 'enzyme'
 import SpotifyPlayer from './spotify-player'
-import store from '../store'
+import store from '../../../store'
 
 describe('SpotifyPlayer', () => {
   let spotifyPlayer

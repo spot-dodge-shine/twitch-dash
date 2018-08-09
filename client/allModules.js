@@ -1,9 +1,6 @@
-import SpotifyDashboard from './components/spotify-dashboard'
-import SpotifyOverlay from './components/spotify-overlay'
-import WhiteboardDashboard from './components/whiteboard/whiteboard-dashboard'
-import WhiteboardOverlay from './components/whiteboard/whiteboard-overlay'
-import GameboyDashboard from './components/gameboy/gameboy-dashboard'
-import GameboyOverlay from './components/gameboy/gameboy-overlay'
+import {SpotifyDashboard, SpotifyOverlay} from './components/widgets/spotify'
+import {WhiteboardDashboard, WhiteboardOverlay} from './components/widgets/whiteboard'
+import {GameboyDashboard, GameboyOverlay} from './components/widgets/gameboy'
 import axios from 'axios'
 
 let allModules = {}
