@@ -1,5 +1,4 @@
-import SpotifyDashboard from './components/spotify-dashboard'
-import SpotifyOverlay from './components/spotify-overlay'
+import {SpotifyDashboard, SpotifyOverlay} from './components/widgets/spotify'
 import {WhiteboardDashboard, WhiteboardOverlay} from './components/widgets/whiteboard'
 import {GameboyDashboard, GameboyOverlay} from './components/widgets/gameboy'
 import axios from 'axios'

@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import SpotifyVoteline from './spotify-voteline'
-import { getActiveVotecycleServer, getVotesServer, getPlayerStatusThunk } from '../store'
+import { getActiveVotecycleServer, getVotesServer, getPlayerStatusThunk } from '../../../store'
 
 class SpotifyOverlay extends Component {
   constructor(props) {
