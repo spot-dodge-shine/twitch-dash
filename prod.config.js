@@ -1,12 +1,11 @@
 var webpack = require('webpack')
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 var CompressionPlugin = require("compression-webpack-plugin");
 
-const isDev = process.env.NODE_ENV === 'development'
-
 
 module.exports = {
-  mode: isDev ? 'development' : 'production',
+  mode: 'production',
   entry: [
     '@babel/polyfill', // enables async-await
     './client/index.js'
@@ -33,26 +32,27 @@ module.exports = {
     })
   ],
   optimization: {
-    minimize: true,
-    runtimeChunk: true,
-    splitChunks: {
-        chunks: "async",
-        minSize: 1000,
-        minChunks: 2,
-        maxAsyncRequests: 5,
-        maxInitialRequests: 3,
-        name: true,
-        cacheGroups: {
-            default: {
-                minChunks: 1,
-                priority: -20,
-                reuseExistingChunk: true,
-            },
-            vendors: {
-                test: /[\\/]node_modules[\\/]/,
-                priority: -10
-            }
+    minimizer: [
+      new UglifyJSPlugin({
+        sourceMap: true,
+        uglifyOptions: {
+          compress: {
+            inline: false
+          }
         }
+      })
+    ],
+    runtimeChunk: false,
+    splitChunks: {
+      cacheGroups: {
+        default: false,
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor_app',
+          chunks: 'all',
+          minChunks: 2
+        }
+      }
     }
   },
   devtool: 'cheap-module-source-map',

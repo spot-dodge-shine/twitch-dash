@@ -80,7 +80,8 @@
     "spotify-web-api-node": "^3.1.1",
     "styled-components": "^3.3.3",
     "tmi.js": "^1.2.1",
-    "uglify-js": "^3.4.6"
+    "uglify-js": "^3.4.6",
+    "uglifyjs-webpack-plugin": "^1.2.7"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.40",
