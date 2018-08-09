@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 import { SketchPicker } from 'react-color'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { EventEmitter } from 'events'
-export const events = new EventEmitter()
+export const whiteboardEvents = new EventEmitter()
 
 class WhiteboardDash extends Component {
   constructor(props) {

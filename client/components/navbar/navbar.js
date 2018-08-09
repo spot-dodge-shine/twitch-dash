@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { logout } from '../store'
+import { logout } from '../../store'
 import { Image, Button, Icon, Menu } from 'semantic-ui-react'
 import styled from 'styled-components'
 
