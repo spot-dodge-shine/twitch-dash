@@ -81,7 +81,7 @@ class WhiteboardDash extends Component {
     const roomName = `/overlay/${this.props.userId}/3`
 
     shouldBroadcast &&
-        events.emit('draw', start, end, strokeColor, lineWidth, roomName);
+        whiteboardEvents.emit('draw', start, end, strokeColor, lineWidth, roomName);
   }
 
   handleColorChange = (color) => {
@@ -91,13 +91,13 @@ class WhiteboardDash extends Component {
 
   handleClear = () => {
     this.ctx.clearRect(0, 0, 880, 495)
-    events.emit('clear', `/overlay/${this.props.userId}/3`)
+    whiteboardEvents.emit('clear', `/overlay/${this.props.userId}/3`)
   }
 
   handleFill = () => {
     this.ctx.fillStyle = this.state.color
     this.ctx.fillRect(0, 0, 880, 495)
-    events.emit('fill', this.state.color, `/overlay/${this.props.userId}/3`)
+    whiteboardEvents.emit('fill', this.state.color, `/overlay/${this.props.userId}/3`)
   }
 
   render() {
