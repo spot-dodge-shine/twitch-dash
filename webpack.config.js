@@ -1,7 +1,3 @@
-var webpack = require('webpack')
-var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-var CompressionPlugin = require("compression-webpack-plugin");
-
 const isDev = process.env.NODE_ENV === 'development'
 
 
@@ -18,7 +14,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx']
   },
-  devtool: 'dev',
+  devtool: 'source-map',
   module: {
     rules: [
       {
