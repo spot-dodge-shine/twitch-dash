@@ -30,7 +30,7 @@ const WelcomeTextStyle = styled.div`
 
 const BodyWrapper = styled.div`
   margin-top: 0%;
-  height: 95%;
+  height: 100%
 `
 
 class UserHome extends Component {
@@ -61,6 +61,7 @@ class UserHome extends Component {
         <Sidebar.Pushable
           as={Segment}
           attached='bottom'
+          style={{height: 'auto', 'min-height': '92%'}}
         >
           <Sidebar
             as={Menu}

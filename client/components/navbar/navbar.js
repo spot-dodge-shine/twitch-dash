@@ -14,7 +14,7 @@ const LogoStyle = styled.div`
 
 const NavbarBottomMargin = styled.div`
   margin-bottom: 0;
-  height: 5%;
+  height: 8%;
 `
 
 const Navbar = (props) => {
@@ -25,6 +25,7 @@ const Navbar = (props) => {
       <Menu
         borderless
         attached='top'
+        style={{height: '100%'}}
       >
         <Menu.Item>
           <Button
